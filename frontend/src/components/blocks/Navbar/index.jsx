@@ -1,76 +1,107 @@
 "use client";
-import Link from "next/link"; // Usando Link do Next para navegação
+
+import React, { useState } from "react";
+import Link from "next/link";
+import "bootstrap/dist/css/bootstrap.min.css";
+import './navbar.css';
 
 export default function Navbar() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg fixed-top custom-navbar">
       <div className="container-fluid">
-        <Link className="navbar-brand" href="/">
-          <i className="bi bi-ev-front-fill me-2"></i>
-          Pdi
+        <Link href="/" className="navbar-brand  fw-bold">
+          <span className="navbar-logo-text"> GM |PDI System</span>
         </Link>
+
         <button
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="true"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon" />
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNavDropdown">
-          {/* A classe 'ms-auto' move esta lista de links para a direita */}
-          <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <Link
-                className="nav-link active px-3"
-                aria-current="page"
-                href="/"
-              >
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link px-3" href="/features">
-                Features
-              </Link>
-            </li>
-            <li className="nav-item px-3">
-              <Link className="nav-link" href="/pricing">
-                Pricing
-              </Link>
-            </li>
+
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
             <li className="nav-item dropdown">
               <a
-                className="nav-link dropdown-toggle"
+                className="nav-link  custom-link-color"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Dropdown link
+               Home
+               <i className="bi bi-chevron-down ms-1 custom-dropdown-icon"></i>
               </a>
+           
               <ul className="dropdown-menu">
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
+                  <Link className="dropdown-item" href="">
+                    Sobre
+                  </Link>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
+                  <Link className="dropdown-item" href="">
+                    Painel do Operador
+                  </Link>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <Link className="dropdown-item" href="">
+                    Painel de Administrador
+                  </Link>
                 </li>
               </ul>
             </li>
+
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link  custom-link-color"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Painel de Controle
+                <i className="bi bi-chevron-down ms-1 custom-dropdown-icon"></i>
+              
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <Link className="dropdown-item" href="">
+                    Dashboard Geral
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" href="">
+                    Painel do Admnistrador
+                  </Link>
+                </li>
+              </ul>
+            </li>
+
           </ul>
+
+          <div className="d-flex">
+            <Link
+              href=""
+              className="btn btn-link  me-2 custom-link-color"
+            >
+              Cadastro
+            </Link>
+            <Link href="" className=" botao-login">
+              Login
+            </Link>
+          </div>
         </div>
       </div>
     </nav>
