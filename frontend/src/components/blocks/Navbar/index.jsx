@@ -1,58 +1,76 @@
 "use client";
-import Link from "next/link";
+import Link from "next/link"; // Usando Link do Next para navegação
 
 export default function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <Link className="navbar-brand fw-bold" href="/">
-          GM
+        <Link className="navbar-brand" href="/">
+          <i className="bi bi-ev-front-fill me-2"></i>
+          Pdi
         </Link>
-
-        {/* Botão do menu mobile */}
         <button
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
           aria-expanded="false"
-          aria-label="Alternar navegação"
+          aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon" />
         </button>
-
-        {/* Links do menu */}
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className="collapse navbar-collapse" id="navbarNavDropdown">
+          {/* A classe 'ms-auto' move esta lista de links para a direita */}
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" href="/">
-                Início
+              <Link
+                className="nav-link active px-3"
+                aria-current="page"
+                href="/"
+              >
+                Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="/features">
-                Recursos
+              <Link className="nav-link px-3" href="/features">
+                Features
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item px-3">
               <Link className="nav-link" href="/pricing">
-                Planos
+                Pricing
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" href="/contact">
-                Contato
-              </Link>
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown link
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Action
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Another action
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Something else here
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
-
-          {/* Botão de login (exemplo) */}
-          <div className="d-flex ms-lg-3 mt-2 mt-lg-0">
-            <Link href="/login" className="btn btn-outline-primary">
-              Entrar
-            </Link>
-          </div>
         </div>
       </div>
     </nav>
