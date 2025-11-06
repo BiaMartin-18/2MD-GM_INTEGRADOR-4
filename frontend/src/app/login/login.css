@@ -1,0 +1,126 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #cce5ff, #ffffff);
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  max-width: 900px;
+  width: 100%;
+  background-color: #f2f7fa;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-top: 150px;
+}
+
+.left-panel, .right-panel {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.left-panel {
+  background-color: #adc6e0;
+}
+
+.left-panel h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.left-panel p {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.language {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.language img {
+  width: 24px;
+  height: 24px;
+}
+
+.links a {
+  margin-right: 20px;
+  color: #0077cc;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.right-panel h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.right-panel p {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form input {
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.form small {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 15px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.signup-btn {
+  background-color: #0077cc;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.social-buttons button {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.signin-link {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.signin-link a {
+  color: #0077cc;
+  text-decoration: none;
+}
