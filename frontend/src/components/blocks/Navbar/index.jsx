@@ -1,13 +1,14 @@
 "use client";
-import Link from "next/link";
+import Link from "next/link"; // Usando Link do Next para navegação
 
 export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          Navbar
-        </a>
+        <Link className="navbar-brand" href="/">
+          <i className="bi bi-ev-front-fill me-2"></i>
+          Pdi
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -20,21 +21,26 @@ export default function Navbar() {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul className="navbar-nav">
+          {/* A classe 'ms-auto' move esta lista de links para a direita */}
+          <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
+              <Link
+                className="nav-link active px-3"
+                aria-current="page"
+                href="/"
+              >
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link className="nav-link px-3" href="/features">
                 Features
-              </a>
+              </Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
+            <li className="nav-item px-3">
+              <Link className="nav-link" href="/pricing">
                 Pricing
-              </a>
+              </Link>
             </li>
             <li className="nav-item dropdown">
               <a
