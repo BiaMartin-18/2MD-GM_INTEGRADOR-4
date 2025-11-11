@@ -2,7 +2,7 @@
   background-color: transparent;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  z-index: 1030;
+  z-index: 9999;
 }
 
 .custom-link-color,

@@ -487,7 +487,7 @@ api-produtos/
 ├── routes/
 │   ├── authRotas.js
 │   ├── produtoRotas.js
-│   └── criptografiaRotas.js
+│   └── criptografiaRotas.js 
 ├── migrations/
 │   ├── 20250115_001_create_database.sql
 │   ├── 20250115_002_create_table_usuarios.sql

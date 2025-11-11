@@ -29,6 +29,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <BootstrapClient />
+        <Footer />
       </body>
     </html>
   );
