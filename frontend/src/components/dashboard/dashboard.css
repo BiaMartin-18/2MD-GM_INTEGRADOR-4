@@ -1,0 +1,90 @@
+/* app/admin/dashboard/dashboard.module.css */
+
+.dashboardContainer {
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #f7f9fc; /* Fundo levemente cinza */
+}
+
+/* Estilo para o card de Notícias (azul forte na imagem) */
+.cardNews {
+    background-color: #4E5DE8 !important; /* Cor principal azul */
+    border: none;
+    position: relative;
+    overflow: hidden;
+    height: 150px; /* Altura fixa para alinhar */
+}
+
+.newsIcon {
+    /* Estilização para o ícone ou círculo central da notícia */
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+/* Placeholders para simular gráficos (adicione seus componentes de gráfico reais aqui) */
+.lineChartPlaceholder, .barChartPlaceholder {
+    height: 150px;
+    background-color: #f0f4f8;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border: 1px dashed #ccc;
+}
+
+.chartPlaceholder {
+    height: 100px;
+    background-color: #f0f4f8;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border: 1px dashed #ccc;
+}
+
+/* Estilo para o círculo de data no Checkup progress */
+.dateCircle {
+    width: 40px;
+    height: 40px;
+    background-color: #e0e7ff;
+    color: #4E5DE8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Estilo para o avatar de doutor na lista "My Doctor" */
+.doctorAvatar {
+    width: 45px;
+    height: 45px;
+    background-color: #ccc; /* Cor de fundo padrão para avatares */
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+/* BOTÕES */
+
+.botao{
+    border-radius: 30px;
+    width:100px;
+}
