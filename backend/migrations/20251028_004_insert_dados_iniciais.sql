@@ -1,4 +1,4 @@
--- Migration: Inserir dados iniciais
+,-- Migration: Inserir dados iniciais
 -- Data: 2025-01-15
 -- Descrição: Dados iniciais para teste do sistema
 

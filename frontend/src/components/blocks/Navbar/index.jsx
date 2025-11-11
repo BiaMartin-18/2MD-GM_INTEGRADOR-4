@@ -98,7 +98,7 @@ export default function Navbar() {
             >
               Cadastro
             </Link>
-            <Link href="" className=" botao-login">
+            <Link href="/login" className=" botao-login">
               Login
             </Link>
           </div>
