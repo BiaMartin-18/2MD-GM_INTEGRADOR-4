@@ -1,8 +1,9 @@
 "use client";
 import Head from "next/head";
-import "./login.css";
+import "./suporte.css";
 
-export default function LoginPage() {
+
+export default function SuportePage() {
   return (
     <>
       <Head>
@@ -18,7 +19,7 @@ export default function LoginPage() {
 
           {/* Lado direito com formulário */}
           <div className="form-side">
-            <h2>Login</h2>
+            <h2>Suporte</h2>
             <p>Entre utilizando seu cadastro adminstrativo dado pelo time de I.T</p>
 
             <form className="login-form">
