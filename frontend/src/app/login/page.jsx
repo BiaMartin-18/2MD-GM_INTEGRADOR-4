@@ -1,40 +1,47 @@
 "use client";
 import Head from "next/head";
 import "./login.css";
+import Navbar from "@/components/blocks/Navbar";
 
 export default function LoginPage() {
   return (
     <>
+      <Navbar />
       <Head>
         <title>Login</title>
       </Head>
 
       <div className="background-wrapper">
-        <div className="background-overlay"></div>
+        {/* Vídeo de fundo */}
+        <video autoPlay loop muted className="background-video">
+          <source src="/imagens/fundologin.mp4" type="video/mp4" />
+          Seu navegador não suporta vídeos HTML5.
+        </video>
 
-        <div className="login-box">
-          {/* Lado esquerdo com imagem sem ofuscamento */}
-          <div className="image-side"></div>
-
-          {/* Lado direito com formulário */}
-          <div className="form-side">
+        <div className="login-wrapper">
+        <div className="login-container">
+          <div className="form-content">
             <h2>Login</h2>
-            <p>Entre utilizando seu cadastro adminstrativo dado pelo time de I.T</p>
-
             <form className="login-form">
-              <input type="email" placeholder="Email" required />
-              <input type="password" placeholder="Senha" required />
-              <a href="#" className="forgot-link">Dúvidas?</a>
+              <div className="input-group">
+                <label htmlFor="email">Email</label>
+                <input type="email" id="email" placeholder="Entre com seu email" required />
+              </div>
+              <div className="input-group">
+                <label htmlFor="password">Senha</label>
+                <input type="password" id="password" placeholder="Entre com sua senha" required />
+              </div>
+
+              <div className="options">
+                
+                <a href="/suporte" className="forgot-password">Problemas com Login?</a>
+              </div>
 
               <button type="submit" className="login-button">Login</button>
-              
             </form>
-
-            <p className="signup-prompt">
-              Problemas com o Login? <a href="/suporte">Contate o Suporte</a>
-            </p>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

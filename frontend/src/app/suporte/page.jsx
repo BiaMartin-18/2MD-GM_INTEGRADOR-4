@@ -1,39 +1,49 @@
 "use client";
 import Head from "next/head";
 import "./suporte.css";
+import Navbar from "@/components/blocks/Navbar";
 
 
 export default function SuportePage() {
   return (
     <>
+      <Navbar />
       <Head>
-        <title>Login</title>
+        <title>Contact Us</title>
       </Head>
 
       <div className="background-wrapper">
+        {/* Vídeo de fundo */}
+        <video autoPlay loop muted className="background-video">
+          <source src="/imagens/fundologin.mp4" type="video/mp4" />
+          Seu navegador não suporta vídeos HTML5.
+        </video>
+
         <div className="background-overlay"></div>
 
-        <div className="login-box">
-          {/* Lado esquerdo com imagem sem ofuscamento */}
-          <div className="image-side"></div>
+        <div className="form-container">
+          <div className="form-left">
+            <h1><strong>Não Consegue Entrar?</strong> Conte-nos o seu problema.</h1>
+            <p>Estamos Aqui Para Ajudar. Entre em contato com a nossa equipe de I.T pelo formulário ao lado e também pelo nosso email e telefone que estão logo abaixo!</p>
+            <div className="contact-details">
+              <img src="/imagens/iconeemail.png" alt="Email" className="icon" />
+              <p> I_T@gmail.com</p>
+            </div>
+            <div className="contact-item">
+              <img src="/imagens/iconetelefone.png" alt="Telefone" className="icon" />
+              <p>+123 456 7890</p>
+            </div>
+          </div>
 
-          {/* Lado direito com formulário */}
-          <div className="form-side">
-            <h2>Suporte</h2>
-            <p>Entre utilizando seu cadastro adminstrativo dado pelo time de I.T</p>
-
-            <form className="login-form">
+          <div className="form-right">
+            <h2><strong>Obtenha Solução</strong></h2>
+            <form className="contact-form">
+              <input type="text" placeholder="Name" required />
               <input type="email" placeholder="Email" required />
-              <input type="password" placeholder="Senha" required />
-              <a href="#" className="forgot-link">Dúvidas?</a>
 
-              <button type="submit" className="login-button">Login</button>
-              
+              <textarea placeholder="Mensagem" required></textarea>
+              <button type="submit" className="submit-button">Enviar</button>
             </form>
-
-            <p className="signup-prompt">
-              Problemas com o Login? <a href="/suporte">Contate o Suporte</a>
-            </p>
           </div>
         </div>
       </div>

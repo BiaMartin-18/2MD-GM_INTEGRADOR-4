@@ -1,7 +1,6 @@
 /* ===== Reset ===== */
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
 }
 
 /* ===== Fundo da página ===== */
@@ -9,129 +8,166 @@ body {
   position: relative;
   width: 100%;
   height: 100vh;
-  background: url("/imagens/GM_foto.jpg") no-repeat center center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
+/* ===== Vídeo de fundo ===== */
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* ===== Sobreposição de fundo ===== */
 .background-overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(3px);
-  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px); /* Desfoque adicional */
+  z-index: 0;
 }
 
-/* ===== Container do login ===== */
-.login-box {
-  position: relative;
-  z-index: 2;
+/* ===== Container do formulário ===== */
+.form-container {
   display: flex;
-  width: 800px;
-  height: 500px;
+  width: 90%; /* Reduz um pouco a largura */
+  max-width: 1000px; /* Limita o tamanho máximo */
+  height: auto; /* Remove a altura fixa */
   border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+  background: transparent;
+  backdrop-filter: blur(10px);
+  margin: 100px auto; /* Centraliza e reduz espaçamento vertical */
+  padding: 40px; /* Adiciona espaço interno */
 }
 
-/* ===== Lado esquerdo com imagem limpa ===== */
-.image-side {
+
+.form-left {
   flex: 1;
-  background: url("/imagens/GM_foto.jpg") no-repeat center center/cover;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-/* ===== Lado direito com formulário ===== */
-.form-side {
-  flex: 1;
-  background: rgb(204, 220, 230);
-  padding: 50px;
+.form-left h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.form-left p {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.contact-details {
+  margin-top: 30px;
+}
+
+.contact-details p {
+  font-size: 14px;
+  color: #ffffff;
+}
+
+/* ===== Formulário de Contato ===== */
+.form-right {
+  flex: none; /* Não ocupar o espaço todo */
+  width: 350px; /* Tamanho fixo do quadro */
+  padding: 30px;
+  background-color: rgb(253, 250, 250);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: auto 40px auto auto; /* Empurra para o canto direito */
 }
 
-.form-side h2 {
+
+.form-right h2 {
   font-size: 28px;
-  margin-bottom: 10px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
 }
 
-.form-side p {
-  font-size: 14px;
-  margin-bottom: 30px;
-  color: #111111;
-  text-align: center;
-}
-
-.login-form {
+.contact-form {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.login-form input {
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
   padding: 12px;
-  border: 1px solid #e7e7e7;
+  border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 14px;
+  transition: border-color 0.3s ease;
 }
 
-.forgot-link {
-  align-self: flex-end;
-  font-size: 12px;
-  color: #007bff;
-  text-decoration: none;
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-.forgot-link:hover {
-  text-decoration: underline;
-}
-
-.login-button {
-  background: #6e94bd;
+.submit-button {
+  background: #4c91d6;
   color: white;
   border: none;
-  padding: 12px;
+  padding: 14px;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.google-button {
-  background: #8897c0;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
+.submit-button:hover {
+  background-color: #000000;
 }
 
-.signup-prompt {
-  margin-top: 20px;
-  font-size: 13px;
+.submit-button:focus {
+  outline: none;
 }
 
-.signup-prompt a {
-  color: #007bff;
-  text-decoration: none;
+.icon{
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  
 }
 
 /* ===== Responsivo ===== */
 @media (max-width: 768px) {
-  .login-box {
+  .form-container {
     flex-direction: column;
-    width: 90%;
-    height: auto;
+    padding: 20px;
   }
 
-  .image-side {
-    height: 200px;
+  .form-left,
+  .form-right {
+    padding: 20px;
   }
 
-  .form-side {
-    padding: 30px;
+  .form-left h1 {
+    font-size: 26px;
+  }
+
+  .form-right h2 {
+    font-size: 24px;
   }
 }
