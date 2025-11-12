@@ -35,7 +35,7 @@ export default function Navbar() {
             <li className="nav-item dropdown dropdown-hover"> 
               <a
                 className="nav-link custom-link-color"
-                href="#"
+                href="/"
                 role="button"
                 // data-bs-toggle="dropdown" REMOVIDO para hover funcionar
                 aria-expanded="false"
@@ -86,7 +86,7 @@ export default function Navbar() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" href="">
+                  <Link className="dropdown-item" href="/dashauditoria">
                     Painel do Admnistrador
                   </Link>
                 </li>
@@ -97,12 +97,12 @@ export default function Navbar() {
 
           <div className="d-flex">
             <Link
-              href=""
+              href="/suporte"
               className="btn btn-link me-2 custom-link-color"
             >
-              Cadastro
+              Suporte
             </Link>
-            <Link href="" className=" botao-login">
+            <Link href="/login" className=" botao-login">
               Login
             </Link>
           </div>

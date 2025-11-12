@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <section className="hero section">
-        <Navbar />
+        <Navbar/>
         <FinisherParticles />
         {/* Conteúdo do Hero - Deve ficar acima do FinisherParticles */}
         <div className="heroContent">
