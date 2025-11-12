@@ -1,15 +1,34 @@
 "use client";
 
-import React from "react";
+
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './navbar.css';
 
 export default function Navbar() {
-  // Removido o useState, o controle é via CSS/Bootstrap classes
+   const [isScrolled, setIsScrolled] = useState(false);
+
+   useEffect(()=>{
+    const handleScroll = () =>{
+      const scrollThreshold = 500; 
+      
+      if (window.scrollY > scrollThreshold) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return()=>{
+      window.removeEventListener('scroll',handleScroll)
+    };
+
+   },[])
 
   return (
-    <nav className="navbar navbar-expand-lg fixed-top custom-navbar">
+    <nav className={`navbar navbar-expand-lg fixed-top custom-navbar ${isScrolled ? 'scrolled':''}`}>
       <div className="container-fluid">
         <Link href="/" className="navbar-brand fw-bold">
          <img src="/imagens/logo/logo.png" alt="" className="logo" />

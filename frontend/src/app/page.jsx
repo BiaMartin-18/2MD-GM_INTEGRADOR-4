@@ -8,28 +8,31 @@ import FinisherParticles from "../components/FinisherParticles";
 export default function Home() {
   return (
     <>
-      <section className="hero section">
-        <Navbar/>
-        <FinisherParticles />
-        {/* Conteúdo do Hero - Deve ficar acima do FinisherParticles */}
-        <div className="heroContent">
-          {/* Título */}
-          <h1 className="title text-white fw-bold">
-            Otimize o input de defeitos e<br /> acelere a apuração de qualidade.
-          </h1>
+      <div className="hero-wrapper">
+        <Navbar />
+        <section className="hero section">
+          <FinisherParticles />
+          {/* Conteúdo do Hero - Deve ficar acima do FinisherParticles */}
+          <div className="heroContent">
+            {/* Título */}
+            <h1 className="titulo text-white fw-bold">
+              Otimize o input de defeitos e<br /> acelere a apuração de
+              qualidade.
+            </h1>
 
-          {/* Descrição */}
-          <p className="description text-white ">
-            Garanta a qualidade, reduza o retrabalho e mantenha o monitoramento
-            total.
-          </p>
+            {/* Descrição */}
+            <p className="description text-white ">
+              Garanta a qualidade, reduza o retrabalho e mantenha o
+              monitoramento total.
+            </p>
 
-          <button className="botao-ferramenta">
-            Conheça a Ferramenta
-            <i className="bi bi-arrow-up-right"></i>
-          </button>
-        </div>
-      </section>
+            <button className="botao-ferramenta">
+              Conheça a Ferramenta
+              <i className="bi bi-arrow-up-right"></i>
+            </button>
+          </div>
+        </section>
+      </div>
 
       {/* NOVA SEÇÃO DE RECURSOS/CARDS */}
       <section className="features-section">
@@ -47,16 +50,20 @@ export default function Home() {
         <div className="cards-grid">
           {/* Exemplo de um Card (Repita para ter 6) */}
           <div className="feature-card">
-            <h4 className="card-title">Usabilidade</h4>
-            <span className="card-icon">*</span>
+            <div className="card-header">
+              <h4 className="card-title">Usabilidade</h4>
+              <i className="bi bi-folder2-open"></i>
+            </div>
             <p className="card-text">
               Troque a complexidade de planilhas por uma ferramenta rápida e
               visualmente clara para gestão de qualidade.
             </p>
           </div>
           <div className="feature-card">
-            <h4 className="card-title">Automação</h4>
-            <span className="card-icon">*</span>
+            <div className="card-header">
+              <h4 className="card-title">Automação</h4>
+              <i className="bi bi-lightning-fill"></i>
+            </div>
             <p className="card-text">
               {" "}
               Unifique o processo de manutenção, ajustando defeitos e falhas em
@@ -65,8 +72,10 @@ export default function Home() {
           </div>
 
           <div className="feature-card">
-            <h4 className="card-title">Segurança e Fluxo de Trabalho</h4>
-            <i className=" bi bi-clipboard-data-fill"></i>
+            <div className="card-header">
+              <h4 className="card-title">Segurança e Fluxo de Trabalho</h4>
+              <i className=" bi bi-clipboard-data-fill"></i>
+            </div>
             <p className="card-text">
               Permita acesso e controle específicos para Auditores, Engenheiros
               e FTs através de um sistema seguro de autenticação.
@@ -74,21 +83,27 @@ export default function Home() {
           </div>
 
           <div className="feature-card">
-            <h4 className="card-title">Recruitment</h4>
-            <span className="card-icon">*</span>
-            <p className="card-text">Boost your candidate experience</p>
+            <div className="card-header">
+              <h4 className="card-title">Gestão de Custos</h4>
+              <i className="bi bi-cash-coin"></i>
+            </div>
+            <p className="card-text">Monitore e ajuste os custos de retrabalho e peças automaticamente, oferecendo uma visão imediata do impacto financeiro de cada ajuste.</p>
           </div>
 
           <div className="feature-card">
-            <h4 className="card-title">Real Estate</h4>
-            <span className="card-icon">*</span>
-            <p className="card-text">View devices making products</p>
+            <div className="card-header">
+            <h4 className="card-title">Acesso Hierárquico</h4>
+           <i className="bi bi-person-vcard-fill"></i>
+            </div>
+            <p className="card-text">Garanta que cada usuário (Administrador, Engenheiro, Operador) veja apenas as informações e ferramentas relevantes para sua função, otimizando o foco.</p>
           </div>
 
           <div className="feature-card">
-            <h4 className="card-title">Talk to sales</h4>
-            <span className="card-icon">*</span>
-            <p className="card-text">Request a custom solution</p>
+            <div className="card-header">
+            <h4 className="card-title">Registro de Veículos</h4>
+            <i className="bi bi-car-front"></i>
+            </div>
+            <p className="card-text">Crie, edite e exclua cadastros de veículos de forma simplificada. O sistema armazena todo o histórico de ajustes e defeitos para auditoria.</p>
           </div>
         </div>
       </section>

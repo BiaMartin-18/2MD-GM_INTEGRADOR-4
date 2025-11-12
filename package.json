@@ -1,0 +1,22 @@
+{
+  "name": "2md-gm_integrador-4",
+  "version": "1.0.0",
+  "description": "Repositório base para desenvolvimento do projeto integrador do curso de Desenvolvimento de Sistemas da 2MD-GM.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BiaMartin-18/2MD-GM_INTEGRADOR-4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BiaMartin-18/2MD-GM_INTEGRADOR-4/issues"
+  },
+  "homepage": "https://github.com/BiaMartin-18/2MD-GM_INTEGRADOR-4#readme"
+}
