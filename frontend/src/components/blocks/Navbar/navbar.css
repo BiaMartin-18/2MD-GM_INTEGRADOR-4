@@ -1,67 +1,101 @@
+/* --- SEUS ESTILOS ORIGINAIS --- */
+
 .custom-navbar {
-  background-color: transparent;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  z-index: 9999;
+    background-color: transparent;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    z-index: 1030;
 }
 
 .custom-link-color,
 .custom-navbar .navbar-brand,
 .custom-navbar .btn-link {
-  color: rgb(0, 0, 0) !important;
-  font-size: 1.1em;
-  text-decoration: none;
+    color: rgb(255, 255, 255) !important;
+    font-size: 1.1em;
+    text-decoration: none;
 }
 
 
- .botao-login {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  padding: 0.5rem 1.25rem;
-  border-radius: 30px;
-  text-decoration: none;
-  width: 9rem;
-  height: 3rem;
-  text-align: center;
-  
- 
+.botao-login {
+    background-color: rgb(255, 255, 255);
+    color: rgb(27, 26, 26);
+    padding: 0.5rem 1.25rem;
+    border-radius: 30px;
+    text-decoration: none;
+    width: 9rem;
+    height: 3rem;
+    text-align: center;
 }
 
 .custom-dropdown-icon {
     font-size: 0.8em; 
-    /* Adiciona uma transição suave, se desejar */
-    transition: transform 0.2s ease-in-out; 
+    /* Adiciona uma transição suave para a rotação */
+    transition: transform 0.3s ease-in-out; 
 }
 
 
+/* 4. Rotaciona a seta quando o dropdown está aberto (Regra original para o clique) */
 
-/* 4. Rotaciona a seta quando o dropdown está aberto */
-.nav-item.show .custom-dropdown-icon {
+/*.nav-item.show .custom-dropdown-icon {
     transform: rotate(180deg) !important;
-}
+}/
 
 /* Estilo para que o texto do link e o ícone fiquem no mesmo nível */
 .nav-link {
-    /* Garante que o link seja um contêiner flexível se você usar 'd-flex' acima */
     display: flex;
     align-items: center;
 }
 
 
-
-
 /* Garante que o ícone do toggler (hambúrguer) seja visível no fundo transparente */
 .custom-navbar .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
 .dropdown-menu {
-  background-color: transparent;
-  border-radius: 4px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
+    /* Adicionais para a transição de entrada */
+    transform: translateY(10px); /* Começa 10px abaixo */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    display: block; 
+    pointer-events: none; /* Garante que não é clicável quando escondido */
 }
 
 .dropdown-item {
-  color: #333;
+    color: #333;
+}
+
+
+/* ---------------------------------------------------- */
+/* NOVO CSS PARA O EFEITO HOVER E ANIMAÇÃO */
+/* ---------------------------------------------------- */
+
+/* Oculta o dropdown menu por padrão, usando opacity e transform */
+.nav-item.dropdown .dropdown-menu {
+    display: block; /* Mantém como block para permitir transição, mas com opacity/pointer-events */
+    opacity: 0;
+    pointer-events: none; 
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* 1. Mostra o dropdown menu e executa a animação no hover do item da lista */
+.nav-item.dropdown.dropdown-hover:hover .dropdown-menu {
+    opacity: 1; /* Torna visível */
+    transform: translateY(0); /* Move para a posição original (animando para baixo) */
+    pointer-events: auto; /* Permite cliques nos itens do dropdown */
+}
+
+/* 2. Rotaciona a seta (ícone) no hover (CORREÇÃO DE ESPECIFICIDADE) */
+/* O seletor .nav-link foi adicionado para garantir que a rotação seja aplicada. */
+.nav-item.dropdown.dropdown-hover:hover  .custom-dropdown-icon {
+    transform: rotate(180deg) !important; 
+}
+
+
+.custom-dropdown-icon{
+  transition: transform 0.3s ease-in-out;
 }

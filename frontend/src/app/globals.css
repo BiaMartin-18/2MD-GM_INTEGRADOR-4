@@ -19,7 +19,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  padding-top: 80px;
+  /* Removido padding-top para permitir que a Hero Section comece no topo */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -43,4 +43,162 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+/* ------------------------------------------- */
+/* ESTILOS DA HERO SECTION (CARD FLUTUANTE) */
+/* ------------------------------------------- */
+
+.hero.section {
+  /* 1. LAYOUT DO CARD */
+  /* ADICIONADO: Margem superior para afastar do topo */
+  margin-top: 30px;
+  /* ADICIONADO: Espaçamento interno para o Navbar e heroContent */
+  padding: 30px 40px;
+  border-radius: 30px;
+  /* 2. TAMANHO E POSICIONAMENTO */
+  width: 98%; /* Largura para "flutuar" */
+  min-height: 80vh; /* Altura mínima para preencher a tela */
+  margin-left: auto;
+  margin-right: auto;
+
+  /* 3. EFEITOS VISUAIS */
+  position: relative;
+  overflow: hidden; /* ESSENCIAL para respeitar o border-radius */
+
+  /* 4. LAYOUT INTERNO (FLEXBOX para alinhar Navbar e Conteúdo) */
+  display: flex;
+  flex-direction: column;
+  /* Ajusta o espaçamento vertical entre Navbar e heroContent */
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+/* Garante que Navbar e o conteúdo fiquem por cima do FinisherParticles */
+.hero.section > *,
+.heroContent {
+  position: relative;
+  z-index: 10;
+}
+
+/* ------------------------------------------- */
+/* ESTILOS DA ANIMAÇÃO (FinisherParticles) */
+/* ------------------------------------------- */
+
+.finisher-header {
+  border-radius: 30px;
+  width: 100%; /* Garante que o fundo preencha a largura do container 98% */
+  height: 100%; /* Garante que o fundo preencha a altura do container 80vh */
+}
+
+.botao-ferramenta {
+  background-color: rgb(255, 255, 255);
+  color: rgb(27, 26, 26);
+  padding: 0.5rem 1.25rem;
+  border-radius: 30px;
+  text-decoration: none;
+  width: 14rem;
+  height: 3rem;
+  text-align: center;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ------------------------------------------- */
+/* ESTILOS DA SEÇÃO DE RECURSOS (CARDS) */
+/* ------------------------------------------- */
+
+.features-section {
+    /* Fundo escuro (Navy Blue) como na imagem de referência */
+    background-color: #0c183a; 
+    color: #ededed;
+    padding: 80px 40px; /* Espaçamento interno */
+    text-align: center; /* Centraliza títulos e descrição */
+}
+
+/* Títulos e Descrição */
+.section-subtitle {
+    color: #a4aed1; /* Cor cinza/azul claro */
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    font-size: 36px;
+    margin-bottom: 20px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-description {
+    color: #a4aed1;
+    font-size: 16px;
+    margin-bottom: 60px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ------------------------------------------- */
+/* LAYOUT DOS CARDS (GRID) */
+/* ------------------------------------------- */
+
+.cards-grid {
+    display: grid;
+    /* Cria 3 colunas de tamanho igual (1fr) com espaçamento de 20px (gap) */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    max-width: 1200px; /* Limita a largura do grid para telas grandes */
+    margin: 0 auto; /* Centraliza o grid */
+}
+
+/* Estilo de cada Card */
+.feature-card {
+    background-color: #172449; /* Fundo do card, ligeiramente mais claro que a seção */
+    padding: 30px;
+    border-radius: 12px; /* Bordas arredondadas */
+    text-align: left; /* Conteúdo interno alinhado à esquerda */
+    min-height: 180px; 
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.feature-card:hover {
+    background-color: #1f305f; /* Efeito hover para feedback */
+}
+
+.card-title {
+    font-size: 18px;
+    color: white;
+
+}
+
+.card-icon {
+    /* Estilo para o ícone/asterisco de canto */
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: #a4aed1;
+    font-size: 20px;
+}
+
+.card-text {
+    color: #a4aed1;
+    font-size: 14px;
+}
+
+
+/*Container para alinhar o título e o ícone */
+.card-header {
+    display: flex;
+    align-items: center; /* Alinha o título e o ícone verticalmente */
+    gap: 8px; /* Espaçamento entre o título e o ícone */
+    margin-bottom: 10px; /* Adiciona um espaço antes da descrição */
 }
