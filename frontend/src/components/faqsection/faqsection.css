@@ -1,0 +1,52 @@
+/*
+  CSS para a seção de FAQ.
+  Aproveita as classes do Bootstrap: display-4, fw-bolder, text-secondary, etc.
+*/
+
+/* 1. Estilos da Seção (Ajuste de Margem/Padding) */
+.faq-section {
+    padding: 4rem 0; /* Espaçamento superior e inferior */
+    margin-top: 4rem; /* Espaçamento acima da seção */
+    margin-bottom: 4rem; /* Espaçamento abaixo da seção */
+    height: 30rem;
+}
+/* 2. Estilos do Acordeão */
+
+/* Remove a borda padrão do item do acordeão e define o espaçamento do título */
+.accordion-item {
+    border: none;
+    background-color: transparent;
+}
+
+/* Estiliza o cabeçalho (pergunta) e adiciona a linha divisória superior */
+.accordion-header .accordion-button {
+    font-weight: 600; /* Deixa o texto da pergunta em negrito */
+    padding-left: 0;
+    padding-right: 0;
+    background-color: transparent !important;
+    border-top: 1px solid #ddd; /* Linha de separação */
+    color: #1a1a1a; /* Cor do texto escuro */
+}
+
+/* Remove a sombra de foco (outline) */
+.accordion-button:focus {
+    box-shadow: none !important;
+}
+
+/* Adiciona a linha divisória inferior ao último item (e único neste caso) */
+.accordion-item:last-of-type .accordion-header .accordion-button {
+    border-bottom: 1px solid #ddd;
+}
+
+/* Estilo do corpo da resposta */
+.accordion-body {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 1.5rem; /* Espaçamento abaixo da resposta */
+}
+
+/* Garante que o texto principal fique ainda mais destacado */
+.faq-section h2 {
+    line-height: 1.1;
+    font-size: 3rem; /* Simula o visual da imagem */
+}

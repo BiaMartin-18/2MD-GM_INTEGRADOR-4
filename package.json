@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/BiaMartin-18/2MD-GM_INTEGRADOR-4/issues"
   },
-  "homepage": "https://github.com/BiaMartin-18/2MD-GM_INTEGRADOR-4#readme"
+  "homepage": "https://github.com/BiaMartin-18/2MD-GM_INTEGRADOR-4#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "react-bootstrap": "^2.10.10"
+  }
 }
