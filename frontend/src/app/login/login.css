@@ -1,17 +1,20 @@
 /* ===== Reset ===== */
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
   background: #f0f0f0;
 
 }
+
+* {
+  box-sizing: border-box;
+}
+
 
 /* ===== Fundo da página ===== */
 .background-wrapper {
   position: relative;
   width: 100%;
   height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,60 +45,6 @@ body {
   z-index: 0;
 }
 
-/* ===== Container do login ===== */
-.login-box {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  width: 800px;
-  height: 500px;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
-  background-color: white;
-  /* Adicionando cor de fundo para a área do formulário */
-}
-
-/* ===== Lado esquerdo com imagem limpa ===== */
-
-
-/* ===== Lado direito com formulário ===== */
-.form-side {
-  flex: 1;
-  background: rgb(204, 220, 230);
-  padding: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.form-side h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.form-side p {
-  font-size: 14px;
-  margin-bottom: 30px;
-  color: #111111;
-  text-align: center;
-}
-
-.login-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.login-form input {
-  padding: 12px;
-  border: 1px solid #e7e7e7;
-  border-radius: 8px;
-  font-size: 14px;
-}
-
 .forgot-link {
   align-self: flex-end;
   font-size: 12px;
@@ -107,49 +56,7 @@ body {
   text-decoration: underline;
 }
 
-.login-button {
-  background: #6e94bd;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
 
-.google-button {
-  background: #8897c0;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.signup-prompt {
-  margin-top: 20px;
-  font-size: 13px;
-}
-
-.signup-prompt a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-/* ===== Responsivo ===== */
-
-
-/* ===== Reset ===== */
-
-
-/* ===== Wrapper ===== */
-.login-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
 
 .login-container {
   background: rgba(255, 255, 255, 0.9);
@@ -164,11 +71,18 @@ body {
   text-align: center;
   font-size: 28px;
   margin-bottom: 20px;
+  color: #000000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+
+
 .input-group {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
+
 
 .input-group label {
   font-size: 14px;
@@ -226,112 +140,6 @@ body {
 }
 
 
-/* ===== Reset ===== */
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #f0f0f0;
-}
-
-/* ===== Fundo da página ===== */
-.background-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  /* Evita que a rolagem seja ativada quando o conteúdo ultrapassa o tamanho da tela */
-}
-
-/* ===== Vídeo de fundo ===== */
-.background-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* Faz o vídeo cobrir toda a tela */
-  z-index: -1;
-  /* Garante que o vídeo fique atrás do conteúdo */
-}
-
-/* ===== Sobreposição de fundo ===== */
-.background-overlay {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  /* Cor de sobreposição mais intensa */
-  backdrop-filter: blur(5px);
-  /* Desfoque adicional */
-  z-index: 0;
-}
-
-/* ===== Container do login ===== */
-.login-box {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  width: 800px;
-  height: 500px;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
-  background-color: rgba(255, 255, 255, 0.9);
-  /* Fundo com opacidade para efeito de vidro fosco */
-  backdrop-filter: blur(10px);
-  /* Efeito de vidro fosco no fundo */
-}
-
-
-/* ===== Lado direito com formulário ===== */
-.form-side {
-  flex: 1;
-  background: rgb(204, 220, 230);
-  padding: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-top-left-radius: 16px;
-  border-bottom-left-radius: 16px;
-}
-
-.form-side h2 {
-  font-size: 30px;
-  /* Tamanho maior para chamar mais atenção */
-  margin-bottom: 20px;
-  color: #333;
-  font-weight: 600;
-  text-align: center;
-}
-
-.form-side p {
-  font-size: 14px;
-  margin-bottom: 30px;
-  color: #555;
-  text-align: center;
-}
-
-/* ===== Estilo dos campos de input ===== */
-.login-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.login-form input {
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  /* Transição suave */
-}
-
 .login-form input:focus {
   border-color: #007bff;
   /* Cor de borda ao focar */
@@ -353,7 +161,7 @@ body {
 }
 
 .login-button {
-  background: #007bff;
+  background: #4c91d6;
   color: white;
   border: none;
   padding: 14px;
@@ -364,34 +172,10 @@ body {
 }
 
 .login-button:hover {
-  background-color: #0056b3;
+  background-color: #2268ad;
   /* Efeito de hover */
 }
 
-.google-button {
-  background: #8897c0;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.google-button:hover {
-  background: #6e7f9d;
-}
-
-.signup-prompt {
-  margin-top: 20px;
-  font-size: 13px;
-}
-
-.signup-prompt a {
-  color: #007bff;
-  text-decoration: none;
-}
 
 /* ===== Responsivo ===== */
 @media (max-width: 768px) {

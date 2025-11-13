@@ -21,7 +21,7 @@ export default function LoginPage() {
         <div className="login-wrapper">
         <div className="login-container">
           <div className="form-content">
-            <h2>Login</h2>
+            <h2><strong>Login Administrador</strong></h2>
             <form className="login-form">
               <div className="input-group">
                 <label htmlFor="email">Email</label>
