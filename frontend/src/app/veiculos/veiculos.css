@@ -1,0 +1,117 @@
+.veiculos-container {
+  padding: 40px;
+  min-height: 100vh;
+  background: #f8fafc;
+  font-family: "Poppins", sans-serif;
+}
+
+.titulo {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* FILTROS */
+.filtros-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.input-busca,
+.select-filtro {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.input-busca:focus,
+.select-filtro:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* GRID */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.produto-card {
+  display: flex;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.produto-card:hover {
+  transform: translateY(-4px);
+}
+
+/* IMAGEM */
+.produto-img {
+  position: relative;
+  flex: 1;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.produto-img img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.badge.ativo {
+  background: #16a34a;
+}
+.badge.manutencao {
+  background: #facc15;
+  color: #000;
+}
+.badge.inativo {
+  background: #dc2626;
+}
+
+/* INFO */
+.produto-info {
+  flex: 1.2;
+  padding: 20px;
+}
+
+.produto-nome {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.placa {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
