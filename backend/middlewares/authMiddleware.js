@@ -58,16 +58,16 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
-// Middleware para verificar se o usuário é administrador
-const adminMiddleware = (req, res, next) => {
-    if (req.usuario.tipo !== 'admin') {
+// Middleware para verificar se o usuário é auditor
+const auditorMiddleware = (req, res, next) => {
+    if (req.usuario.tipo !== 'auditor') {
         return res.status(403).json({ 
             erro: 'Acesso negado',
-            mensagem: 'Apenas administradores podem acessar este recurso'
+            mensagem: 'Apenas auditores podem acessar este recurso'
         });
     }
     next();
 };
 
-export { authMiddleware, adminMiddleware };
+export { authMiddleware, auditorMiddleware };
 

@@ -1,0 +1,232 @@
+/* ====== Dashboard.css ====== */
+
+/* Page wrapper */
+.pageWrapper {
+  background-color: #f6f8fc;
+  min-height: 100vh;
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+/* ------------------------------------------------------------- */
+/* SEÇÃO HEADER (Fundo Animado e Navbar) - Mantida a correção   */
+/* ------------------------------------------------------------- */
+
+.dashboardHeaderSection {
+  position: relative;
+  width: 100%;
+  height: 25rem; /* Reduzido um pouco para dar mais espaço ao conteúdo principal */
+  overflow: hidden;
+  background: #0b1528;
+  border-radius: 0 0 20px 20px;
+  z-index: 20;
+}
+
+/* Fundo Animado e Navbar Wrappers (mantidos) */
+.animatedBackgroundContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: linear-gradient(135deg, #0b1225, #18223c);
+}
+.finisher-canvas-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.navbarWrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 0;
+}
+.navbarWrapper nav {
+  background: transparent !important;
+  z-index: 30;
+}
+.finisher-header {
+  width: 100%;
+  height: 100%;
+}
+
+/* Conteúdo ABAIXO do Navbar (Mensagem de Boas-Vindas) */
+.dashboard-content-overlay {
+  position: relative;
+  z-index: 5;
+  color: #fff;
+  padding-top: 150px;
+}
+
+/* Estilos da Saudação */
+.greeting-container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.welcome-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+.current-date {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-bottom: 0;
+}
+
+/* ------------------------------------------------------------- */
+/* SEÇÃO DE KPIS (4 Cards no Topo) - Novo Layout                  */
+/* ------------------------------------------------------------- */
+.kpi-section {
+  top: -90px; /* Ajuste este valor. -50px ou -60px costuma ser suficiente */
+  z-index: 50; /* Garante que fique ACIMA do dashboardHeaderSection (z-index: 10) */
+  position: relative;
+}
+
+.kpi-card {
+  border-radius: 8px;
+  min-height: 140px;
+  background: #ffffff;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kpi-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4c5468;
+  margin-bottom: 0;
+}
+
+.kpi-value {
+  font-size: 30px;
+  font-weight: 700;
+  color: #1b2130;
+}
+
+.kpi-change {
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(0, 128, 0, 0.1); /* Cor de fundo para o indicador */
+}
+.text-danger {
+  color: #ff4d4f !important;
+  background: rgba(255, 77, 79, 0.1);
+}
+
+.kpi-subtitle {
+  font-size: 12px;
+  color: #999;
+  margin-top: 5px;
+}
+
+/* ------------------------------------------------------------- */
+/* SEÇÃO DE CONTEÚDO PRINCIPAL (Gráficos e Listas)               */
+/* ------------------------------------------------------------- */
+.main-content-section {
+  margin-top: 40px !important;
+  position: relative;
+
+  margin-top: 40px !important; /* Mantém o espaçamento interno */
+}
+
+/* Cards reutilizados (cardLarge e cardBox) */
+.cardBox,
+.cardLarge {
+  border-radius: 16px;
+  background: #ffffff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+h4 {
+  font-weight: 700;
+  color: #1b2130;
+  font-size: 18px;
+}
+
+/* Estilo para placeholder de gráfico de linha com info box */
+.chartLargePlaceholder {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  background: #e9eef7;
+  border-radius: 12px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-info-box {
+  position: absolute;
+  top: 10%;
+  right: 15%;
+  background-color: #1b2130;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/* Estilos da Lista de Defeitos */
+.search-bar-list {
+  margin-bottom: 15px;
+}
+.list-placeholder {
+  margin-top: 15px;
+}
+.list-item span {
+  font-size: 13px;
+  color: #1b2130;
+}
+
+/* Estilos do Cronograma (Schedule) */
+.schedule-placeholder {
+  margin-top: 15px;
+}
+.schedule-item strong {
+  font-size: 14px;
+  color: #1b2130;
+}
+.schedule-item span {
+  font-size: 12px;
+}
+.schedule-item-placeholder {
+  width: 100%;
+  height: 100px;
+  background: #e9eef7;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* Estilos do Status dos Defeitos */
+.status-details {
+  font-size: 14px;
+}
+.status-details strong {
+  color: #1b2130;
+  font-weight: 600;
+}
+
+/* Responsividade geral */
+@media (max-width: 992px) {
+  .kpi-section {
+    margin-top: 20px !important; /* Desabilita sobreposição em telas menores */
+  }
+  .kpi-value {
+    font-size: 24px;
+  }
+}

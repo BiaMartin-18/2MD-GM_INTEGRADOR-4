@@ -11,6 +11,10 @@ router.post('/registrar', AuthController.registrar);
 // Rotas protegidas (precisam de autenticação)
 router.get('/perfil', authMiddleware, AuthController.obterPerfil);
 
+// Nova Rota Protegida por Autorização (Apenas Auditor/Admin)
+router.get('/dashboard-auditor', authMiddleware, adminMiddleware, AuthController.acessoAuditor); 
+// ^ Usa a autenticação E a autorização.
+
 // Rotas OPTIONS para CORS (preflight requests)
 router.options('/login', (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');

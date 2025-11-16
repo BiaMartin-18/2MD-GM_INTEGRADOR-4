@@ -1,223 +1,128 @@
-/* ===== Reset ===== */
-body {
-  margin: 0;
-  background: #f0f0f0;
-
+/* ------------------------------------------------------------- */
+/* 0. Configuração base (Adicionar no CSS Global se possível)     */
+/* ------------------------------------------------------------- */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 }
 
-* {
-  box-sizing: border-box;
+/* ------------------------------------------------------------- */
+/* 1. Estilos do Fundo Animado (login-background-animated)       */
+/* ------------------------------------------------------------- */
+.login-background-animated {
+    /* Fundo fixed que cobre 100% da tela (viewport) */
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw; 
+    height: 100vh; 
+    overflow: hidden; 
+    background-color: #0c183a;
+    z-index: -1; /* Fica no fundo */
 }
 
-
-/* ===== Fundo da página ===== */
-.background-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  /* Evita que a rolagem seja ativada quando o conteúdo ultrapassa o tamanho da tela */
+/* 2. Wrapper para o FinisherParticles (Preenche o pai fixo 100%x100%) */
+.finisher-canvas-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
-/* ===== Vídeo de fundo ===== */
-.background-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* Faz o vídeo cobrir toda a tela */
-  z-index: -1;
-  /* Garante que o vídeo fique atrás do conteúdo */
+/* 3. Estilo para o elemento .finisher-header gerado no componente */
+.finisher-header { 
+    width: 100%; 
+    height: 100%; 
 }
 
-/* ===== Sobreposição de fundo ===== */
-.background-overlay {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(3px);
-  /* Desfoque adicional */
-  z-index: 0;
+/* ------------------------------------------------------------- */
+/* 4. Estilos do CONTEÚDO (Formulário)                           */
+/* ------------------------------------------------------------- */
+
+/* Wrapper do Conteúdo - Garante que ele tenha altura suficiente para centralizar */
+.login-wrapper-content {
+    min-height: 100vh; 
+    
+    /* ************* AJUSTE AQUI: ALTURA DA SUA NAVBAR ************* */
+    padding-top: 80px; 
+    
+    box-sizing: border-box; 
 }
 
-.forgot-link {
-  align-self: flex-end;
-  font-size: 12px;
-  color: #007bff;
-  text-decoration: none;
+/* Centraliza o login na tela */
+.login-wrapper {
+    position: relative; 
+    z-index: 10;
+    
+    /* Ocupa a altura restante do .login-wrapper-content */
+    height: calc(100vh - 80px); /* ************* AJUSTE AQUI: ALTURA DA SUA NAVBAR ************* */
+    width: 100%; 
+    
+    /* Flexbox para centralização */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.forgot-link:hover {
-  text-decoration: underline;
-}
-
-
-
+/* 5. Estilo do Card de Login */
 .login-container {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 16px;
-  padding: 40px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 400px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
 }
 
-.form-content h2 {
-  text-align: center;
-  font-size: 28px;
-  margin-bottom: 20px;
-  color: #000000;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Opcional: Estilos do Formulário */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
-
-
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
 
 .input-group label {
-  font-size: 14px;
-  color: #555;
+    display: block;
+    text-align: left;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
 }
 
 .input-group input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
-  margin-top: 5px;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
 }
 
 .options {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.remember-me {
-  display: flex;
-  align-items: center;
-}
-
-.remember-me input {
-  margin-right: 5px;
+    text-align: right;
 }
 
 .forgot-password {
-  font-size: 12px;
-  color: #007bff;
-  text-decoration: none;
-}
-
-.forgot-password:hover {
-  text-decoration: underline;
+    color: #0c183a;
+    font-size: 0.9rem;
+    text-decoration: none;
 }
 
 .login-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
+    padding: 1rem;
+    background-color: #077eed;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .login-button:hover {
-  background-color: #0056b3;
-}
-
-
-.login-form input:focus {
-  border-color: #007bff;
-  /* Cor de borda ao focar */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  /* Efeito de sombra ao focar */
-}
-
-.forgot-link {
-  align-self: flex-end;
-  font-size: 12px;
-  color: #007bff;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.forgot-link:hover {
-  color: #0056b3;
-  text-decoration: underline;
-}
-
-.login-button {
-  background: #4c91d6;
-  color: white;
-  border: none;
-  padding: 14px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.login-button:hover {
-  background-color: #2268ad;
-  /* Efeito de hover */
-}
-
-
-/* ===== Responsivo ===== */
-@media (max-width: 768px) {
-  .login-box {
-    flex-direction: column;
-    width: 90%;
-    height: auto;
-  }
-
-  .image-side {
-    height: 200px;
-  }
-
-  .form-side {
-    padding: 30px;
-  }
-
-  .form-side h2 {
-    font-size: 24px;
-    /* Reduzir o tamanho do título em telas menores */
-  }
-}
-
-@media (max-width: 768px) {
-  .login-container {
-    padding: 30px;
-    width: 90%;
-  }
-}
-
-@media (max-width: 768px) {
-  .login-box {
-    flex-direction: column;
-    width: 90%;
-    height: auto;
-  }
-
-  .image-side {
-    height: 200px;
-  }
-
-  .form-side {
-    padding: 30px;
-  }
+    background-color: #056abf;
 }

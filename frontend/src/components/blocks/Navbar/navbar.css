@@ -105,12 +105,12 @@
 
 .custom-navbar.scrolled {
   /* Exemplo: Um azul escuro sólido (ou semitransparente) para contraste */
-  background-color: rgba(218, 218, 218, 0.37); /* Preto quase opaco */
+  background-color: rgb(17, 74, 206) !important; /* Preto quase opaco */
   border-radius: 35px;
   height: 6rem;
   margin-top: 1rem;
   /* Opcional: Adicionar uma sombra sutil para destacar que está flutuando */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+ 
   transition: 0.5s;
 }
 
@@ -126,8 +126,106 @@
 li.nav-item.dropdown.dropdown-hover:hover 
   /* ... e aplica a regra ao pseudo-elemento ::before do ícone descendente. */
   i.bi.bi-chevron-down.ms-1.custom-dropdown-icon::before {
-    transform: rotate(180deg) !important;
-    will-change: transform;
-    transform-origin: 50% 50% 0px;
-    opacity: 1;
+  transform: rotate(180deg) !important;
+  will-change: transform;
+  transform-origin: 50% 50% 0px;
+  opacity: 1;
+}
+
+/* --- ESTILO PARA O OFFCANVAS (MENU MOBILE EM TELA CHEIA) --- */
+
+/* Garante que o corpo do Offcanvas (onde os links estão) também seja escuro */
+.custom-offcanvas .offcanvas-body {
+  background-color: #3126ff;
+  padding-left: 2rem !important; /* Espaçamento da esquerda para o Nível 1 (Títulos) */
+  padding-right: 2rem !important; /* E
+}
+
+.custom-offcanvas {
+  border: none !important;
+  box-shadow: none !important; /* Remove qualquer sombra de contorno */
+}
+
+.offcanvas.offcanvas-end.custom-offcanvas {
+  /* Define o fundo e largura que você já tem */
+  background-color: #002bd8 !important;
+  width: 100vw !important;
+
+  /* MUDANÇAS ESSENCIAIS: Zera Borda e Sombra */
+  border: 0 !important; /* Remove todas as bordas */
+  border-left: 0 !important; /* Especificamente a borda lateral */
+  box-shadow: none !important; /* Remove a sombra que simula um contorno */
+}
+
+.offcanvas-submenu {
+  list-style: none;
+  padding-left: 2rem !important; /* Recua os links do submenu para a direita */
+    padding-top: 0.5rem;
+    padding-bottom: 1rem; /* Espaçamento entre os grupos */
+    margin: 0;
+}
+
+.offcanvas-submenu .nav-link {
+    font-size: 1.2rem;
+    color: #cccccc !important;
+    padding: 0.25rem 0 !important; /* Reduz o espaçamento interno do link */
+}
+
+/* 3. Estiliza o CABEÇALHO (onde o X fica) com a cor correta */
+.custom-offcanvas .offcanvas-header {
+  /* CORREÇÃO ESSENCIAL: Fundo azul para cobrir o branco do Bootstrap */
+  background-color: #3126ff !important;
+  /* Garante que o título se alinhe com o padding do corpo */
+    margin-left: -1rem; /* Pode ser necessário ajustar esse valor */
+    
+  border-bottom: 0 !important; /* Remove qualquer linha */
+  border: none;
+  /* Configuração para o botão fechar */
+  padding: 1rem 1rem 0 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Estilo dos links no corpo do Offcanvas */
+.custom-offcanvas .offcanvas-body .nav-link {
+  /* Tornar o link principal branco */
+  color: #ffffff !important;
+  font-size: 1.5rem;
+  padding: 0.75rem 0;
+}
+
+/* Estilo para os sub-menus */
+.offcanvas-submenu .nav-link {
+  font-size: 1.2rem;
+  color: #cccccc !important; /* Cor cinza claro para sub-links */
+}
+
+/* Botão de Login no Offcanvas */
+.botao-login-offcanvas {
+  /* MUDANÇA ESSENCIAL: Fundo BRANCO e cor do texto PRETO */
+  background-color: #ffffff; /* Fundo branco */
+  color: rgb(7, 82, 255); /* Adicionado: Cor do texto PRETO */
+  padding: 0.75rem 1.25rem;
+  padding-top: 1.5rem !important;
+  margin-left: 2rem !important;
+  border-radius: 30px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Remove o contorno preto que aparece ao focar/abrir o Offcanvas (Acessibilidade padrão do navegador/Bootstrap) */
+.offcanvas:focus {
+  /* MUDANÇA ESSENCIAL: Remove o contorno/borda de foco */
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove o contorno preto (outline) do botão hambúrguer quando ele é clicado (focado) */
+.navbar-toggler:focus,
+.navbar-toggler:active {
+  outline: none !important;
+  box-shadow: none !important;
+  /* Para navegadores mais antigos (embora pouco usado atualmente): */
+  border-color: transparent !important;
 }
