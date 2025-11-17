@@ -11,6 +11,10 @@ import authRotas from './routes/authRotas.js';
 import criptografiaRotas from './routes/criptografiaRotas.js';
 import usuarioRotas from './routes/usuarioRotas.js';
 import auditoriaRoutes from "./routes/auditoriaRoutes.js"
+import veiculosRoutes from './routes/veiculosRoutes.js'
+
+
+
 
 // Importar middlewares
 import { logMiddleware } from './middlewares/logMiddleware.js';
@@ -53,6 +57,7 @@ app.use('/api/produtos', produtoRotas);
 app.use('/api/criptografia', criptografiaRotas);
 app.use('/api/usuarios', usuarioRotas);
 app.use('/auditorias', auditoriaRoutes);
+app.use("/veiculos", veiculosRoutes);
 
 
 // Rota raiz

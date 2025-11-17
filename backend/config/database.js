@@ -18,10 +18,11 @@ const pool = mysql.createPool({
 });
 
 // Função para obter uma conexão do pool
-async function getConnection() {
+async function getConnection() { 
     return pool.getConnection();
 }
 
+// Função para ler registros (um ou múltiplos)
 // Função para ler registros (um ou múltiplos)
 async function read(table, where = null) {
     const connection = await getConnection();
@@ -33,10 +34,16 @@ async function read(table, where = null) {
 
         const [rows] = await connection.execute(sql);
         return rows;
+
+    } catch (error) {
+        console.error("🔥 ERRO NO READ():", error);
+        throw new Error(`Erro ao executar SELECT na tabela '${table}': ${error.message}`);
+        
     } finally {
         connection.release();
     }
 }
+
 
 // Função para inserir um novo registro
 async function create(table, data) {

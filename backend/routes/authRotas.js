@@ -1,6 +1,6 @@
 import express from 'express';
 import AuthController from '../controllers/AuthController.js';
-import { authMiddleware, adminMiddleware } from '../middlewares/authMiddleware.js';
+import { authMiddleware, auditorMiddleware } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.post('/registrar', AuthController.registrar);
 router.get('/perfil', authMiddleware, AuthController.obterPerfil);
 
 // Nova Rota Protegida por Autorização (Apenas Auditor/Admin)
-router.get('/dashboard-auditor', authMiddleware, adminMiddleware, AuthController.acessoAuditor); 
+//router.get('/dashboard-auditor', authMiddleware, auditorMiddleware, AuthController.acessoAuditor); 
 // ^ Usa a autenticação E a autorização.
 
 // Rotas OPTIONS para CORS (preflight requests)

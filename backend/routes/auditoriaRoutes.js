@@ -1,9 +1,9 @@
 import express from 'express';
-import { listarAuditorias} from '../controllers/auditoriaController.js'
-import { authMiddleware, auditorMiddleware } from '../middlewares/authMiddleware.js'; // Importação do arquivo
+import { listarAuditorias } from '../controllers/auditoriaController.js';
 
 const router = express.Router();
 
-router.get('/',authMiddleware, auditorMiddleware, listarAuditorias);
+// rota pública
+router.get('/', listarAuditorias);
 
 export default router;

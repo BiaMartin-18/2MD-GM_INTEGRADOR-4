@@ -1,7 +1,15 @@
-import Link from 'next/link'
-import './cardcarros.css'
+import "./cardcarros.css";
 
-export default function CardVeiculo({ id, modelo, placa, status, imagem, onVerVeiculo }) {
+export default function CardVeiculo({
+    id,
+    modelo,
+    placa,
+    status,
+    imagem,
+    defeito,
+    grau_defeito,
+    onVerVeiculo
+}) {
     return (
         <div className="produto-card">
             <div className="produto-img">
@@ -9,21 +17,37 @@ export default function CardVeiculo({ id, modelo, placa, status, imagem, onVerVe
                     className={`badge ${
                         status === "Ativo"
                             ? "ativo"
-                            : status === "Em manutenção"
+                            : status === "Manutenção"
                             ? "manutencao"
                             : "inativo"
-                        }`}
+                    }`}
                 >
                     {status}
                 </span>
-                <img src={imagem} alt={modelo} />
+
+                <img
+                    src={imagem || "/placeholder.png"}
+                    alt={modelo}
+                />
             </div>
 
             <div className="produto-info">
                 <h2 className="produto-nome">{modelo}</h2>
-                <p className="placa">Placa: {placa}</p>
-                <a className="ver" href="#" onClick={onVerVeiculo}>Ver detalhes</a>
+
+                <p className="placa">Part Number: {placa}</p>
+
+                <p className="defeito">
+                    <strong>Defeito:</strong> {defeito}
+                </p>
+
+                <p className="grau-defeito">
+                    <strong>Grau:</strong> {grau_defeito}
+                </p>
+
+                <button className="ver" onClick={onVerVeiculo}>
+                    Ver detalhes
+                </button>
             </div>
         </div>
-    )
+    );
 }

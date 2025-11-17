@@ -1,7 +1,7 @@
 .veiculos-container {
   padding: 40px;
   min-height: 100vh;
-  background: #f8fafc;
+  background: #acbfd3;
   font-family: "Poppins", sans-serif;
 }
 
@@ -115,3 +115,14 @@
   font-size: 0.9rem;
   margin-bottom: 8px;
 }
+
+.navbar {
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: relative;  /* <- ISSO É IMPORTANTE */
+  z-index: 10;
+  background-color: #acbfd3;
+}
+
+

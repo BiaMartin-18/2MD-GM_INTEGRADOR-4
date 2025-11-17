@@ -77,8 +77,8 @@ export default function Navbar() {
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" href="/sobre">
-                      Sobre
+                    <Link className="dropdown-item" href="/veiculos">
+                      Veículos
                     </Link>
                   </li>
                   <li>
