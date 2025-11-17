@@ -1,203 +1,214 @@
-/* ===== Reset ===== */
+
 body {
-  margin: 0;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-light-bg); /* Fundo da página levemente cinza */
 }
 
-/* ===== Fundo da página ===== */
-.background-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  /* Evita que a rolagem seja ativada quando o conteúdo ultrapassa o tamanho da tela */
-}
+/* ---------------------------------------------------- */
+/* === 1. Cabeçalho Degradê (Hero Section Axionet) === */
+/* ---------------------------------------------------- */
 
-/* ===== Vídeo de fundo ===== */
-.background-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* Faz o vídeo cobrir toda a tela */
-  z-index: -1;
-  
-  background-color: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(6px);
-}
-
-  /* Garante que o vídeo fique atrás do conteúdo 
-
-/* ===== Sobreposição de fundo ===== */
-.background-overlay {
-  position: absolute;
-  inset: 0;
-  /* Desfoque adicional */
-  z-index: 0;
-}
-/* ===== Container do formulário ===== */
-.form-container {
-  display: flex;
-  width: 90%; /* Reduz um pouco a largura */
-  max-width: 1000px; /* Limita o tamanho máximo */
-  height: auto; /* Remove a altura fixa */
-  border-radius: 16px;
-  background: transparent;
-  backdrop-filter: blur(10px);
-  margin: 100px auto; /* Centraliza e reduz espaçamento vertical */
-  padding: 40px; /* Adiciona espaço interno */
-}
-
-
-.form-left {
-  flex: 1;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.form-left h1 {
-  font-size: 32px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #ffffff;
-}
-
-.form-left p {
-  font-size: 16px;
-  color: #ffffff;
-}
-
-.contact-details {
-  margin-top: 30px;
-}
-
-.contact-details p {
-  font-size: 14px;
-  color: #ffffff;
-}
-
-/* ===== Formulário de Contato ===== */
-.form-right {
-  flex: none; /* Não ocupar o espaço todo */
-  width: 350px; /* Tamanho fixo do quadro */
-  padding: 30px;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: auto 40px auto auto; /* Empurra para o canto direito */
-  backdrop-filter: blur(2px); /* Desfoque do fundo para dar mais foco no formulário */
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
-  background-color: rgba(255, 255, 255, 0.9);
-  /* Fundo com opacidade para efeito de vidro fosco */
-  backdrop-filter: blur(10px);
-}
-
-
-.form-right h2 {
-  font-size: 28px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #050505;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.contact-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.contact-form input,
-.contact-form select,
-.contact-form textarea {
-  padding: 12px;
-  border: 2px solid #f3eeee;
-  border-radius: 8px;
-  font-size: 14px;
-  transition: border-color 0.3s ease;
-}
-
-.contact-form input:focus,
-.contact-form select:focus,
-.contact-form textarea:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.submit-button {
-  background: #4c91d6;
-  color: white;
-  border: none;
-  padding: 14px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.submit-button:hover {
-  background-color: #2268ad;
-}
-
-.submit-button:focus {
-  outline: none;
-}
-
-.icon{
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
+.hero-support-axionet {
+    /* Fundo Degradê Largo */
+    background-image: url('/imagens/Manuseio-GM.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 100px; /* Adiciona espaço abaixo da Navbar */
+    padding-bottom: 80px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    height: 40rem;
   
 }
 
-
-/* ===== Detalhes de Contato ===== */
-.contact-details, .contact-item {
-  display: flex;
-  align-items: center; /* Isso alinha o ícone e o texto verticalmente */
-  margin-top: 10px; /* Ajuste o espaço entre os itens, se necessário */
+.hero-support-axionet::before {
+    content: '';
+    position: absolute; /* Posiciona o overlay em relação ao pai (relative) */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Seu overlay azul semi-transparente */
+   background-image: linear-gradient(
+        to right, /* Direção do degradê: da esquerda para a direita */
+        rgba(22, 96, 255, 0.781),  /* Azul Mais Forte (60% de opacidade) */
+        rgba(50, 115, 255, 0.233)   /* Azul Mais Claro (30% de opacidade) */
+    );
+    /* Z-index para posicionar *acima* da imagem (implícita), mas *abaixo* do texto */
+    z-index: 1; 
 }
 
-.contact-details img, .contact-item img {
-  margin-right: 10px; /* Adiciona um pequeno espaço entre o ícone e o texto */
+.hero-title-axionet {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    /* Ajustando a cor para branco para ser legível sobre o overlay escuro */
+    color: #ffffff; 
 }
 
-.contact-details p, .contact-item p {
-  font-size: 15px;
-  color: #ffffff;
-  margin-top: 20px;
+.hero-lead-axionet {
+    font-size: 1.1rem;
+    color: #e0e0e0; /* Cor clara para o parágrafo */
+    max-width: 600px;
+}
+
+.text-accent-axionet {
+    /* Cor de destaque */
+    color:blue!important;
+}
+
+/* ESSENCIAL: Garantir que o texto (.container) esteja acima do overlay */
+.hero-support-axionet .container {
+    position: relative;
+    z-index: 2; /* Z-index maior que o do overlay */
 }
 
 
-/* ===== Responsivo ===== */
-@media (max-width: 768px) {
-  .form-container {
-    flex-direction: column;
-    padding: 20px;
-  }
+.hero-title-axionet {
+    font-size: 3.5rem; /* Ajuste o tamanho da fonte */
+    font-weight: 700;
+    line-height: 1.1;
+}
 
-  .form-left,
-  .form-right {
-    padding: 20px;
-  }
+.hero-lead-axionet {
+    font-size: 1.1rem;
+    color: #ffffff; 
+    max-width: 600px;
 
-  .form-left h1 {
-    font-size: 26px;
-  }
+}
 
-  .form-right h2 {
-    font-size: 24px;
-  }
+.text-blue{
+    color: #ffffffbe !important;
+}
+
+
+
+
+.text-accent-axionet {
+    /* Cor de destaque para "Nossa Equipe de Suporte" */
+    color: var(--color-accent-axionet) !important;
+}
+
+/* ---------------------------------------------------- */
+/* === 2. Seção Principal (Conecte-se) === */
+/* ---------------------------------------------------- */
+
+.section-title-specialist-axionet {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--color-primary-axionet);
+}
+
+
+/* ---------------------------------------------------- */
+/* === 3. Cartões de Contato (Boston, Austin, etc.) === */
+/* ---------------------------------------------------- */
+
+.contact-card-axionet {
+    /* Estilo do Card Axionet: Fundo levemente off-white */
+    background-color: #ffffff; 
+    border: 1px solid #e0e0e0 !important;
+    transition: box-shadow 0.3s ease;
+    height: 100%; /* Garante que todos os cards da row tenham a mesma altura */
+}
+
+.contact-card-axionet:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact-icon-axionet {
+    font-size: 2rem;
+    color: var(--color-accent-axionet);
+    /* Fundo leve para o ícone, simulando o Axionet */
+    background-color: rgba(0, 140, 159, 0.1); 
+    padding: 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.view-directions-axionet {
+    color: var(--color-accent-axionet);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.view-directions-axionet:hover {
+    color: var(--color-primary-axionet);
+}
+
+
+/* ---------------------------------------------------- */
+/* === 4. Formulário (Inicie a Conversa) === */
+/* ---------------------------------------------------- */
+
+.form-discussion-card-axionet {
+    /* Card Branco Flutuante para o Formulário */
+    background-color: #ffffff;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+/* Campos de Input e Select */
+.form-control, .form-select {
+    padding: 12px;
+    /* Borda fina e arredondada, como no modelo */
+    border: 1px solid #ced4da; 
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+/* Placeholder e Labels */
+.form-label {
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+}
+
+/* Botão de Envio Estilizado (Axionet Gradient/Color) */
+.btn-submit-axionet {
+    background-color: var(--color-accent-axionet);
+    border-color: var(--color-accent-axionet);
+    font-weight: 600;
+    padding: 12px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-submit-axionet:hover {
+    background-color: #00707e; /* Versão mais escura do destaque */
+    border-color: #00707e;
+}
+
+
+/* ---------------------------------------------------- */
+/* === Responsivo (Ajuste para Mobile) === */
+/* ---------------------------------------------------- */
+
+@media (max-width: 992px) {
+    .hero-title-axionet {
+        font-size: 2.5rem;
+    }
+
+    .hero-support-axionet {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .section-title-specialist-axionet {
+        font-size: 1.8rem;
+    }
+
+    /* Empilha os cartões de contato um sobre o outro no mobile */
+    .col-md-6 {
+        margin-bottom: 1rem !important;
+    }
+
+    /* Reduz o padding do formulário no mobile */
+    .form-discussion-card-axionet {
+        padding: 30px !important;
+    }
 }
