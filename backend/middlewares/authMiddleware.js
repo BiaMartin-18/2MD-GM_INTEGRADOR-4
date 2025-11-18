@@ -60,7 +60,7 @@ const authMiddleware = (req, res, next) => {
 
 // Middleware para verificar se o usuário é auditor
 const auditorMiddleware = (req, res, next) => {
-    if (req.usuario.tipo !== 'auditor') {
+    if (req.usuario.tipo_usuario.toLowerCase() !== 'auditor') {
         return res.status(403).json({ 
             erro: 'Acesso negado',
             mensagem: 'Apenas auditores podem acessar este recurso'

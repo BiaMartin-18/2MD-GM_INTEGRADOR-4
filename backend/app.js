@@ -49,7 +49,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Middleware para log de requisições (salva no banco de dados)
-app.use(logMiddleware);
+//app.use(logMiddleware);
 
 // Rotas da API
 app.use('/api/auth', authRotas);

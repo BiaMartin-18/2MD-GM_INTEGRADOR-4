@@ -1,14 +1,14 @@
 import express from 'express';
-import AuthController from '../controllers/AuthController.js';
+import UsuarioController from '../controllers/UsuarioController.js';
 import { authMiddleware, auditorMiddleware } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
 // Rotas de usuários (apenas admin)
-router.get('/', authMiddleware, auditorMiddleware, AuthController.listarUsuarios);
-router.post('/', authMiddleware, auditorMiddleware, AuthController.criarUsuario);
-router.put('/:id', authMiddleware,auditorMiddleware, AuthController.atualizarUsuario);
-router.delete('/:id', authMiddleware, auditorMiddleware, AuthController.excluirUsuario);
+router.get('/', authMiddleware, auditorMiddleware, UsuarioController.listarUsuarios);
+router.post('/', authMiddleware, auditorMiddleware, UsuarioController.criarUsuario);
+router.put('/:id', authMiddleware,auditorMiddleware, UsuarioController.atualizarUsuario);
+router.delete('/:id', authMiddleware, auditorMiddleware, UsuarioController.excluirUsuario);
 
 // Rotas OPTIONS para CORS (preflight requests)
 router.options('/', (req, res) => {
@@ -24,6 +24,9 @@ router.options('/:id', (req, res) => {
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     res.sendStatus(200);
 });
+
+
+
 
 export default router;
 
