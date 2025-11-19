@@ -68,7 +68,7 @@
 }
 
 .welcome-title {
-  font-size: 32px;
+  font-size: 42px;
   font-weight: 700;
   margin-bottom: 5px;
   line-height: 1.2;
@@ -83,10 +83,37 @@
 /* SEÇÃO DE KPIS (4 Cards no Topo) - Responsividade no topo */
 /* ------------------------------------------------------------- */
 .kpi-section {
-  top: -90px; /* Sobreposição para telas grandes */
-  z-index: 50;
+  top: -80px; /* Sobreposição para telas grandes */
+  z-index: 60;
   position: relative;
+  
 }
+
+.kpi-card {
+ border-radius: 12px;
+ min-height: 140px;
+
+ background: linear-gradient(145deg, #ff2020 0%, #f9f9f9 100%);
+ border: none;
+ box-shadow: 0 4px 12px rgb(255, 0, 0);
+
+ /* Mantém a transição para o hover */
+ transition: transform 0.3s ease, box-shadow 0.3s ease; 
+ position: relative;
+ overflow: hidden;
+}
+
+.kpi-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  color: #308efa; /* Cor primária do ícone */
+  flex-shrink: 0; /* Garante que o ícone não seja comprimido */
+}
+
+
 
 .navbarWrapper .navbar-collapse.show {
     z-index: 1000 !important;
@@ -101,27 +128,37 @@
 }
 
 
+.card {
+/* Garante que o Bootstrap não quebre a transição */
+transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+border: none; 
+overflow: hidden; 
+}
+
+
 
 .kpi-card {
   border-radius: 12px; /* Aumentado um pouco o raio */
   min-height: 140px;
-  background: #ffffff;
+  background: rgb(0, 33, 63);
   border: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+color: #f6f8fc;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+
 }
 
 .kpi-title {
   font-size: 14px;
   font-weight: 500;
-  color: #4c5468;
+  color: #f6f8fc;
   margin-bottom: 0;
 }
 
 .kpi-value {
   font-size: 32px; /* Ajustado para melhor destaque */
   font-weight: 700;
-  color: #1b2130;
+  color: #f6f8fc;
 }
 
 /* Indicadores de Mudança (Change) */
@@ -136,17 +173,18 @@
   color: #52c41a !important; /* Texto verde */
 }
 .text-danger {
-  color: #ff4d4f !important; /* Cor forte de perigo (vermelho) */
-  background: rgba(255, 77, 79, 0.1);
+  color: #3e8ef7 !important; /* Cor forte de perigo (vermelho) */
+  background: rgba(77, 104, 255, 0.37);
 }
 .text-success {
   /* Garantindo que o estilo de sucesso seja aplicado */
-  color: #52c41a !important;
+  color: #099dff !important;
+  background-color: #099dff46;
 }
 
 .kpi-subtitle {
-  font-size: 12px;
-  color: #999;
+  font-size: 15px;
+  color: #d1dff1;
   margin-top: 5px;
 }
 
@@ -257,3 +295,5 @@ h4 {
     margin-top: 0 !important;
   }
 }
+
+
