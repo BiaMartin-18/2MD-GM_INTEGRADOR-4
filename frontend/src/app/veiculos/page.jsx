@@ -13,7 +13,7 @@ export default function Veiculos() {
     useEffect(() => {
         async function carregar() {
             try {
-                const res = await fetch("http://localhost:3000/veiculos");
+                const res = await fetch("http://localhost:3001/veiculos");
                 const json = await res.json();
 
                 // Sua API retorna: { sucesso: true, veiculos: [...] }
