@@ -7,8 +7,6 @@ export default function DetalhesVeiculos({ vehicleId }) {
     const [veiculo, setVeiculo] = useState(null)
 
     useEffect(() => {
-        if (vehicleId) {
-            
-        }
+        if (vehicleId) {}
     })
 }
