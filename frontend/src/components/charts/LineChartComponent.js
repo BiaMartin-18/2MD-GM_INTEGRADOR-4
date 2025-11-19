@@ -16,7 +16,7 @@ const LineChartComponent = ({ data }) => (
       <Line 
         type="monotone" 
         dataKey="indice" 
-        stroke="#5d50f0" 
+        stroke="#1100c9ff" 
         strokeWidth={3}
         activeDot={{ r: 8 }}
         name="Índice"
