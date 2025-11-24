@@ -18,7 +18,6 @@ body {
     background-repeat: no-repeat;
     padding-top: 100px; /* Adiciona espaço abaixo da Navbar */
     padding-bottom: 80px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     position: relative;
     height: 40rem;
   
@@ -34,8 +33,8 @@ body {
     /* Seu overlay azul semi-transparente */
    background-image: linear-gradient(
         to right, /* Direção do degradê: da esquerda para a direita */
-        rgba(22, 96, 255, 0.781),  /* Azul Mais Forte (60% de opacidade) */
-        rgba(50, 115, 255, 0.233)   /* Azul Mais Claro (30% de opacidade) */
+        rgba(0, 61, 192, 0.815),  /* Azul Mais Forte (60% de opacidade) */
+        rgba(0, 64, 201, 0.596)   /* Azul Mais Claro (30% de opacidade) */
     );
     /* Z-index para posicionar *acima* da imagem (implícita), mas *abaixo* do texto */
     z-index: 1; 
@@ -57,7 +56,7 @@ body {
 
 .text-accent-axionet {
     /* Cor de destaque */
-    color:blue!important;
+    color:rgba(248, 248, 248, 0.589)!important;
 }
 
 /* ESSENCIAL: Garantir que o texto (.container) esteja acima do overlay */
@@ -87,9 +86,9 @@ body {
 
 
 
-.text-accent-axionet {
+.texto-destaque {
     /* Cor de destaque para "Nossa Equipe de Suporte" */
-    color: var(--color-accent-axionet) !important;
+    color: rgb(73, 73, 219)!important;
 }
 
 /* ---------------------------------------------------- */
@@ -171,16 +170,20 @@ body {
 
 /* Botão de Envio Estilizado (Axionet Gradient/Color) */
 .btn-submit-axionet {
-    background-color: var(--color-accent-axionet);
-    border-color: var(--color-accent-axionet);
+    background-color:#0758ee;
+    color: #ffffff;
+    border:none;
+    border-radius: 35px;
     font-weight: 600;
     padding: 12px;
     transition: background-color 0.2s ease;
+
 }
 
 .btn-submit-axionet:hover {
-    background-color: #00707e; /* Versão mais escura do destaque */
-    border-color: #00707e;
+    background-color: #023085; /* Versão mais escura do destaque */
+    color: #ffffff;
+    border: none;
 }
 
 

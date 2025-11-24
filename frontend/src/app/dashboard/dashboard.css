@@ -1,28 +1,28 @@
-/* ====== Dashboard.css ====== */
+/* ====== dashboard.css - Otimizado e com Responsividade Reforçada ====== */
 
 /* Page wrapper */
 .pageWrapper {
-  background-color: #f6f8fc;
+  background-color: #f6f8fc; /* Fundo cinza claro */
   min-height: 100vh;
   width: 100%;
   padding-bottom: 40px;
 }
 
 /* ------------------------------------------------------------- */
-/* SEÇÃO HEADER (Fundo Animado e Navbar) - Mantida a correção   */
+/* SEÇÃO HEADER (Fundo Animado e Navbar) - Manutenção do Design */
 /* ------------------------------------------------------------- */
 
 .dashboardHeaderSection {
   position: relative;
   width: 100%;
-  height: 25rem; /* Reduzido um pouco para dar mais espaço ao conteúdo principal */
+  height: 25rem; /* Altura do cabeçalho */
   overflow: hidden;
-  background: #0b1528;
+  background: #0b1528; /* Fundo escuro */
   border-radius: 0 0 20px 20px;
-  z-index: 20;
+  z-index: 60;
 }
 
-/* Fundo Animado e Navbar Wrappers (mantidos) */
+/* Fundo Animado e Navbar Wrappers */
 .animatedBackgroundContainer {
   position: absolute;
   top: 0;
@@ -41,17 +41,16 @@
 }
 .navbarWrapper {
   position: relative;
-  z-index: 10;
+  /* Aumentei o Z-INDEX para garantir que a navbar e seu menu flutuem acima do dashboardHeaderSection (60) */
+  z-index: 1000; 
   width: 100%;
   padding: 0;
 }
-.navbarWrapper nav {
-  background: transparent !important;
-  z-index: 30;
-}
-.finisher-header {
-  width: 100%;
-  height: 100%;
+/* ... */
+.navbarWrapper .navbar-collapse.show {
+    /* Z-index mais alto para flutuar sobre todo o conteúdo do header (z-index 60) */
+    z-index: 1002 !important; 
+    /* ... */
 }
 
 /* Conteúdo ABAIXO do Navbar (Mensagem de Boas-Vindas) */
@@ -69,7 +68,7 @@
 }
 
 .welcome-title {
-  font-size: 32px;
+  font-size: 42px;
   font-weight: 700;
   margin-bottom: 5px;
   line-height: 1.2;
@@ -81,63 +80,120 @@
 }
 
 /* ------------------------------------------------------------- */
-/* SEÇÃO DE KPIS (4 Cards no Topo) - Novo Layout                  */
+/* SEÇÃO DE KPIS (4 Cards no Topo) - Responsividade no topo */
 /* ------------------------------------------------------------- */
 .kpi-section {
-  top: -90px; /* Ajuste este valor. -50px ou -60px costuma ser suficiente */
-  z-index: 50; /* Garante que fique ACIMA do dashboardHeaderSection (z-index: 10) */
+  top: -80px; /* Sobreposição para telas grandes */
+  z-index: 60;
   position: relative;
+  
 }
 
 .kpi-card {
-  border-radius: 8px;
+ border-radius: 12px;
+ min-height: 140px;
+
+ background: linear-gradient(145deg, #ff2020 0%, #f9f9f9 100%);
+ border: none;
+ box-shadow: 0 4px 12px rgb(255, 0, 0);
+
+ /* Mantém a transição para o hover */
+ transition: transform 0.3s ease, box-shadow 0.3s ease; 
+ position: relative;
+ overflow: hidden;
+}
+
+.kpi-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  color: #308efa; /* Cor primária do ícone */
+  flex-shrink: 0; /* Garante que o ícone não seja comprimido */
+}
+
+
+
+.navbarWrapper .navbar-collapse.show {
+    z-index: 1000 !important;
+    position: absolute; /* Habilita o z-index corretamente */
+    top: 100%; 
+    left: 0;
+    width: 100%;
+    background-color: #18223c; /* Fundo escuro para o menu flutuante em mobile */
+    border-radius: 0 0 10px 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+.card {
+/* Garante que o Bootstrap não quebre a transição */
+transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+border: none; 
+overflow: hidden; 
+}
+
+
+
+.kpi-card {
+  border-radius: 12px; /* Aumentado um pouco o raio */
   min-height: 140px;
-  background: #ffffff;
+  background: rgb(0, 33, 63);
   border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+color: #f6f8fc;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+
 }
 
 .kpi-title {
   font-size: 14px;
   font-weight: 500;
-  color: #4c5468;
+  color: #f6f8fc;
   margin-bottom: 0;
 }
 
 .kpi-value {
-  font-size: 30px;
+  font-size: 32px; /* Ajustado para melhor destaque */
   font-weight: 700;
-  color: #1b2130;
+  color: #f6f8fc;
 }
 
+/* Indicadores de Mudança (Change) */
 .kpi-change {
   font-size: 12px;
   font-weight: 600;
   display: flex;
   align-items: center;
   padding: 2px 8px;
-  border-radius: 10px;
-  background: rgba(0, 128, 0, 0.1); /* Cor de fundo para o indicador */
+  border-radius: 15px; /* Pill shape */
+  background: rgba(82, 196, 26, 0.1); /* Fundo suave para sucesso (verde) */
+  color: #52c41a !important; /* Texto verde */
 }
 .text-danger {
-  color: #ff4d4f !important;
-  background: rgba(255, 77, 79, 0.1);
+  color: #3e8ef7 !important; /* Cor forte de perigo (vermelho) */
+  background: rgba(77, 104, 255, 0.37);
+}
+.text-success {
+  /* Garantindo que o estilo de sucesso seja aplicado */
+  color: #099dff !important;
+  background-color: #099dff46;
 }
 
 .kpi-subtitle {
-  font-size: 12px;
-  color: #999;
+  font-size: 15px;
+  color: #d1dff1;
   margin-top: 5px;
 }
 
 /* ------------------------------------------------------------- */
-/* SEÇÃO DE CONTEÚDO PRINCIPAL (Gráficos e Listas)               */
+/* SEÇÃO DE CONTEÚDO PRINCIPAL (Gráficos e Listas)               */
 /* ------------------------------------------------------------- */
 .main-content-section {
-  margin-top: 40px !important;
   position: relative;
-
-  margin-top: 40px !important; /* Mantém o espaçamento interno */
+  /* Margem condicional para telas grandes */
 }
 
 /* Cards reutilizados (cardLarge e cardBox) */
@@ -146,87 +202,98 @@
   border-radius: 16px;
   background: #ffffff;
   border: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); /* Sombra mais destacada */
 }
 
 h4 {
   font-weight: 700;
   color: #1b2130;
   font-size: 18px;
+  margin-bottom: 20px; /* Adiciona espaço após o título do card */
 }
 
-/* Estilo para placeholder de gráfico de linha com info box */
-.chartLargePlaceholder {
-  position: relative;
-  width: 100%;
-  height: 350px;
-  background: #e9eef7;
-  border-radius: 12px;
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Estilo para container de gráfico (para Recharts) */
+.card-body > div[style] {
+  margin-top: 10px; /* Espaçamento entre o título e o gráfico */
 }
 
-.chart-info-box {
-  position: absolute;
-  top: 10%;
-  right: 15%;
-  background-color: #1b2130;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 600;
-  opacity: 0.8;
-}
-
-/* Estilos da Lista de Defeitos */
+/* Estilos da Lista de Defeitos (Top Defeitos) */
 .search-bar-list {
   margin-bottom: 15px;
 }
-.list-placeholder {
-  margin-top: 15px;
+.list-group-flush {
+  border-top: 1px solid #eee;
 }
-.list-item span {
-  font-size: 13px;
-  color: #1b2130;
+.list-group-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
 }
-
-/* Estilos do Cronograma (Schedule) */
-.schedule-placeholder {
-  margin-top: 15px;
-}
+.list-item span,
 .schedule-item strong {
   font-size: 14px;
   color: #1b2130;
+  font-weight: 500;
+}
+.list-item .badge {
+  background-color: #5d50f0 !important;
+}
+
+/* Estilos do Cronograma (Schedule) */
+.schedule-item {
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 .schedule-item span {
   font-size: 12px;
+  color: #6c757d;
 }
-.schedule-item-placeholder {
-  width: 100%;
-  height: 100px;
-  background: #e9eef7;
-  border-radius: 8px;
-  margin-top: 10px;
+.schedule-item .badge {
+  min-width: 100px;
+  text-align: center;
 }
 
-/* Estilos do Status dos Defeitos */
-.status-details {
-  font-size: 14px;
-}
-.status-details strong {
-  color: #1b2130;
-  font-weight: 600;
-}
+/* ------------------------------------------------------------- */
+/* RESPONSIVIDADE GERAL (Mobile First)                           */
+/* ------------------------------------------------------------- */
 
-/* Responsividade geral */
-@media (max-width: 992px) {
+/* Telas Pequenas/Médias (Mobile e Tablet: < 992px) */
+@media (max-width: 991.98px) {
+  .dashboardHeaderSection {
+    height: 18rem; /* Diminui a altura do header em mobile */
+  }
+  .dashboard-content-overlay {
+    padding-top: 100px; /* Ajusta o padding do conteúdo do header */
+  }
+  .welcome-title {
+    font-size: 26px;
+  }
+
+  /* Remove a sobreposição do KPI e corrige o fluxo em mobile */
   .kpi-section {
-    margin-top: 20px !important; /* Desabilita sobreposição em telas menores */
+    top: 0;
+    margin-top: 20px !important;
+  }
+
+  /* Ajusta o espaçamento superior do conteúdo principal */
+  .main-content-section {
+    margin-top: 20px !important;
+  }
+
+  /* Reduz a altura mínima dos cards KPI */
+  .kpi-card {
+    min-height: auto;
   }
   .kpi-value {
-    font-size: 24px;
+    font-size: 28px;
   }
 }
+
+/* Telas Grandes (Desktop: >= 992px) */
+@media (min-width: 992px) {
+  /* Garante que o conteúdo principal não tenha margin-top extra, pois os KPIs o sobrepõem */
+  .main-content-section {
+    margin-top: 0 !important;
+  }
+}
+
+
