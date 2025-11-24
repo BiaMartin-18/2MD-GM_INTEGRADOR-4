@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import CardVeiculo from "@/components/cardcarros/index"; // IMPORTA O CARD CORRETO
 import "./veiculos.css";
 import Navbar from "@/components/blocks/Navbar";
+import FinisherParticles from "@/components/FinisherParticles";
 
 export default function Veiculos() {
     const [veiculos, setVeiculos] = useState([]);
@@ -13,7 +14,7 @@ export default function Veiculos() {
     useEffect(() => {
         async function carregar() {
             try {
-                const res = await fetch("http://localhost:3000/veiculos");
+                const res = await fetch("http://localhost:3001/veiculos");
                 const json = await res.json();
 
                 // Sua API retorna: { sucesso: true, veiculos: [...] }
@@ -52,33 +53,40 @@ export default function Veiculos() {
     });
 
     return (
-        
-<>
-<Navbar/>
-        
-        <div className="veiculos-container">
-            <h1 className="titulo">Veículos</h1>
+        <>
+            <div className="hero-wrapper">
+                <Navbar />
+                <section className="hero section">
+                    <FinisherParticles />
+                    {/* Conteúdo do Hero - Deve ficar acima do FinisherParticles */}
+                    <div className="heroContent">
+                        {/* Título */}
+                        <h1 className="titulo text-white fw-bold mb-5">
+                            Veículos
+                        </h1>
+                        {/* Filtro */}
+                        <div className="filtros-container mt-5">
+                            <input
+                                type="text"
+                                placeholder="Modelo, placa ou status..."
+                                value={busca}
+                                onChange={(e) => setBusca(e.target.value)}
+                                className="input-busca"
+                            />
 
-            {/* FILTROS */}
-            <div className="filtros-container">
-                <input
-                    type="text"
-                    placeholder="Buscar por modelo, placa ou status..."
-                    value={busca}
-                    onChange={(e) => setBusca(e.target.value)}
-                    className="input-busca"
-                />
-
-                <select
-                    value={filtro}
-                    onChange={(e) => setFiltro(e.target.value)}
-                    className="select-filtro"
-                >
-                    <option value="Todos">Todos</option>
-                    <option value="Ativo">Ativo</option>
-                    <option value="Manutenção">Manutenção</option>
-                    <option value="Inativo">Inativo</option>
-                </select>
+                            <select
+                                value={filtro}
+                                onChange={(e) => setFiltro(e.target.value)}
+                                className="select-filtro"
+                            >
+                                <option value="Todos">Todos</option>
+                                <option value="Ativo">Ativo</option>
+                                <option value="Manutenção">Manutenção</option>
+                                <option value="Inativo">Inativo</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
             </div>
 
             <div className="cards-grid">
@@ -96,7 +104,6 @@ export default function Veiculos() {
                     />
                 ))}
             </div>
-        </div>
         </>
     );
 }

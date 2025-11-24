@@ -9,9 +9,9 @@ CREATE TABLE IF NOT EXISTS usuarios (
     nome VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     senha VARCHAR(255) NOT NULL,
-    tipo_usuario ENUM('Auditor', 'FT', 'Engenheiros') NOT NULL,
+    tipo_usuario ENUM('Auditor', 'FT', 'Engenheiro') NOT NULL,
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     data_atualizacao DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    turno VARCHAR(50) NOT NULL,
+    turno VARCHAR(50) NOT NULL
 );
 

@@ -33,6 +33,7 @@ export default function Navbar() {
           isScrolled ? "scrolled" : ""
         }`}
       >
+        <div className="navbar-content-wrapper"></div>
         <div className="container-fluid">
           <Link href="/" className="navbar-brand fw-bold">
             <img
@@ -81,19 +82,7 @@ export default function Navbar() {
                       Veículos
                     </Link>
                   </li>
-                  <li>
-                    <Link className="dropdown-item" href="/painel-operador">
-                      Painel do Operador
-                    </Link>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" href="/painel-admin">
-                      Painel de Administrador
-                    </Link>
-                  </li>
+
                 </ul>
               </li>
 
@@ -110,15 +99,11 @@ export default function Navbar() {
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="painelDropdown">
                   <li>
-                    <Link className="dropdown-item" href="/dashboard-geral">
+                    <Link className="dropdown-item" href="/dashboard">
                       Dashboard Geral
                     </Link>
                   </li>
-                  <li>
-                    <Link className="dropdown-item" href="/dashauditoria">
-                      Painel do Administrador
-                    </Link>
-                  </li>
+                 
                 </ul>
               </li>
             </ul>

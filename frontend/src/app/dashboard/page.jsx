@@ -1,299 +1,346 @@
-// Dashboard.js
 "use client";
+
+import React from "react";
 import Navbar from "@/components/blocks/Navbar";
-// IMPORTAR OS NOVOS COMPONENTES DE GRÁFICO (Ajuste os caminhos se necessário)
-import LineChartComponent from "@/components/charts/LineChartComponent";
-import PieChartComponent from "@/components/charts/PieChartComponent";
-import BarChartComponent from "@/components/charts/BarChartComponent";
-import { useEffect, useState } from "react"; // Importar useState para a data
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./dashboard.css";
+import "./dashboard.css"; // Seus estilos do dashboard
+import LineChartComponent from "@/components/charts/LineChartComponent";
+import BarChartComponent from "@/components/charts/BarChartComponent";
+import PieChartComponent from "@/components/charts/PieChartComponent";
+import OverviewLineChart from "@/components/charts/OverviewLineChart";
 import FinisherParticles from "@/components/FinisherParticles";
 
-// Função auxiliar para formatar a data (opcional, mas bom para UX)
-const getFormattedDate = () => {
-  const date = new Date();
-  return date
-    .toLocaleDateString("pt-BR", {
-      weekday: "long",
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    })
-    .replace(/^[a-z]/, (char) => char.toUpperCase()); // Capitaliza o primeiro caractere
+// REMOVIDO: A constante KpiCard foi eliminada.
+
+// --- MOCK DATA (Dados de Exemplo) ---
+const mockData = {
+  // Dados mantidos apenas para os GRÁFICOS e LISTAS
+  lineChart: [
+    { mes: "Jan", indice: 5.5 },
+    { mes: "Fev", indice: 36.0 },
+    { mes: "Mar", indice: 95.8 },
+    { mes: "Abr", indice: 66.5 },
+    { mes: "Mai", indice: 97.2 },
+    { mes: "Jun", indice: 18.5 },
+  ],
+  barChart: [
+    { mes: "Jan", Tracker: 50, Montana: 40, Spin: 30 },
+    { mes: "Fev", Tracker: 60, Montana: 45, Spin: 35 },
+    { mes: "Mar", Tracker: 55, Montana: 50, Spin: 40 },
+    { mes: "Abr", Tracker: 70, Montana: 60, Spin: 45 },
+    { mes: "Mai", Tracker: 80, Montana: 70, Spin: 50 },
+    { mes: "Jun", Tracker: 90, Montana: 80, Spin: 55 },
+  ],
+  pieChart: [
+    { name: "Falha Crítica", value: 15, color: "#2045ffff" },
+    { name: "Falha Grave", value: 30, color: "#040764ff" },
+    { name: "Falha Média", value: 55, color: "#597ef7" },
+    { name: "Falha Leve", value: 100, color: "#033889ff" },
+  ],
+  topDefeitos: [
+    { id: 1, nome: "Ajuste de Painel", count: 12, prioridade: "Alta" },
+    { id: 2, nome: "Pintura (Micro-bolhas)", count: 9, prioridade: "Alta" },
+    { id: 3, nome: "Fixação de Forro", count: 6, prioridade: "Média" },
+    { id: 4, nome: "Acabamento da Porta", count: 5, prioridade: "Baixa" },
+  ],
+  agendamentos: [
+    {
+      id: 1,
+      veiculo: "Tracker 2024 (VIN: 0100)",
+      data: "Amanhã, 10:00h",
+      status: "Pendente",
+    },
+    {
+      id: 2,
+      veiculo: "Montana 2023 (VIN: 0101)",
+      data: "Amanhã, 14:30h",
+      status: "Em Andamento",
+    },
+  ],
 };
 
-export default function Dashboard() {
-  useEffect(() => {
-    require("bootstrap/dist/js/bootstrap.bundle.min.js");
-  }, []);
-
-  // Variáveis Fictícias do Projeto PDI
-  const today = getFormattedDate();
-  const userName = "Beatriz Martin"; // Gerente de Grupo
-  const metricas = {
-    totalVeiculos: 432,
-    auditoriasAbertas: 24,
-    taxaDefeitoLinha: 8, // Porcentagem de veículos com defeito na saída da linha
-    aplicantesVagas: 24, // Exemplo de KPI de RH, adaptado para PDI/Auditorias
-    // Métricas PDI
-    totalFTs: 18,
-    defeitosCorrigidos: 91,
-    defeitosEmAberto: 9,
-    custoMedioAjuste: 450.5,
+export default function DashboardPage() {
+  // Função para obter a data e formatar (Apenas para simulação)
+  const getCurrentDate = () => {
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return new Date().toLocaleDateString("pt-BR", options);
   };
-
-  const pieData = [
-    { name: "Graves", value: 40, color: "#060053ff" }, // Azul escuro
-    { name: "Médios", value: 35, color: "#5151f0ff" }, // Azul roxo
-    { name: "Moderados", value: 25, color: "#60a0ffff" }, // Azul claro
-  ];
-
-  const barData = [
-    // Mês 1
-    {
-      mes: "Jan",
-      Tracker: 10, // Auditorias do Tracker em Janeiro
-      Montana: 5, // Auditorias da Montana em Janeiro
-      Spin: 3, // Auditorias do Spin em Janeiro
-    },
-    // Mês 2
-    {
-      mes: "Fev",
-      Tracker: 15,
-      Montana: 8,
-      Spin: 4,
-    },
-    // Mês 3
-    {
-      mes: "Mar",
-      Tracker: 8,
-      Montana: 12,
-      Spin: 7,
-    },
-    // Mês 4
-    {
-      mes: "Abr",
-      Tracker: 18,
-      Montana: 9,
-      Spin: 5,
-    },
-    // Mês 5
-    {
-      mes: "Mai",
-      Tracker: 22,
-      Montana: 15,
-      Spin: 10,
-    },
-    // Mês 6
-    {
-      mes: "Jun",
-      Tracker: 16,
-      Montana: 11,
-      Spin: 6,
-    },
-    // Mês 7
-    {
-      mes: "Jul",
-      Tracker: 25,
-      Montana: 14,
-      Spin: 9,
-    },
-    // Mês 8
-    {
-      mes: "Agosto",
-      Tracker: 49,
-      Montana: 20,
-      Spin: 12,
-    },
-    // Mês 9
-    {
-      mes: "Setembro",
-      Tracker: 30,
-      Montana: 18,
-      Spin: 10,
-    },
-    // Mês 10
-    {
-      mes: "Outubro",
-      Tracker: 35,
-      Montana: 22,
-      Spin: 15,
-    },
-    // Mês 11
-    {
-      mes: "Novembro",
-      Tracker: 28,
-      Montana: 16,
-      Spin: 11,
-    },
-    // Mês 12
-    {
-      mes: "Dezembro",
-      Tracker: 40,
-      Montana: 25,
-      Spin: 14,
-    },
-  ];
-
-  const lineData = [
-    { mes: "Jan", indice: 120 },
-    { mes: "Fev", indice: 150 },
-    { mes: "Mar", indice: 130 },
-    { mes: "Abr", indice: 180 },
-    { mes: "Mai", indice: 160 },
-    { mes: "Jun", indice: 210 },
-    { mes: "Jul", indice: 190 },
-    { mes: "Ago", indice: 230 },
-    { mes: "Set", indice: 200 },
-    { mes: "Out", indice: 250 },
-    { mes: "Nov", indice: 220 },
-    { mes: "Dez", indice: 270 },
-  ];
 
   return (
     <div className="pageWrapper">
-      {/* 1. SEÇÃO SUPERIOR (Header, Navbar, Fundo Animado) - Sem alteração na estrutura base */}
-      <section className="dashboardHeaderSection">
+      <div className="dashboardHeaderSection">
         <div className="animatedBackgroundContainer">
+          <FinisherParticles />
           <div className="finisher-canvas-wrapper">
-            <FinisherParticles />
+            {/* Seu canvas animado ou outra decoração de fundo aqui */}
           </div>
         </div>
         <div className="navbarWrapper">
-          <Navbar />
+          <Navbar /> {/* Sua Navbar fixa e responsiva */}
         </div>
 
-        {/* CONTEÚDO DO HEADER (Mensagem e Navegação Secundária) */}
+        {/* Overlay de Conteúdo do Header */}
         <div className="container dashboard-content-overlay">
-          {/* Mensagem de Saudação Dinâmica e Data */}
-          <div className="greeting-container">
-            <h1 className="welcome-title">Bom dia, {userName}!</h1>
-            <p className="current-date">É {today}</p>
-          </div>
-
-          {/* Menu de Navegação Secundário (Removido, pois não é padrão do seu projeto e polui o header) */}
-          {/* <div className="secondaryNav"> ... </div> */}
-        </div>
-      </section>
-
-      {/* 2. SEÇÃO DE KPIs (Métricas Principais no Topo) */}
-      <section className="container kpi-section mt-5">
-        <div className="row g-4">
-          {/* KPI 1: Total de Veículos em PDI */}
-          <div className="col-lg-3 col-md-6">
-            <div className="card p-3 shadow-sm kpi-card">
-              <h5 className="kpi-title">Total de Veículos em PDI</h5>
-              <div className="d-flex justify-content-between align-items-center mt-2">
-                <span className="kpi-value">{metricas.totalVeiculos}</span>
-                <span className="kpi-change text-success">+3.5%</span>
-              </div>
-              <p className="kpi-subtitle">Desde o mês passado</p>
-            </div>
-          </div>
-
-          {/* KPI 2: Auditorias Abertas */}
-          <div className="col-lg-3 col-md-6">
-            <div className="card p-3 shadow-sm kpi-card">
-              <h5 className="kpi-title">Auditorias Abertas</h5>
-              <div className="d-flex justify-content-between align-items-center mt-2">
-                <span className="kpi-value">{metricas.auditoriasAbertas}</span>
-                <span className="kpi-change text-success">+5%</span>
-              </div>
-              <p className="kpi-subtitle">Desde a semana passada</p>
-            </div>
-          </div>
-
-          {/* KPI 3: Taxa de Defeito de Linha (%) */}
-          <div className="col-lg-3 col-md-6">
-            <div className="card p-3 shadow-sm kpi-card">
-              <h5 className="kpi-title">Taxa de Defeito de Linha</h5>
-              <div className="d-flex justify-content-between align-items-center mt-2">
-                <span className="kpi-value">{metricas.taxaDefeitoLinha}%</span>
-                <span className="kpi-change text-danger">↓ 1%</span>
-              </div>
-              <p className="kpi-subtitle">Desde o mês passado</p>
-            </div>
-          </div>
-
-          {/* KPI 4: Custo Médio por Ajuste (R$) */}
-          <div className="col-lg-3 col-md-6">
-            <div className="card p-3 shadow-sm kpi-card">
-              <h5 className="kpi-title">Custo Médio por Ajuste</h5>
-              <div className="d-flex justify-content-between align-items-center mt-2">
-                <span className="kpi-value">
-                  R${metricas.custoMedioAjuste.toFixed(2)}
-                </span>
-                <span className="kpi-change text-success">+6%</span>
-              </div>
-              <p className="kpi-subtitle">Desde o mês passado</p>
+          <div className="row greeting-container">
+            <div className="col-12">
+              <h1 className="welcome-title">Bem-vinda, Paloma Vicente</h1>
+              <p className="current-date">Relatório de {getCurrentDate()}</p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Gráficos e Listas seriam inseridos aqui */}
-      <section className="container main-content-section mt-5">
-        <div className="row g-4">
-          {/* COLUNA ESQUERDA (Larga: Gráficos de Desempenho) - col-lg-8 */}
-          <div className="col-lg-8">
-            <div className="row g-4">
-              {/* 3.1 GRÁFICO 1: Índice de Defeitos por Mês (GRÁFICO DE LINHAS) */}
-              <div className="col-12">
-                <div className="card p-4 shadow-sm cardLarge">
-                  <h4>Índice de Defeitos Mais Ocorrentes (Mensal)</h4>
-                  <p>Tendência e Projeção do Volume de Defeitos</p>
-                  <div
-                    className="chartLargePlaceholder"
-                    style={{ height: "350px" }}
-                  >
-                    {/* Componente Gráfico de Linhas aqui */}
-                    <LineChartComponent data={lineData} />
-                  </div>
-                </div>
-              </div>
+      {/* --- SEÇÃO PRINCIPAL DE KPIS (Abaixo do Header) --- */}
+      <div className="container kpi-section">
+        <div className="row">
+            
+            {/* CARD 1: Auditorias Concluídas */}
+            <div className="col-12 col-sm-6 col-md-6 col-lg-3 mb-4">
+                <div className="card kpi-card shadow-sm h-100 position-relative">
+                    <div className="card-body">
+                        
+                        {/* Ícone grande de fundo (kpi-background-icon) REMOVIDO aqui. */}
 
-              {/* 3.2 GRÁFICO 2: Lista de Auditores/Defeitos (Mantido como lista/tabela) */}
-              {/* ... (Seu código da lista de defeitos e responsáveis) ... */}
-            </div>
-          </div>
-
-          {/* COLUNA DIREITA (Estreita: Tarefas e Status) - col-lg-4 */}
-          <div className="col-lg-4">
-            <div className="row g-4">
-              {/* 3.3 CARD 3: Defeitos Graves, Médios e Moderados (GRÁFICO DE PIZZA) */}
-              <div className="col-12">
-                <div className="card p-4 shadow-sm cardBox">
-                  <h4>Classificação de Defeitos</h4>
-                  <p className="text-muted small">Graves, Médios e Moderados</p>
-                  <div className="chartPlaceholder" style={{ height: "350px" }}>
-                    {/* Componente Gráfico de Pizza aqui */}
-                    <PieChartComponent data={pieData} />
-                  </div>
-                </div>
-              </div>
-
-              {/* 3.4 CARD 4: Modelos de Carros com Mais Auditorias (GRÁFICO DE BARRA) */}
-              <div className="row g-4 mt-4">
-                <div className="col-12">
-                  {" "}
-                  {/* <<< USE col-12 AQUI! */}
-                  <div className="card p-4 shadow-sm cardLarge">
-                    <h4>Modelos com Mais Auditorias (Mensal)</h4>
-                    <div
-                      className="chartPlaceholder"
-                      style={{ height: "350px" }}
-                    >
-                      {/* Componente Gráfico de Barra (Agora com largura total) */}
-                      <BarChartComponent data={barData} />
+                        <div className="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p className="kpi-title">Auditorias Concluídas</p>
+                                <h3 className="kpi-value">1.250</h3>
+                            </div>
+                            {/* Ícone principal, menor e colorido (MANTIDO) */}
+                            <div className="kpi-icon-wrapper">
+                                <i className="bi bi-check2-all"></i>
+                            </div>
+                        </div>
+                        <div className="d-flex align-items-center mt-2">
+                            <span className="kpi-change text-success">
+                                <i className="bi bi-arrow-up-right me-1"></i>
+                                +12.5%
+                            </span>
+                            <p className="kpi-subtitle ms-2">vs. mês anterior</p>
+                        </div>
                     </div>
+                </div>
+            </div>
+
+            {/* CARD 2: Defeitos Registrados */}
+            <div className="col-12 col-sm-6 col-md-6 col-lg-3 mb-4">
+                <div className="card kpi-card shadow-sm h-100 position-relative">
+                    <div className="card-body">
+                        
+                        {/* Ícone grande de fundo (kpi-background-icon) REMOVIDO aqui. */}
+
+                        <div className="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p className="kpi-title">Defeitos Registrados</p>
+                                <h3 className="kpi-value">48</h3>
+                            </div>
+                            {/* Ícone principal, menor e colorido (MANTIDO) */}
+                            <div className="kpi-icon-wrapper">
+                                <i className="bi bi-clipboard-check"></i>
+                            </div>
+                        </div>
+                        <div className="d-flex align-items-center mt-2">
+                            <span className="kpi-change text-danger">
+                                <i className="bi bi-arrow-down-right me-1"></i>
+                                -5.2%
+                            </span>
+                            <p className="kpi-subtitle ms-2">vs. semana passada</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* CARD 3: Índice de Qualidade (IQ) */}
+            <div className="col-12 col-sm-6 col-md-6 col-lg-3 mb-4">
+                <div className="card kpi-card shadow-sm h-100 position-relative">
+                    <div className="card-body">
+                        
+                        {/* Ícone grande de fundo (kpi-background-icon) REMOVIDO aqui. */}
+
+                        <div className="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p className="kpi-title">Índice de Qualidade (IQ)</p>
+                                <h3 className="kpi-value">98.5</h3>
+                            </div>
+                            {/* Ícone principal, menor e colorido (MANTIDO) */}
+                            <div className="kpi-icon-wrapper">
+                                <i className="bi bi-speedometer2"></i>
+                            </div>
+                        </div>
+                        <div className="d-flex align-items-center mt-2">
+                            <span className="kpi-change text-success">
+                                <i className="bi bi-arrow-up-right me-1"></i>
+                                +0.8%
+                            </span>
+                            <p className="kpi-subtitle ms-2">Atualizado hoje</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* CARD 4: Veículos Auditados */}
+            <div className="col-12 col-sm-6 col-md-6 col-lg-3 mb-4">
+                <div className="card kpi-card shadow-sm h-100 position-relative">
+                    <div className="card-body">
+                        
+                        {/* Ícone grande de fundo (kpi-background-icon) REMOVIDO aqui. */}
+
+                        <div className="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p className="kpi-title">Veículos Auditados</p>
+                                <h3 className="kpi-value">350</h3>
+                            </div>
+                            {/* Ícone principal, menor e colorido (MANTIDO) */}
+                            <div className="kpi-icon-wrapper">
+                                <i className="bi bi-car-front-fill"></i>
+                            </div>
+                        </div>
+                        <div className="d-flex align-items-center mt-2">
+                            <span className="kpi-change text-success">
+                                <i className="bi bi-arrow-up-right me-1"></i>
+                                +25.0%
+                            </span>
+                            <p className="kpi-subtitle ms-2">Neste mês</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+      {/* --- SEÇÃO DE GRÁFICOS E LISTAS (Conteúdo Principal) --- */}
+      <div className="container main-content-section">
+        <div className="row">
+          {/* 1. GRÁFICO DE LINHA (Índice de Qualidade Mensal) - 8 COLUNAS */}
+          <div className="col-lg-8 mb-4">
+            <div className="card cardLarge h-100">
+              <div className="card-body">
+                <h4>Índice de Qualidade (IQ) - Últimos 6 Meses</h4>
+                <div style={{ width: "100%", height: "350px" }}>
+                  <LineChartComponent data={mockData.lineChart} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 2. GRÁFICO DE PIZZA (Distribuição de Severidade dos Defeitos) - 4 COLUNAS */}
+          <div className="col-lg-4 mb-4">
+            <div className="card cardBox h-100">
+              <div className="card-body">
+                <h4>Severidade dos Defeitos (Total)</h4>
+                <div style={{ width: "100%", height: "350px" }}>
+                  <PieChartComponent data={mockData.pieChart} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 3. GRÁFICO DE BARRAS (Auditorias por Modelo) - 12 COLUNAS */}
+          <div className="col-lg-12 mb-4">
+            <div className="card cardLarge h-100">
+              <div className="card-body">
+                <h4>Volume de Auditorias por Modelo (Mensal)</h4>
+                <div style={{ width: "100%", height: "350px" }}>
+                  <BarChartComponent data={mockData.barChart} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="container-fluid py-5"
+            style={{ backgroundColor: "#f8f9fa", minHeight: "100vh" }}
+          >
+            {/* LINHA SUPERIOR: GRÁFICO DE VISÃO GERAL */}
+            <div className="row mb-4">
+              <div className="col-12">
+                <div
+                  className="card shadow border-0"
+                  style={{ height: "350px" }}
+                >
+                  <div className="card-body p-0">
+                    <OverviewLineChart />
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          {/* 4. LISTA DE TOP 5 DEFEITOS - 6 COLUNAS */}
+          <div className="col-lg-6 mb-4">
+            <div className="card cardBox h-100">
+              <div className="card-body">
+                <h4 className="mb-3">Top Defeitos por Ocorrência</h4>
+                <div className="input-group search-bar-list mb-3">
+                  <span className="input-group-text">
+                    <i className="bi bi-search"></i>
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Buscar defeito..."
+                  />
+                </div>
+
+                <ul className="list-group list-group-flush list-placeholder">
+                  {mockData.topDefeitos.map((item) => (
+                    <li
+                      key={item.id}
+                      className="list-group-item d-flex justify-content-between align-items-center list-item"
+                    >
+                      <span>{item.nome}</span>
+                      <span className="badge bg-primary rounded-pill">
+                        {item.count}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* 5. CRONOGRAMA / AGENDAMENTOS - 6 COLUNAS */}
+          <div className="col-lg-6 mb-4">
+            <div className="card cardBox h-100">
+              <div className="card-body">
+                <h4 className="mb-3">Próximos Agendamentos de Auditoria</h4>
+                <ul className="list-group list-group-flush schedule-placeholder">
+                  {mockData.agendamentos.map((item) => (
+                    <li
+                      key={item.id}
+                      className="list-group-item d-flex justify-content-between align-items-center schedule-item"
+                    >
+                      <div>
+                        <strong>{item.veiculo}</strong>
+                        <br />
+                        <span className="text-muted">{item.data}</span>
+                      </div>
+                      <span
+                        className={`badge ${
+                          item.status === "Pendente"
+                            ? "bg-warning text-dark"
+                            : "bg-info"
+                        }`}
+                      >
+                        {item.status}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <button className="btn btn-outline-primary btn-sm mt-3 w-100">
+                  Ver Todos
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

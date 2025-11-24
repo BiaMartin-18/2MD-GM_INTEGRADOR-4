@@ -1,41 +1,97 @@
 .veiculos-container {
   padding: 40px;
   min-height: 100vh;
-  background: #acbfd3;
   font-family: "Poppins", sans-serif;
 }
 
-.titulo {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #1f2937;
-  margin-bottom: 30px;
+/* ESTILOS DA HERO SECTION (CARD FLUTUANTE) */
+.hero-wrapper {
+  padding-top: 30px; 
+}
+
+.hero.section {
+  padding: 30px 40px;
+  padding-top: 30px;
+  border-radius: 30px;
+  padding-top: 30px; /* Mantém o espaçamento para o Navbar interno */
+  padding-bottom: 40px; 
+  padding-left: 40px; 
+  padding-right: 40px;
+  width: 98%; /* Largura para "flutuar" */
+  min-height: 50vh; /* Altura mínima para preencher a tela */
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden; /* ESSENCIAL para respeitar o border-radius */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+.hero-content {
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  max-width: 800px;
+}
+
+/* Garante que Navbar e o conteúdo fiquem por cima do FinisherParticles */
+.hero.section > *,
+.heroContent {
+  position: relative;
+  z-index: 10;
+}
+
+/* ESTILOS DA ANIMAÇÃO (FinisherParticles) */
+.finisher-header {
+  border-radius: 30px;
+  width: 100%; /* Garante que o fundo preencha a largura do container 98% */
+  height: 100%; /* Garante que o fundo preencha a altura do container 80vh */
+}
+
+.titulo {
+  font-size: 2.4rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 40px;
+  position: relative;
 }
 
 /* FILTROS */
 .filtros-container {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
   flex-wrap: wrap;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
-.input-busca,
-.select-filtro {
-  padding: 10px 14px;
-  border: 1px solid #ccc;
+.filtros-container input,
+.filtros-container select {
+  padding: 12px 15px;
+  border: 1px solid #d1d9e6;
   border-radius: 10px;
   font-size: 1rem;
   outline: none;
-  transition: 0.2s ease;
+  width: 250px;
+  transition: all 0.3s ease;
 }
 
-.input-busca:focus,
-.select-filtro:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+.filtros-container input:focus,
+.filtros-container select:focus {
+  border-color: #4e89ff;
+  box-shadow: 0 0 8px rgba(78, 137, 255, 0.3);
+}
+
+.filtros-container select:hover,
+.filtros-container input:hover {
+  border-color: #4e89ff;
 }
 
 /* GRID */
@@ -115,14 +171,3 @@
   font-size: 0.9rem;
   margin-bottom: 8px;
 }
-
-.navbar {
-  width: 100%;
-  top: 0;
-  left: 0;
-  position: relative;  /* <- ISSO É IMPORTANTE */
-  z-index: 10;
-  background-color: #acbfd3;
-}
-
-
