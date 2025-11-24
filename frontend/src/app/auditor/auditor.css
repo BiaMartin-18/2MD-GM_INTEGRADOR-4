@@ -2,15 +2,19 @@
 /* VARIÁVEIS DE COR E TEMA */
 /* ------------------------------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a1f3c; /* Fundo estático escuro (Body) */
+  --foreground: #ffffff; /* Texto claro */
   --color-primary: #3654ff; /* Azul Principal */
   --color-card-bg: #172449; /* Fundo do card escuro */
   --color-section-bg: #0c183a; /* Fundo da seção de recursos/CRUD */
   --color-text-light: #a4aed1; /* Cor de texto claro/secundário */
   --color-icon: #6f8cc4; /* Cor para ícones em fundo escuro */
-  --color-success: #4CAF50; /* Verde para OK */
+  --color-success: #4CAF50; /* Verde para OK / Botão de destaque */
   --color-danger: #ff4d4d; /* Vermelho para pendente/delete */
+
+  /* Variáveis para o modelo Frontier */
+  --color-frontier-bg: #172449; /* Fundo geral da Hero (cor da seção) */
+  --color-frontier-green: #5cb85c; /* Verde dos botões e ícones dos labels */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,11 +31,16 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
+
+
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  margin: 0;
+  background: var(--background); /* Fundo estático */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -51,13 +60,7 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
-
-/* Classes utilitárias do Bootstrap que foram mencionadas */
+/* Classes utilitárias do Bootstrap (Para o JSX) */
 .position-relative { position: relative; }
 .position-absolute { position: absolute; }
 .top-0 { top: 0; }
@@ -68,97 +71,171 @@ a {
 .d-flex { display: flex; }
 .align-items-center { align-items: center; }
 .justify-content-center { justify-content: center; }
+.justify-content-start { justify-content: flex-start; }
 .text-center { text-align: center; }
 .text-white { color: white; }
 .fw-bold { font-weight: bold; }
-.mt-3 { margin-top: 1rem; }
-.mt-4 { margin-top: 1.5rem; }
+.mb-2 { margin-bottom: 0.5rem; }
 .mb-4 { margin-bottom: 1.5rem; }
+.gap-3 { gap: 1rem; }
 .gap-5 { gap: 3rem; }
-.text-muted { color: #6c757d; }
+.text-muted { color: #bbbbbb; }
 .lead { font-size: 1.25rem; font-weight: 300; }
 .text-primary { color: var(--color-primary); }
-.text-secondary { color: #6c757d; }
-.rounded { border-radius: 0.375rem; }
 .shadow { box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); }
-.p-5 { padding: 3rem; }
+.shadow-sm { box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); }
+.py-5 { padding-top: 3rem; padding-bottom: 3rem; }
 .display-6 { font-size: 2.5rem; font-weight: 300; line-height: 1.2; }
-.mb-2 { margin-bottom: 0.5rem; }
 
 
 /* ------------------------------------------- */
-/* ESTILOS DA HERO SECTION INICIAL */
+/* ESTILOS HERO SECTION FRONTIER HARVESTERS */
 /* ------------------------------------------- */
 
-/* CORREÇÃO: Remove o padding superior que criava espaço em branco acima da Navbar */
-.hero-wrapper {
-  padding-top: 0;
+
+
+.hero-frontier-style {
+    background-color: var(--color-frontier-bg); /* Fundo sólido e escuro */
+    color: var(--foreground); 
+    width: 100%;
+    /* Ajustes para controlar a altura e acomodar os labels */
+    min-height: 550px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible; 
+    padding-top: 100px; /* Mais espaço acima */
+    padding-bottom: 100px; /* Mais espaço abaixo para o quote */
 }
 
-.hero.section {
-  padding: 30px 40px;
-  border-radius: 30px;
-  padding-top: 30px;
-  padding-bottom: 40px;
-  padding-left: 40px;
-  padding-right: 40px;
-  width: 98%;
-  min-height: 80vh;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 40px;
+.hero-frontier-title {
+    font-size: 60px; 
+    line-height: 1.1;
+    margin-bottom: 20px;
+    margin-top: 0;
+    text-align: left;
 }
 
-.hero-content {
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  max-width: 800px;
+.hero-frontier-description {
+    font-size: 18px;
+    max-width: 600px;
+    opacity: 0.9;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
 }
 
-.hero.section > *,
-.heroContent {
-  position: relative;
-  z-index: 10;
+/* Imagem principal com border-radius */
+.hero-image-frontier {
+    border-radius: 20px; 
+    object-fit: cover; 
+    max-width: 100%;
+    height: auto;
+    display: block; 
+    z-index: 2; 
 }
 
-.finisher-header {
-  border-radius: 30px;
-  width: 100%;
-  height: 100%;
+/* Botão principal no estilo Frontier (verde) */
+.botao-acao-principal-frontier {
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    background-color:#3654ff; 
+    color: var(--foreground); 
 }
 
-.botao-ferramenta {
-  background-color: rgb(255, 255, 255);
-  color: rgb(27, 26, 26);
-  padding: 0.5rem 1.25rem;
-  border-radius: 30px;
-  text-decoration: none;
-  width: 14rem;
-  height: 3rem;
-  text-align: center;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-left: auto;
-  margin-right: auto;
-  transition: all 0.3s ease;
-}
-
-.botao-ferramenta i {
-  font-size: 1.1rem;
+.botao-acao-principal-frontier:hover {
+    background-color: #4CAF50; 
 }
 
 /* ------------------------------------------- */
-/* ESTILOS DA SEÇÃO DE RECURSOS/CARDS (Base para o CRUD) */
+/* ESTILOS DOS LABELS DE SOBREPOSIÇÃO (Overlay Labels) */
+/* ------------------------------------------- */
+
+.icon-green-bg-frontier {
+    background-color: #ff1f1f;  /* MUDA AQUI */
+    color: var(--color-frontier-green);
+}
+
+
+.overlay-label-frontier {
+    position: absolute;
+    background-color: white; /* Fundo branco */
+    padding: 15px 20px;
+    border-radius: 12px; 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 3; 
+    min-width: 180px; 
+    color: #333; /* Texto escuro para contraste com fundo branco */
+}
+
+.icon-green-bg-frontier {
+    background-color: #e0ffe0; 
+    color: var(--color-frontier-green); 
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+}
+
+.label-text-frontier {
+    color: #333; /* Texto escuro para contraste com fundo branco */
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Posicionamento dos Labels (Relativo à coluna da Imagem - Direita) */
+
+.top-right-label-frontier {
+    top: 50px; 
+    right: -20px; 
+}
+
+.middle-left-label-frontier {
+    top: 220px; /* Ajuste para centralizar verticalmente */
+    left: -40px; 
+}
+
+.bottom-center-label-frontier {
+    bottom: -40px; /* Ajuste crucial para subir e não invadir a seção CRUD */
+    left: 50%;
+    transform: translateX(-50%); 
+    min-width: 300px; 
+    flex-direction: column; 
+    align-items: flex-start; 
+    padding: 20px;
+}
+
+.quote-text-frontier {
+    font-size: 14px;
+    font-style: italic;
+    color: #4a4a4a;
+    margin-bottom: 5px;
+}
+
+.quote-author-frontier {
+    font-size: 12px;
+    color: #6a6a6a;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.quote-author-frontier i {
+    font-size: 1rem;
+    color: #6a6a6a;
+}
+
+
+
+
+
+/* ------------------------------------------- */
+/* ESTILOS DA SEÇÃO DE RECURSOS/CARDS (CRUD) */
 /* ------------------------------------------- */
 
 .features-section {
@@ -168,212 +245,43 @@ a {
   text-align: center;
 }
 
-/* Títulos e Descrição */
-.section-subtitle {
-  color: var(--color-text-light);
-  font-size: 14px;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-}
-
-.section-title {
-  font-size: 36px;
-  margin-bottom: 20px;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.section-description {
-  color: var(--color-text-light);
-  font-size: 16px;
-  margin-bottom: 60px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* LAYOUT DOS CARDS (GRID) */
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Estilo de cada Card */
-.feature-card {
-  background-color: var(--color-card-bg);
-  padding: 30px;
-  border-radius: 12px;
-  text-align: left;
-  justify-content: center;
-  min-height: 180px;
-  position: relative;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.feature-card:hover {
-  background-color: #1f305f;
-}
-
-.card-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-
-.card-header i {
-  font-size: 1.5rem;
-  color: var(--color-icon);
-  padding: 10px;
-}
-
-.card-title {
-  font-size: 18px;
-  color: white;
-}
-
-.card-text {
-  color: var(--color-text-light);
-  font-size: 14px;
-}
-
-/* ------------------------------------------- */
-/* SEÇÃO MISSÃO/IMAGEM DE FUNDO */
-/* ------------------------------------------- */
-
-.mission-section {
-  position: relative;
-  width: 100%;
-  min-height: 760px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  overflow: hidden;
-}
-
-.mission-bg-overlay {
-  background-color: rgba(0, 79, 248, 0.349);
-  z-index: 1;
-}
-
-.mission-card {
-  z-index: 2;
-  width: 100%;
-  height: 30rem;
-}
-
-/* Estilos para o botão de Dashboard */
-.button-dashboard {
-  background-color: #ffffff00;
-  color: #0c183a;
-  width: 8.5em;
-  height: 2.9em;
-  border: none;
-  border-radius: 11px;
-  transition: all 0.6s ease;
-  display: flex;
-  align-items: center;
-}
-
-.button-dashboard:hover {
-  background-color: var(--color-primary);
-  cursor: pointer;
-  border: none;
-  color: #ffffff;
-}
-
-.button-dashboard svg {
-  width: 1.6em;
-  margin: -0.2em 0.8em 1em;
-  position: absolute;
-  display: flex;
-  transition: all 0.6s ease;
-}
-
-.button-dashboard:hover svg {
-  transform: translateX(5px);
-}
-
-.text {
-  margin: 0 1.5em;
-}
-
-/* ------------------------------------------- */
-/* NOVOS ESTILOS PARA HERO SECTION CRUD (COM CORREÇÃO DE MARGEM) */
-/* ------------------------------------------- */
-
-.hero-crud-section {
-    position: relative;
-    width: 100%;
-    min-height: 450px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    /* CORREÇÃO: Remove a margem inferior */
-    margin-bottom: 0;
-    background-color: var(--color-section-bg);
-}
-
-.hero-crud-bg-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
-}
-
-.hero-crud-bg-overlay {
-    background-color: rgba(0, 0, 0, 0.65);
-    z-index: 1;
-}
-
-.hero-crud-title {
-    font-size: 48px;
-    line-height: 1.2;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.hero-crud-description {
-    font-size: 18px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    opacity: 0.9;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-/* ------------------------------------------- */
-/* ESTILOS DA PÁGINA CRUD (VEÍCULOS) */
-/* ------------------------------------------- */
-
 .veiculos-crud-section {
-    /* CORREÇÃO: Garante padding superior interno para o conteúdo CRUD */
     padding-top: 80px; 
     padding-bottom: 80px;
     background-color: var(--color-section-bg);
+    color: var(--foreground);
 }
 
-.crud-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
+.crud-container { max-width: 1200px; margin: 0 auto; }
+.section-subtitle { color: var(--color-text-light); }
+.section-title { color: var(--foreground); }
+.section-description { color: var(--color-text-light); }
 
-/* Área de Ações e Pesquisa */
+/* CRUD ACTIONS */
 .crud-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
+}
+
+.botao-ferramenta {
+    background-color: rgb(255, 255, 255);
+    color: rgb(27, 26, 26);
+    padding: 0.5rem 1.25rem;
+    border-radius: 30px;
+    text-decoration: none;
+    width: 14rem;
+    height: 3rem;
+    text-align: center;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 0.3s ease;
 }
 
 .create-button {
@@ -385,7 +293,6 @@ a {
     width: auto;
 }
 
-/* Input de Pesquisa */
 .search-input {
     padding: 10px 15px;
     border-radius: 8px;
@@ -396,19 +303,30 @@ a {
     transition: border-color 0.3s;
 }
 
-.search-input:focus {
-    outline: none;
-    border-color: var(--color-primary);
+.search-input::placeholder { color: var(--color-text-light); }
+
+/* CARD GRID */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.search-input::placeholder {
-    color: var(--color-text-light);
-    opacity: 0.8;
-}
-
-/* Cards de Veículo */
 .crud-grid {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.feature-card {
+    background-color: var(--color-card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: left;
+    min-height: 180px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .veiculo-card {
@@ -416,207 +334,292 @@ a {
     min-height: auto;
 }
 
-.veiculo-card[data-status="pendente"] {
-    border-left: 5px solid var(--color-danger);
-}
+/* Status Colors */
+.veiculo-card[data-status="pendente"] { border-left: 5px solid var(--color-danger); }
+.veiculo-card[data-status="ok"] { border-left: 5px solid var(--color-success); }
+.veiculo-card[data-status="pendente"] .status-text { color: var(--color-danger); font-weight: bold; }
+.veiculo-card[data-status="ok"] .status-text { color: var(--color-success); font-weight: bold; }
 
-.veiculo-card[data-status="ok"] {
-    border-left: 5px solid var(--color-success);
-}
+.card-title { color: white; }
+.card-text { color: var(--color-text-light); }
 
-.veiculo-card[data-status="pendente"] .status-text {
-    color: var(--color-danger);
-    font-weight: bold;
-}
 
-.veiculo-card[data-status="ok"] .status-text {
-    color: var(--color-success);
-    font-weight: bold;
-}
-
-.card-actions {
-    margin-top: 15px;
-    display: flex;
-    gap: 10px;
-}
-
-.edit-btn, .delete-btn {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    flex-grow: 1;
-    font-size: 14px;
-    transition: background-color 0.2s;
-}
-
-.edit-btn {
-    background-color: var(--color-icon);
-    color: white;
-}
-
-.edit-btn:hover {
-    background-color: #8c9ccf;
-}
-
-.delete-btn {
-    background-color: var(--color-danger);
-    color: white;
-}
-
-.delete-btn:hover {
-    background-color: #e04444;
-}
-
-.no-results {
-    grid-column: 1 / -1;
-    text-align: center;
-    margin-top: 20px;
-}
-
+.card-actions { margin-top: 15px; display: flex; gap: 10px; }
+.edit-btn, .delete-btn { padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; flex-grow: 1; font-size: 14px; transition: background-color 0.2s; }
+.edit-btn { background-color: var(--color-icon); color: white; }
+.delete-btn { background-color: var(--color-danger); color: white; }
+.no-results { grid-column: 1 / -1; text-align: center; margin-top: 20px; }
 
 /* ------------------------------------------- */
 /* Estilos do Modal (Pop-up) para CRUD */
 /* ------------------------------------------- */
 
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); display: flex;
+    justify-content: center; align-items: center; z-index: 1000;
 }
 
 .modal-content {
-    background-color: white;
-    padding: 30px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    background-color: white; padding: 30px; border-radius: 12px;
+    width: 90%; max-width: 500px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     color: var(--foreground);
 }
 
 .modal-title {
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 15px;
-    margin-bottom: 25px;
-    color: var(--color-section-bg);
-    font-size: 24px;
+    border-bottom: 1px solid #e0e0e0; padding-bottom: 15px;
+    margin-bottom: 25px; color: var(--color-section-bg); font-size: 24px;
 }
 
-.form-group {
-    margin-bottom: 18px;
-}
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--color-card-bg); font-size: 14px; }
+.form-input { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; color: black; background-color: #f7f7f7; }
+.form-input:focus { border-color: var(--color-primary); outline: none; }
 
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: var(--color-card-bg);
-    font-size: 14px;
-}
+.form-actions { margin-top: 30px; display: flex; justify-content: flex-end; gap: 10px; }
 
-.form-input {
+.cancel-btn, .save-btn { padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: 500; }
+.cancel-btn { border: 1px solid #ccc; background-color: #ffffff; color: var(--color-card-bg); }
+.save-btn { border: none; background-color: var(--color-primary); color: white; }
+
+
+
+/* WRAPPER DA IMAGEM PARA ANCORAR OS LABELS */
+.hero-image-wrapper-frontier {
+    position: relative;
+    display: inline-block;
     width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    color: black;
-    background-color: #f7f7f7;
+    max-width: 620px;  /* deixa igual ao mockup */
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0px 18px 45px rgba(0,0,0,0.35); /* sombra igual ao exemplo */
 }
 
-.form-input:focus {
-    border-color: var(--color-primary);
-    outline: none;
+/* Ajuste da imagem (já existia, só reforço) */
+.hero-image-wrapper-frontier img {
+    width: 100%;
+    display: block;
+    border-radius: 22px;
 }
 
-.form-actions {
-    margin-top: 30px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
+/* ------------------------------------------- */
+/* AJUSTES PRECISOS DOS LABELS PARA FICAR IGUAL AO EXEMPLO */
+/* ------------------------------------------- */
+
+/* card pequeno verde superior direito */
+.top-right-label-frontier {
+    top: 40px;
+    right: -35px;
 }
 
-.cancel-btn, .save-btn {
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 500;
+/* card de manutenção esquerda */
+.middle-left-label-frontier {
+    top: 230px;
+    left: -55px;
 }
 
-.cancel-btn {
-    border: 1px solid #ccc;
-    background-color: #ffffff;
-    color: var(--color-card-bg);
+/* card de depoimento inferior */
+.bottom-center-label-frontier {
+    bottom: -70px; /* bem mais para baixo */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 380px; 
+    border-radius: 20px;
+    padding: 25px 28px;
+
+    /* Aqui está o gradiente igual ao EXEMPLO */
+    background: linear-gradient(
+        95deg,
+        #ffffff 60%,
+        #d8f6db 100%
+    );
+
+    box-shadow: 0 16px 35px rgba(0,0,0,0.18);
 }
 
-.cancel-btn:hover {
-    background-color: #f0f0f0;
+/* texto do depoimento mais parecido */
+.bottom-center-label-frontier .quote-text-frontier {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 10px;
 }
 
-.save-btn {
-    border: none;
-    background-color: var(--color-primary);
-    color: white;
-}
-
-.save-btn:hover {
-    background-color: #2b45e0;
-}
 
 /* ------------------------------------------- */
 /* MEDIA QUERIES (Responsividade) */
 /* ------------------------------------------- */
 
 @media (max-width: 992px) {
-  .cards-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-frontier-title { font-size: 50px; }
+  
+  /* Ajusta a posição dos labels para evitar que saiam muito da tela */
+  .top-right-label-frontier { right: 10px; }
+  .middle-left-label-frontier { left: 10px; }
+  .bottom-center-label-frontier { bottom: -40px; }
 }
 
 @media (max-width: 768px) {
-  .cards-grid {
-    grid-template-columns: 1fr;
+  .cards-grid { grid-template-columns: 1fr; }
+  
+  /* Ajustes para a Hero Frontier em telas menores */
+  .hero-frontier-style {
+      min-height: auto; 
+      padding-top: 60px;
+      padding-bottom: 120px; 
+  }
+  /* Usa 'column-reverse' para que em mobile a IMAGEM (order-lg-2 no JSX) venha antes do TEXTO (order-lg-1) */
+  .hero-frontier-style .row {
+      flex-direction: column-reverse; 
+      align-items: center;
+      text-align: center;
+  }
+  .hero-frontier-title {
+      font-size: 40px;
+      text-align: center !important; 
+  }
+  .hero-frontier-description {
+      text-align: center !important;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  .hero-frontier-style .d-flex {
+      justify-content: center !important; 
+  }
+
+  /* Ajusta os labels para ficarem estáticos em mobile e aparecerem em coluna */
+  .hero-image-frontier {
+      width: 80%; 
+      height: auto;
+  }
+  .overlay-label-frontier {
+      position: static; 
+      margin: 10px auto; 
+      width: 80%; 
+      max-width: 300px;
+  }
+  .top-right-label-frontier, 
+  .middle-left-label-frontier, 
+  .bottom-center-label-frontier {
+      position: static;
+      transform: none; 
+      order: 1; 
+  }
+  .bottom-center-label-frontier {
+    order: 2; 
+  }
+  .col-lg-5 {
+      display: flex; 
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 40px; 
   }
 
   /* Ajustes para a seção CRUD */
-  .crud-actions {
-    flex-direction: column;
-    gap: 15px;
-    align-items: stretch;
-  }
-  .search-input, .create-button {
-    width: 100%;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
+  .crud-actions { flex-direction: column; gap: 15px; align-items: stretch; }
+  .search-input, .create-button { width: 100%; margin-left: 0 !important; margin-right: 0 !important; }
 
-  .hero-crud-title {
-    font-size: 38px;
-  }
-  .hero-crud-description {
-    font-size: 16px;
-  }
+}
+
+/* From Uiverse.io by gharsh11032000 */ 
+.animated-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 36px;
+  border: 4px solid;
+  border-color: transparent;
+  font-size: 16px;
+  background-color: inherit;
+  border-radius: 100px;
+  font-weight: 600;
+  color: rgb(103, 154, 250);
+  box-shadow: 0 0 0 2px rgb(8, 94, 255);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button svg {
+  position: absolute;
+  width: 24px;
+  fill: rgb(103, 154, 250);
+  z-index: 9;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button .arr-1 {
+  right: 16px;
+}
+
+.animated-button .arr-2 {
+  left: -25%;
+}
+
+.animated-button .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: rgb(10, 84, 243);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button .text {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-12px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button:hover {
+  box-shadow: 0 0 0 12px transparent;
+  color: #212121;
+  border-radius: 12px;
+}
+
+.animated-button:hover .arr-1 {
+  right: -25%;
+}
+
+.animated-button:hover .arr-2 {
+  left: 16px;
+}
+
+.animated-button:hover .text {
+  transform: translateX(12px);
+}
+
+.animated-button:hover svg {
+  fill: #212121;
+}
+
+.animated-button:active {
+  scale: 0.95;
+  box-shadow: 0 0 0 4px rgb(133, 168, 81);
+}
+
+.animated-button:hover .circle {
+  width: 320px;
+  height: 220px;
+  opacity: 1;
 }
 
 @media (max-width: 576px) {
-  .hero.section, .features-section {
-    padding: 30px 20px;
-  }
-  .section-title {
-    font-size: 28px;
-  }
-  .modal-content {
-    padding: 20px;
-  }
-  .hero-crud-title {
-    font-size: 30px;
-  }
+  /* Ajustes de fonte e padding */
+  .hero.section, .features-section { padding: 30px 20px; }
+  .section-title { font-size: 28px; }
+  .modal-content { padding: 20px; }
+  .hero-frontier-title { font-size: 32px; }
+  
+  /* Botões em tela muito pequena */
+  .hero-frontier-style .d-flex { flex-direction: column; }
+  .botao-acao-principal-frontier { width: 100%; text-align: center; }
+  
+  .overlay-label-frontier { width: 95%; } 
 }
