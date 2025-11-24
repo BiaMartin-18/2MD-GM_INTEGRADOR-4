@@ -1,52 +1,25 @@
+"use client";
+
+import Link from "next/link";
 import "./cardcarros.css";
 
-export default function CardVeiculo({
-    id,
-    modelo,
-    placa,
-    status,
-    imagem,
-    defeito,
-    grau_defeito,
-    onVerVeiculo
-}) {
+export default function CardVeiculo({ veiculo }) {
     return (
-        <div className="produto-card">
-            <div className="produto-img">
-                <span
-                    className={`badge ${
-                        status === "Ativo"
-                            ? "ativo"
-                            : status === "Manutenção"
-                            ? "manutencao"
-                            : "inativo"
-                    }`}
-                >
-                    {status}
-                </span>
+        <div className="card-container">
+            <div className="card-main">
 
-                <img
-                    src={imagem || "/placeholder.png"}
-                    alt={modelo}
-                />
-            </div>
+                <h2 className="title">{veiculo.modelo}</h2>
 
-            <div className="produto-info">
-                <h2 className="produto-nome">{modelo}</h2>
+                <div className="info">
+                    <p><strong>Placa:</strong> {veiculo.part_number}</p>
+                    <p><strong>Defeito:</strong> {veiculo.defeito}</p>
+                    <p><strong>Grau do defeito:</strong> {veiculo.grau_defeito}</p>
+                    <p><strong>Status:</strong> {veiculo.status_veiculo}</p>
+                </div>
 
-                <p className="placa">Part Number: {placa}</p>
-
-                <p className="defeito">
-                    <strong>Defeito:</strong> {defeito}
-                </p>
-
-                <p className="grau-defeito">
-                    <strong>Grau:</strong> {grau_defeito}
-                </p>
-
-                <button className="ver" onClick={onVerVeiculo}>
-                    Ver detalhes
-                </button>
+                <Link href={`/veiculos/${veiculo.part_number}`} className="add-btn">
+                    Ver detalhes do veículo
+                </Link>
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import CardVeiculo from "@/components/cardcarros/index"; // IMPORTA O CARD CORRETO
+import CardVeiculo from "@/components/cardcarros/index";
 import "./veiculos.css";
 import Navbar from "@/components/blocks/Navbar";
 import FinisherParticles from "@/components/FinisherParticles";
@@ -26,9 +26,9 @@ export default function Veiculos() {
                     modelo: v.modelo,
                     placa: v.part_number,
                     status: v.status_veiculo,
-                    defeito: v.defeito,              // <-- ADICIONE ISSO
-                    grau_defeito: v.grau_defeito,    // <-- E ISSO
-                    imagem: "/placeholder.png",
+                    defeito: v.defeito,              
+                    grau_defeito: v.grau_defeito,    
+                    //imagem: "/placeholder.png",
                 }));
 
                 setVeiculos(convertidos);
@@ -80,9 +80,8 @@ export default function Veiculos() {
                                 className="select-filtro"
                             >
                                 <option value="Todos">Todos</option>
-                                <option value="Ativo">Ativo</option>
                                 <option value="Manutenção">Manutenção</option>
-                                <option value="Inativo">Inativo</option>
+                                <option value="Inativo">Aguardando revisão</option>
                             </select>
                         </div>
                     </div>
@@ -93,14 +92,7 @@ export default function Veiculos() {
                 {filtrados.map((v) => (
                     <CardVeiculo
                         key={v.id}
-                        id={v.id}
-                        modelo={v.modelo}
-                        placa={v.placa}
-                        status={v.status}
-                        defeito={v.defeito}
-                        grau_defeito={v.grau_defeito}
-                        imagem={v.imagem}
-                        onVerVeiculo={() => alert(`Veículo: ${v.placa}`)}
+                        veiculo={v}
                     />
                 ))}
             </div>

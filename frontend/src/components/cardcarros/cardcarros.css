@@ -1,88 +1,57 @@
-.produto-card {
-    display: flex;
-    background: #fff;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease;
-}
-
-.produto-card:hover {
-    transform: translateY(-4px);
-}
-
-/* IMAGEM */
-.produto-img {
-    position: relative;
-    flex: 1;
-    background: #f1f5f9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.produto-img img {
+.card-container {
     width: 100%;
-    height: 180px;
-    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    margin: 12px;
 }
 
-.badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    padding: 6px 10px;
-    font-size: 0.8rem;
-    border-radius: 6px;
+.card-main {
+    background: linear-gradient(#1e3c72, #2a5298);
+    padding: 25px;
+    width: 330px;
+    border-radius: 25px;
+    color: white;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.30);
+    animation: fadeIn 0.3s ease-in-out;
+    transition: transform 0.3s ease;
+}
+
+.card-main:hover {
+    transform: translateY(-6px) scale(1.08);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.title {
+    font-size: 22px;
     font-weight: 600;
-    color: #fff;
+    margin-bottom: 15px;
 }
 
-.badge.ativo {
-    background: #16a34a;
+.info p {
+    margin: 5px 0;
+    opacity: 0.9;
 }
 
-.badge.manutencao {
-    background: #facc15;
-    color: #000;
-}
-
-.badge.inativo {
-    background: #dc2626;
-}
-
-/* INFO */
-.produto-info {
-    flex: 1.2;
-    padding: 20px;
-}
-
-.produto-nome {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #111827;
-    margin-bottom: 6px;
-}
-
-.placa,
-.defeito,
-.grau-defeito {
-    color: #6b7280;
-    font-size: 0.9rem;
-    margin-bottom: 8px;
-}
-
-.ver {
+.add-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 15px;
+    font-weight: bold;
+    background: white;
+    color: #1e3c72;
+    text-align: center;
+    display: block;
     text-decoration: none;
-    color: #2563eb;
-    font-weight: 500;
-    transition: 0.2s;
-    background: none;
-    border: none;
-    padding: 0;
     cursor: pointer;
+    transition: 0.2s ease;
 }
 
-.ver:hover {
-    text-decoration: underline;
+.add-btn:hover {
+    background: #e6e6e6;
 }

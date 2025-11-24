@@ -33,8 +33,7 @@ export default function Navbar() {
           isScrolled ? "scrolled" : ""
         }`}
       >
-        <div className="navbar-content-wrapper"></div>
-        <div className="container-fluid">
+        <div className="container-fluid d-flex align-items-center">
           <Link href="/" className="navbar-brand fw-bold">
             <img
               src="/imagens/logo/logo.png"

@@ -1,14 +1,22 @@
 /* --- SEUS ESTILOS ORIGINAIS --- */
-
 .custom-navbar {
   background-color: transparent;
   padding-top: 1rem;
   padding-bottom: 1rem;
   z-index: 1030;
   width: 100%;
-  width: 98%;
-  margin-left: auto;
-  margin-right: auto;
+}
+
+.custom-navbar .container-fluid {
+  max-width: 1200px;
+}
+
+.navbar-brand {
+  margin-left: 0 !important;
+}
+
+.navbar-toggler {
+  margin-right: 0 !important;
 }
 
 .custom-link-color,
@@ -105,13 +113,15 @@
 
 .custom-navbar.scrolled {
   /* Exemplo: Um azul escuro sólido (ou semitransparente) para contraste */
-  background-color: rgb(17, 74, 206) !important; /* Preto quase opaco */
+  background-color: rgb(17, 74, 206) !important;
   border-radius: 35px;
   height: 6rem;
   margin-top: 1rem;
-  /* Opcional: Adicionar uma sombra sutil para destacar que está flutuando */
- 
   transition: 0.5s;
+  max-width: 1200px;
+  left: 50%;
+  transform: translateX(-50%);
+ 
 }
 
 /* .li.nav-item.dropdown.dropdown-hover:hover
@@ -149,7 +159,7 @@ li.nav-item.dropdown.dropdown-hover:hover
 .offcanvas.offcanvas-end.custom-offcanvas {
   /* Define o fundo e largura que você já tem */
   background-color: #002bd8 !important;
-  width: 100vw !important;
+  width: 100% !important;
 
   /* MUDANÇAS ESSENCIAIS: Zera Borda e Sombra */
   border: 0 !important; /* Remove todas as bordas */
@@ -229,5 +239,3 @@ li.nav-item.dropdown.dropdown-hover:hover
   /* Para navegadores mais antigos (embora pouco usado atualmente): */
   border-color: transparent !important;
 }
-
-
