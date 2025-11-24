@@ -12,6 +12,10 @@ import criptografiaRotas from './routes/criptografiaRotas.js';
 import usuarioRotas from './routes/usuarioRotas.js';
 import auditoriaRoutes from "./routes/auditoriaRoutes.js"
 import veiculosRoutes from './routes/veiculosRoutes.js'
+import dashboardRoutes from "./routes/dashboardRoutes.js";
+
+
+
 
 
 
@@ -58,6 +62,8 @@ app.use('/api/criptografia', criptografiaRotas);
 app.use('/api/usuarios', usuarioRotas);
 app.use('/auditorias', auditoriaRoutes);
 app.use("/veiculos", veiculosRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+
 
 
 // Rota raiz
