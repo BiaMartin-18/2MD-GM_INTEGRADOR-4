@@ -38,7 +38,7 @@ export default function LoginPage() {
       localStorage.setItem("token", data.dados.token);
 
       // Redirecionar para admin
-      router.push("/admin");
+      router.push("/auditor");
     } catch (error) {
       setErro("Erro ao conectar ao servidor.");
       console.error(error);

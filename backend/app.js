@@ -13,6 +13,7 @@ import usuarioRotas from './routes/usuarioRotas.js';
 import auditoriaRoutes from "./routes/auditoriaRoutes.js"
 import veiculosRoutes from './routes/veiculosRoutes.js'
 import dashboardRoutes from "./routes/dashboardRoutes.js";
+import auditoriasVeiculosRoutes from "./routes/auditoriasveiculos.js"
 
 
 
@@ -63,6 +64,7 @@ app.use('/api/usuarios', usuarioRotas);
 app.use('/auditorias', auditoriaRoutes);
 app.use("/veiculos", veiculosRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/auditoriasveiculos", auditoriasVeiculosRoutes);
 
 
 
