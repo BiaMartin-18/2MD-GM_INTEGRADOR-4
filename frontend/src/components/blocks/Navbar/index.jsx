@@ -151,21 +151,8 @@ export default function Navbar() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="nav-link" href="/sobre">
-                    Sobre
-                  </Link>
-                </li>
-                <li>
-                  <Link className="nav-link" href="/painel-operador">
-                    Painel do Operador
-                  </Link>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <Link className="nav-link" href="/painel-admin">
-                    Painel de Administrador
+                  <Link className="nav-link" href="/veiculos">
+                    Veiculos
                   </Link>
                 </li>
               </ul>
@@ -180,11 +167,6 @@ export default function Navbar() {
                 <li>
                   <Link className="nav-link" href="/dashboard-geral">
                     Dashboard Geral
-                  </Link>
-                </li>
-                <li>
-                  <Link className="nav-link" href="/dashauditoria">
-                    Painel do Administrador
                   </Link>
                 </li>
               </ul>
