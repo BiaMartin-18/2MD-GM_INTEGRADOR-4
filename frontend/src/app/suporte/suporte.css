@@ -1,189 +1,226 @@
-
 body {
     margin: 0;
     overflow-x: hidden;
     font-family: 'Poppins', sans-serif;
-    background-color: var(--color-light-bg); /* Fundo da página levemente cinza */
+    background-color: #ffffff; 
 }
 
 /* ---------------------------------------------------- */
-/* === 1. Cabeçalho Degradê (Hero Section Axionet) === */
+/* === 1. Hero Section (Fidelidade ao HelpCenter) === */
 /* ---------------------------------------------------- */
 
 .hero-support-axionet {
-    /* Fundo Degradê Largo */
+    /* Fundo original (Carro) */
     background-image: url('/imagens/Manuseio-GM.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding-top: 100px; /* Adiciona espaço abaixo da Navbar */
-    padding-bottom: 80px;
+    padding-top: 100px; 
+    padding-bottom: 20px; 
     position: relative;
-    height: 40rem;
-  
+    height: 38rem; 
 }
 
 .hero-support-axionet::before {
     content: '';
-    position: absolute; /* Posiciona o overlay em relação ao pai (relative) */
+    position: absolute; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Seu overlay azul semi-transparente */
-   background-image: linear-gradient(
-        to right, /* Direção do degradê: da esquerda para a direita */
-        rgba(0, 61, 192, 0.815),  /* Azul Mais Forte (60% de opacidade) */
-        rgba(0, 64, 201, 0.596)   /* Azul Mais Claro (30% de opacidade) */
+    /* Overlay Azul Mais Claro para manter o BG visível, mas legível */
+    background-image: linear-gradient(
+        to right, 
+        rgba(0, 73, 156, 0.815), 
+        rgba(0, 64, 201, 0.4) 
     );
-    /* Z-index para posicionar *acima* da imagem (implícita), mas *abaixo* do texto */
     z-index: 1; 
 }
 
-.hero-title-axionet {
-    font-size: 3.5rem;
-    font-weight: 700;
-    line-height: 1.1;
-    /* Ajustando a cor para branco para ser legível sobre o overlay escuro */
-    color: #ffffff; 
-}
-
-.hero-lead-axionet {
-    font-size: 1.1rem;
-    color: #e0e0e0; /* Cor clara para o parágrafo */
-    max-width: 600px;
-}
-
-.text-accent-axionet {
-    /* Cor de destaque */
-    color:rgba(248, 248, 248, 0.589)!important;
-}
-
-/* ESSENCIAL: Garantir que o texto (.container) esteja acima do overlay */
 .hero-support-axionet .container {
     position: relative;
-    z-index: 2; /* Z-index maior que o do overlay */
+    z-index: 2; 
+    text-align: center; 
 }
 
-
-.hero-title-axionet {
-    font-size: 3.5rem; /* Ajuste o tamanho da fonte */
+.hero-title-helpplus {
+    margin-top: 30px;
+    font-size: 3rem; 
     font-weight: 700;
     line-height: 1.1;
-}
-
-.hero-lead-axionet {
-    font-size: 1.1rem;
     color: #ffffff; 
-    max-width: 600px;
-
 }
 
-.text-blue{
-    color: #ffffffbe !important;
+.text-accent-helpplus {
+    color: #d6e4ff !important; 
+    font-size: 6rem;
 }
 
-
-
-
-.texto-destaque {
-    /* Cor de destaque para "Nossa Equipe de Suporte" */
-    color: rgb(73, 73, 219)!important;
+.hero-lead-helpplus {
+    
+    font-size: 1.0rem;
+    color: #e0e0e0; 
+    margin-top: 15px; 
+    margin-bottom: 20px !important;
 }
+
 
 /* ---------------------------------------------------- */
-/* === 2. Seção Principal (Conecte-se) === */
+/* === 5. Bloco de Pesquisa (Fidelidade ao HelpCenter) === */
 /* ---------------------------------------------------- */
 
-.section-title-specialist-axionet {
-    font-size: 2.2rem;
+.search-block-helpplus {
+    margin-top: 30px;
+    max-width: 600px; 
+    background-color: #ffffff;
+    border-radius: 30px;
+    padding: 10px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    /* ESSENCIAL: Garante que o input e o botão fiquem na mesma linha, lado a lado */
+    display: flex; 
+    align-items: center; 
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px; 
+}
+
+.search-block-helpplus form {
+    /* Ocupa 100% do bloco de pesquisa */
+    width: 100%; 
+    display: flex;
+}
+
+.search-input-helpplus {
+    /* Ocupa todo o espaço restante antes do botão */
+    flex-grow: 1; 
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+}
+
+.search-input-helpplus:focus {
+    box-shadow: none; 
+    outline: none;
+}
+
+.btn-search-helpplus {
+    /* Botão no canto direito */
+    background-color: #0300b3; 
+    color: #ffffff;
+    border-radius: 30px;
+    padding: 10px 25px;
     font-weight: 600;
-    color: var(--color-primary-axionet);
+    transition: background-color 0.2s;
+    border: none;
+    /* Adiciona margem à esquerda se necessário, mas o padding do bloco já resolve */
+    margin-left: 5px; 
 }
 
+.btn-search-helpplus:hover {
+    background-color: #0400e4;
+    color: #ffffff;
+    font-style: none;
+
+}
 
 /* ---------------------------------------------------- */
-/* === 3. Cartões de Contato (Boston, Austin, etc.) === */
+/* === 6. Cartões de Categoria (Fidelidade ao HelpCenter) === */
 /* ---------------------------------------------------- */
 
-.contact-card-axionet {
-    /* Estilo do Card Axionet: Fundo levemente off-white */
-    background-color: #ffffff; 
-    border: 1px solid #e0e0e0 !important;
-    transition: box-shadow 0.3s ease;
-    height: 100%; /* Garante que todos os cards da row tenham a mesma altura */
+.category-cards-wrapper-helpplus {
+    position: relative;
+    z-index: 2;
+    padding-top: 20px;
 }
 
-.contact-card-axionet:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.contact-icon-axionet {
-    font-size: 2rem;
-    color: var(--color-accent-axionet);
-    /* Fundo leve para o ícone, simulando o Axionet */
-    background-color: rgba(0, 140, 159, 0.1); 
-    padding: 10px;
+.category-card-helpplus {
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
-    display: inline-block;
+    background-color: #ffffff;
+    transition: box-shadow 0.3s, border-color 0.3s;
+    cursor: pointer;
+    height: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); 
 }
 
-.view-directions-axionet {
-    color: var(--color-accent-axionet);
+.category-card-helpplus:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    border-color: #b5b5b5;
+}
+
+.category-card-helpplus.active {
+    border-color: #ff6e40; 
+    box-shadow: 0 0 0 1px #ff6e40; 
+}
+
+.category-icon-helpplus {
+    font-size: 2rem;
+    color: #444; 
+}
+
+.category-card-helpplus.active .category-icon-helpplus {
+    color: #ff6e40; 
+}
+
+.category-card-helpplus.active h6 {
+    color: #444; 
+}
+
+
+/* ---------------------------------------------------- */
+/* === 7. Seção FAQ/Acordeão (Fidelidade ao HelpCenter) === */
+/* ---------------------------------------------------- */
+
+.faq-section-helpplus {
+    background-color: #ffffff; 
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+}
+
+.faq-main-title-helpplus {
+    font-size: 1.8rem;
     font-weight: 600;
+    color: #444;
+}
+
+.faq-main-lead-helpplus {
     font-size: 0.9rem;
-    text-decoration: none;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.faq-item-helpplus {
+    border: none;
+    border-bottom: 1px solid #eee; 
+    margin-bottom: 0; 
+}
+
+.faq-item-helpplus .accordion-button {
+    background-color: #ffffff;
+    padding: 15px 0; 
+    font-weight: 500;
+    color: #444;
+    border: none;
+    box-shadow: none; 
     transition: color 0.2s ease;
 }
 
-.view-directions-axionet:hover {
-    color: var(--color-primary-axionet);
-}
-
-
-/* ---------------------------------------------------- */
-/* === 4. Formulário (Inicie a Conversa) === */
-/* ---------------------------------------------------- */
-
-.form-discussion-card-axionet {
-    /* Card Branco Flutuante para o Formulário */
+.faq-item-helpplus .accordion-button:not(.collapsed) {
+    color: #002df3; 
     background-color: #ffffff;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
 }
 
-/* Campos de Input e Select */
-.form-control, .form-select {
-    padding: 12px;
-    /* Borda fina e arredondada, como no modelo */
-    border: 1px solid #ced4da; 
-    border-radius: 6px;
-    font-size: 0.9rem;
+.faq-item-helpplus .accordion-body {
+    color: #666;
+    font-size: 0.95rem;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 20px;
 }
 
-/* Placeholder e Labels */
-.form-label {
-    font-weight: 600;
-    font-size: 0.8rem;
-    margin-bottom: 4px;
-}
-
-/* Botão de Envio Estilizado (Axionet Gradient/Color) */
-.btn-submit-axionet {
-    background-color:#0758ee;
-    color: #ffffff;
-    border:none;
-    border-radius: 35px;
-    font-weight: 600;
-    padding: 12px;
-    transition: background-color 0.2s ease;
-
-}
-
-.btn-submit-axionet:hover {
-    background-color: #023085; /* Versão mais escura do destaque */
-    color: #ffffff;
-    border: none;
+.accordion {
+    --bs-accordion-border-width: 0;
 }
 
 
@@ -192,26 +229,13 @@ body {
 /* ---------------------------------------------------- */
 
 @media (max-width: 992px) {
-    .hero-title-axionet {
+    .hero-title-helpplus {
         font-size: 2.5rem;
     }
 
     .hero-support-axionet {
         padding-top: 50px;
         padding-bottom: 50px;
-    }
-
-    .section-title-specialist-axionet {
-        font-size: 1.8rem;
-    }
-
-    /* Empilha os cartões de contato um sobre o outro no mobile */
-    .col-md-6 {
-        margin-bottom: 1rem !important;
-    }
-
-    /* Reduz o padding do formulário no mobile */
-    .form-discussion-card-axionet {
-        padding: 30px !important;
+        height: auto; 
     }
 }
