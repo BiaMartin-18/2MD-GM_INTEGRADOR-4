@@ -1,71 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/blocks/Navbar";
 import "./auditor.css";
 
-// Dados iniciais para simular um banco de dados
-const initialVehicles = [
-  {
-    id: 1,
-    placa: "ABC-1234",
-    modelo: "GM Onix Plus",
-    defeitos: 3,
-    custo: 120.5,
-  },
-  { id: 2, placa: "DEF-5678", modelo: "GM Tracker", defeitos: 1, custo: 45.0 },
-  { id: 3, placa: "GHI-9012", modelo: "GM Montana", defeitos: 0, custo: 0.0 },
-];
+// Funções para chamar o backend
+async function createVeiculo(veiculo) {
+  const resp = await fetch("http://localhost:3001/api/auditoriasveiculos", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(veiculo),
+  });
+  return await resp.json();
+}
 
-// -------------------------------------------------------------
-// NOVO COMPONENTE: Hero Section (Modelo Frontier Harvesters - Colunas Invertidas)
-// -------------------------------------------------------------
+async function updateVeiculo(veiculo) {
+  const resp = await fetch(`http://localhost:3001/api/auditoriasveiculos/${veiculo.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(veiculo),
+  });
+  return await resp.json();
+}
+
+async function deleteVeiculo(id) {
+  const resp = await fetch(`http://localhost:3001/api/auditoriasveiculos/${id}`, {
+    method: "DELETE",
+  });
+  return await resp.json();
+}
+
+// HeroSectionCRUD
 const HeroSectionCRUD = () => (
   <section className="hero-frontier-style position-relative">
     <div className="container position-relative z-2 py-5">
       <div className="row align-items-center">
-        {/* ------------------------------ */}
-        {/* COLUNA DO TEXTO (ESQUERDA) */}
-        {/* ------------------------------ */}
         <div className="col-lg-6 order-lg-1 text-white">
           <h1 className="hero-frontier-title fw-bold">
             Bem-vindo ao Controle PDI
           </h1>
-
           <p className="hero-frontier-description mb-4 p-3">
             Gerencie, audite e otimize sua frota de veículos com eficiência e
             precisão.
           </p>
-
           <div className="d-flex gap-3 justify-content-start">
             <button className="animated-button">
-              <svg
-                viewBox="0 0 24 24"
-                className="arr-2"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-              </svg>
-
               <span className="text">Começar Agora</span>
-
               <span className="circle"></span>
-
-              <svg
-                viewBox="0 0 24 24"
-                className="arr-1"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-              </svg>
             </button>
           </div>
         </div>
-
-        {/* ------------------------------ */}
-        {/* COLUNA DA IMAGEM (DIREITA) */}
-        {/* ------------------------------ */}
         <div className="col-lg-6 order-lg-2 position-relative d-flex justify-content-center">
           <Image
             src="/imagens/tracker-GM.jpg"
@@ -75,56 +60,75 @@ const HeroSectionCRUD = () => (
             className="hero-image-frontier shadow-lg"
             priority
           />
-
-          {/* Label superior direito */}
           <div className="overlay-label-frontier top-right-label-frontier shadow-sm">
             <i className="bi bi-wrench icone"></i>
             <p className="label-text-frontier">Edição de Auditorias</p>
           </div>
-
-          {/* Label esquerdo do meio */}
           <div className="overlay-label-frontier middle-left-label-frontier shadow-sm">
             <i className="bi bi-wrench-adjustable icone"></i>
             <p className="label-text-frontier">Registro de Defeitos</p>
-          </div>
-
-          {/* Label inferior (quote) */}
-          <div className="overlay-label-frontier bottom-center-label-frontier shadow-sm">
-            <p className="quote-text-frontier">
-              "A otimização do manuseio não é um custo, mas um investimento."
-            </p>
-            <p className="quote-author-frontier">
-              <i className="bi bi-person-circle"></i>
-              <span className="author-text">Você, Auditor Controle PDI</span>
-            </p>
           </div>
         </div>
       </div>
     </div>
   </section>
 );
-// -------------------------------------------------------------
 
 export default function VeiculosCRUD() {
-  const [veiculos, setVeiculos] = useState(initialVehicles);
+  const [veiculos, setVeiculos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentVeiculo, setCurrentVeiculo] = useState(null);
   const [form, setForm] = useState({
     id: null,
     placa: "",
     modelo: "",
-    defeitos: 0,
-    custo: 0.0,
+    defeito: "",
   });
   const [searchTerm, setSearchTerm] = useState("");
+
+  // Buscar dados da API
+  useEffect(() => {
+    async function fetchAuditorias() {
+      try {
+        const resp = await fetch("http://localhost:3001/api/auditoriasveiculos");
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const data = await resp.json();
+
+        const veiculosTransformados = data.map((item) => ({
+          id: item.part_number ?? `${Math.random().toString(36).slice(2, 9)}`,
+          placa: item.part_number ?? "—",
+          modelo: item.modelo ?? "—",
+          defeito: item.defeito ?? "—",
+          auditoria: {
+            descricao: item.descrição ?? item.descricao ?? "—",
+            grau: item.grau_defeito ?? "—",
+            status: item.status_veiculo ?? "—",
+            data: item.data_auditoria ?? "—",
+            resultado: item.resultado ?? "—",
+            responsavel: item.auditor_responsavel ?? "—",
+          },
+        }));
+
+        setVeiculos(veiculosTransformados);
+      } catch (err) {
+        console.error("Erro ao buscar auditorias:", err);
+      }
+    }
+    fetchAuditorias();
+  }, []);
 
   const openModal = (veiculo = null) => {
     if (veiculo) {
       setCurrentVeiculo(veiculo);
-      setForm(veiculo);
+      setForm({
+        id: veiculo.id ?? null,
+        placa: veiculo.placa ?? "",
+        modelo: veiculo.modelo ?? "",
+        defeito: veiculo.defeito ?? "",
+      });
     } else {
       setCurrentVeiculo(null);
-      setForm({ id: null, placa: "", modelo: "", defeitos: 0, custo: 0.0 });
+      setForm({ id: null, placa: "", modelo: "", defeito: "" });
     }
     setIsModalOpen(true);
   };
@@ -139,35 +143,55 @@ export default function VeiculosCRUD() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSave = (e) => {
+  // Salvar (POST ou PUT)
+  const handleSave = async (e) => {
     e.preventDefault();
+
     const veiculoData = {
-      ...form,
-      custo: parseFloat(form.custo || 0),
-      defeitos: parseInt(form.defeitos || 0),
+      part_number: form.placa,
+      modelo: form.modelo,
+      defeito: form.defeito,
+      descricao: form.defeito,
+      grau_defeito: "Leve",
+      status_veiculo: "Pendente",
+      data_auditoria: new Date().toISOString(),
+      resultado: "—",
+      auditor_responsavel: "—",
     };
 
-    if (currentVeiculo) {
-      setVeiculos((prev) =>
-        prev.map((v) => (v.id === veiculoData.id ? veiculoData : v))
-      );
-    } else {
-      const newId = Math.max(...veiculos.map((v) => v.id), 0) + 1;
-      setVeiculos((prev) => [...prev, { ...veiculoData, id: newId }]);
+    try {
+      let savedVeiculo;
+      if (currentVeiculo) {
+        savedVeiculo = await updateVeiculo({ ...veiculoData, id: currentVeiculo.id });
+        setVeiculos((prev) =>
+          prev.map((v) => (v.id === currentVeiculo.id ? savedVeiculo : v))
+        );
+      } else {
+        savedVeiculo = await createVeiculo(veiculoData);
+        setVeiculos((prev) => [...prev, savedVeiculo]);
+      }
+      closeModal();
+    } catch (err) {
+      console.error("Erro ao salvar veículo:", err);
     }
-    closeModal();
   };
 
-  const handleDelete = (id) => {
-    if (confirm("Tem certeza que deseja excluir este veículo?")) {
+  // Deletar
+  const handleDelete = async (id) => {
+    if (!confirm("Tem certeza que deseja excluir este veículo?")) return;
+
+    try {
+      await deleteVeiculo(id);
       setVeiculos((prev) => prev.filter((v) => v.id !== id));
+    } catch (err) {
+      console.error("Erro ao deletar veículo:", err);
     }
   };
 
   const filteredVeiculos = veiculos.filter(
     (v) =>
-      v.placa.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      v.modelo.toLowerCase().includes(searchTerm.toLowerCase())
+      (v.placa && v.placa.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (v.modelo && v.modelo.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   return (
@@ -175,14 +199,12 @@ export default function VeiculosCRUD() {
       <Navbar />
       <HeroSectionCRUD />
 
-      {/* A SEÇÃO DE GERENCIAMENTO CRUD VEM ABAIXO DA HERO */}
       <section className="features-section veiculos-crud-section">
         <div className="crud-container">
           <h3 className="section-subtitle">VISÃO GERAL</h3>
           <h2 className="section-title">Painel de Controle de Veículos</h2>
           <p className="section-description">
-            Utilize as ferramentas abaixo para gerenciar os veículos da sua
-            frota.
+            Utilize as ferramentas abaixo para gerenciar os veículos da sua frota.
           </p>
 
           <div className="crud-actions">
@@ -208,31 +230,29 @@ export default function VeiculosCRUD() {
                 <div
                   key={veiculo.id}
                   className="feature-card veiculo-card"
-                  data-status={veiculo.defeitos > 0 ? "pendente" : "ok"}
+                  data-status={veiculo.defeito && veiculo.defeito !== "—" ? "pendente" : "ok"}
                 >
                   <div className="card-header">
                     <h4 className="card-title">{veiculo.placa}</h4>
                     <i className="bi bi-car-front"></i>
                   </div>
-                  <p className="card-text">Modelo:
-                     {veiculo.modelo}</p>
-                  <p className="card-text status-text">
-                   Defeitos Pendentes:{veiculo.defeitos}
-                  </p>
-                  <p className="card-text">
-                    Custo Estimado (R$): {veiculo.custo.toFixed(2)}
-                  </p>
+
+                  <p className="card-text"><strong>Modelo:</strong> {veiculo.modelo}</p>
+                  <p className="card-text"><strong>Defeito:</strong> {veiculo.defeito}</p>
+
+                  <hr />
+                  <p className="card-text"><strong>Descrição:</strong> {veiculo.auditoria?.descricao ?? "—"}</p>
+                  <p className="card-text"><strong>Grau do Defeito:</strong> {veiculo.auditoria?.grau ?? "—"}</p>
+                  <p className="card-text"><strong>Status:</strong> {veiculo.auditoria?.status ?? "—"}</p>
+                  <p className="card-text"><strong>Data Auditoria:</strong> {veiculo.auditoria?.data ?? "—"}</p>
+                  <p className="card-text"><strong>Resultado:</strong> {veiculo.auditoria?.resultado ?? "—"}</p>
+                  <p className="card-text"><strong>Auditor:</strong> {veiculo.auditoria?.responsavel ?? "—"}</p>
+
                   <div className="card-actions">
-                    <button
-                      className="edit-btn"
-                      onClick={() => openModal(veiculo)}
-                    >
+                    <button className="edit-btn" onClick={() => openModal(veiculo)}>
                       <i className="bi bi-pencil-square"></i> Editar
                     </button>
-                    <button
-                      className="delete-btn"
-                      onClick={() => handleDelete(veiculo.id)}
-                    >
+                    <button className="delete-btn" onClick={() => handleDelete(veiculo.id)}>
                       <i className="bi bi-trash"></i> Excluir
                     </button>
                   </div>
@@ -247,7 +267,6 @@ export default function VeiculosCRUD() {
         </div>
       </section>
 
-      {/* MODAL */}
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -280,38 +299,19 @@ export default function VeiculosCRUD() {
               </div>
 
               <div className="form-group">
-                <label>Defeitos Pendentes:</label>
+                <label>Defeito:</label>
                 <input
-                  type="number"
-                  name="defeitos"
-                  value={form.defeitos}
+                  type="text"
+                  name="defeito"
+                  value={form.defeito}
                   onChange={handleChange}
                   required
                   className="form-input"
-                  min="0"
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Custo Estimado (R$):</label>
-                <input
-                  type="number"
-                  name="custo"
-                  value={form.custo}
-                  onChange={handleChange}
-                  required
-                  className="form-input"
-                  step="0.01"
-                  min="0"
                 />
               </div>
 
               <div className="form-actions">
-                <button
-                  type="button"
-                  onClick={closeModal}
-                  className="cancel-btn"
-                >
+                <button type="button" onClick={closeModal} className="cancel-btn">
                   Cancelar
                 </button>
                 <button type="submit" className="save-btn">
