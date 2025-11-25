@@ -14,6 +14,7 @@ import auditoriaRoutes from "./routes/auditoriaRoutes.js"
 import veiculosRoutes from './routes/veiculosRoutes.js'
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import auditoriasVeiculosRoutes from "./routes/auditoriasveiculos.js"
+import veiculosRouter from "./routes/veiculosid.js";
 
 
 
@@ -65,6 +66,8 @@ app.use('/auditorias', auditoriaRoutes);
 app.use("/veiculos", veiculosRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/auditoriasveiculos", auditoriasVeiculosRoutes);
+app.use("/api/veiculos", veiculosRouter);
+
 
 
 

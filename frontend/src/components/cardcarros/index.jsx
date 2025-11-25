@@ -11,13 +11,13 @@ export default function CardVeiculo({ veiculo }) {
                 <h2 className="title">{veiculo.modelo}</h2>
 
                 <div className="info">
-                    <p><strong>Placa:</strong> {veiculo.part_number}</p>
+                    <p><strong>Placa:</strong> {veiculo.placa}</p>
                     <p><strong>Defeito:</strong> {veiculo.defeito}</p>
                     <p><strong>Grau do defeito:</strong> {veiculo.grau_defeito}</p>
-                    <p><strong>Status:</strong> {veiculo.status_veiculo}</p>
+                    <p><strong>Status:</strong> {veiculo.status}</p>
                 </div>
 
-                <Link href={`/veiculos/${veiculo.part_number}`} className="add-btn">
+                <Link href={`/veiculos/${veiculo.id}`} className="add-btn">
                     Ver detalhes do veículo
                 </Link>
             </div>

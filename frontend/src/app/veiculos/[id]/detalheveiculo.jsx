@@ -1,98 +1,46 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import "./veiculo.css";
 
-export default function DetalhesVeiculo() {
-    const params = useSearchParams();
-    const id = params.get("id");
+export default function DetalhesVeiculo({ vehicleId }) {
+  const [veiculo, setVeiculo] = useState(null);
 
-    const [veiculo, setVeiculo] = useState(null);
+  useEffect(() => {
+    if (!vehicleId) return;
 
-    useEffect(() => {
-        if (!id) return;
+    async function carregar() {
+      try {
+        const res = await fetch(`http://localhost:3001/api/veiculos/${vehicleId}`);
+        const json = await res.json();
 
-        async function carregar() {
-            try {
-                const res = await fetch(`http://localhost:3000/veiculos/${id}`);
-                const json = await res.json();
-
-                setVeiculo({
-                    id: json.part_number,
-                    modelo: json.modelo,
-                    placa: json.part_number,
-                    status: json.status_veiculo,
-                    defeito: json.defeito,
-                    grau_defeito: json.grau_defeito,
-                    imagens: json.imagens || ["/placeholder.png"],
-                    detalhes: json.detalhes || {
-                        causas: "Não informado",
-                        procedimento: "Não informado",
-                        tempo: "Não informado",
-                    },
-                });
-            } catch (err) {
-                console.error("Erro ao carregar veículo:", err);
-            }
+        if (json.veiculos && json.veiculos.length > 0) {
+          setVeiculo(json.veiculos[0]);    // 👈 AGORA FUNCIONA!
+        } else {
+          console.error("Nenhum veículo encontrado");
         }
 
-        carregar();
-    }, [id]);
+      } catch (err) {
+        console.error("Erro ao carregar veículo:", err);
+      }
+    }
 
+    carregar();
+  }, [vehicleId]);
 
-    if (!veiculo) return <p className="carregando">Carregando...</p>;
+  if (!veiculo) return <p style={{ color: "white" }}>Carregando...</p>;
 
-    return (
-        <div className="detalhes-container">
-            
-            {/* Esquerda (imagens) */}
-            <div className="left">
-                <div className="main-image">
-                    <img src={veiculo.imagens[0]} alt={veiculo.modelo} />
-                </div>
+  return (
+    <div style={{ padding: 20, color: "white" }}>
+      <h1>{veiculo.modelo}</h1>
+      <p><strong>Placa:</strong> {veiculo.part_number}</p>
+      <p><strong>Status:</strong> {veiculo.status_veiculo}</p>
+      <p><strong>Defeito:</strong> {veiculo.defeito}</p>
+      <p><strong>Grau:</strong> {veiculo.grau_defeito}</p>
 
-                <div className="thumbs">
-                    {veiculo.imagens.map((img, i) => (
-                        <img
-                            key={i}
-                            src={img}
-                            onClick={() => {
-                                document.querySelector(".main-image img").src = img;
-                            }}
-                        />
-                    ))}
-                </div>
-            </div>
+      <hr />
 
-            {/* Direita (informações) */}
-            <div className="right">
-                <h1>{veiculo.modelo}</h1>
-                <p className="placa">Placa: {veiculo.placa}</p>
-                <p className="defeito">{veiculo.defeito}</p>
-
-                <div className="badges">
-                    <span>{veiculo.status}</span>
-                    <span>Grau: {veiculo.grau_defeito}</span>
-                </div>
-
-                <div className="accordion">
-                    <details>
-                        <summary>O que causou o defeito?</summary>
-                        <p>{veiculo.detalhes?.causas}</p>
-                    </details>
-
-                    <details>
-                        <summary>Como será feita a manutenção?</summary>
-                        <p>{veiculo.detalhes?.procedimento}</p>
-                    </details>
-
-                    <details>
-                        <summary>Tempo estimado</summary>
-                        <p>{veiculo.detalhes?.tempo}</p>
-                    </details>
-                </div>
-            </div>
-        </div>
-    );
+      <h3>Detalhes</h3>
+      <p>{veiculo.descrição || "Sem descrição"}</p>
+    </div>
+  );
 }
