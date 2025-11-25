@@ -78,23 +78,24 @@ const HeroSectionCRUD = () => (
 
           {/* Label superior direito */}
           <div className="overlay-label-frontier top-right-label-frontier shadow-sm">
-            <i className="bi bi-truck-flatbed icon-green-bg-frontier"></i>
-            <p className="label-text-frontier">Gestão de Frotas</p>
+            <i className="bi bi-wrench icone"></i>
+            <p className="label-text-frontier">Edição de Auditorias</p>
           </div>
 
           {/* Label esquerdo do meio */}
           <div className="overlay-label-frontier middle-left-label-frontier shadow-sm">
-            <i className="bi bi-wrench-adjustable icon-green-bg-frontier"></i>
-            <p className="label-text-frontier">Manutenção Preditiva</p>
+            <i className="bi bi-wrench-adjustable icone"></i>
+            <p className="label-text-frontier">Registro de Defeitos</p>
           </div>
 
           {/* Label inferior (quote) */}
           <div className="overlay-label-frontier bottom-center-label-frontier shadow-sm">
             <p className="quote-text-frontier">
-              "A otimização da frota não é um custo, mas um investimento."
+              "A otimização do manuseio não é um custo, mas um investimento."
             </p>
             <p className="quote-author-frontier">
-              <i className="bi bi-person-circle"></i> Você, CEO Controle PDI
+              <i className="bi bi-person-circle"></i>
+              <span className="author-text">Você, Auditor Controle PDI</span>
             </p>
           </div>
         </div>
@@ -213,12 +214,13 @@ export default function VeiculosCRUD() {
                     <h4 className="card-title">{veiculo.placa}</h4>
                     <i className="bi bi-car-front"></i>
                   </div>
-                  <p className="card-text">**Modelo:** {veiculo.modelo}</p>
+                  <p className="card-text">Modelo:
+                     {veiculo.modelo}</p>
                   <p className="card-text status-text">
-                    **Defeitos Pendentes:** **{veiculo.defeitos}**
+                   Defeitos Pendentes:{veiculo.defeitos}
                   </p>
                   <p className="card-text">
-                    **Custo Estimado (R$):** {veiculo.custo.toFixed(2)}
+                    Custo Estimado (R$): {veiculo.custo.toFixed(2)}
                   </p>
                   <div className="card-actions">
                     <button
