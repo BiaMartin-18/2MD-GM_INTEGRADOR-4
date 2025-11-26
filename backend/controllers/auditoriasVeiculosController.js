@@ -1,5 +1,22 @@
 import { getConnection } from "../config/database.js";
 
+// ================= Função para converter datas =================
+function formatDateToMySQL(dateString) {
+  if (!dateString) return null;
+
+  const d = new Date(dateString);
+  if (isNaN(d.getTime())) return null;
+
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  const hours = String(d.getHours()).padStart(2, "0");
+  const minutes = String(d.getMinutes()).padStart(2, "0");
+  const seconds = String(d.getSeconds()).padStart(2, "0");
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
 // ================= GET =================
 export async function getAuditoriasVeiculos(req, res) {
   try {
@@ -44,6 +61,9 @@ export async function createAuditoriaVeiculo(req, res) {
   try {
     const conn = await getConnection();
 
+    // Converter data
+    const dataFormatada = formatDateToMySQL(data_auditoria);
+
     // Inserir no veiculos
     await conn.query(`
       INSERT INTO veiculos (part_number, modelo, defeito, descrição, grau_defeito, status_veiculo)
@@ -54,7 +74,7 @@ export async function createAuditoriaVeiculo(req, res) {
     await conn.query(`
       INSERT INTO auditoria (part_number, data_auditoria, resultado, auditor_responsavel)
       VALUES (?, ?, ?, ?)
-    `, [part_number, data_auditoria, resultado, auditor_responsavel]);
+    `, [part_number, dataFormatada, resultado, auditor_responsavel]);
 
     res.status(201).json({ message: "Auditoria de veículo criada com sucesso" });
 
@@ -81,6 +101,8 @@ export async function updateAuditoriaVeiculo(req, res) {
   try {
     const conn = await getConnection();
 
+    const dataFormatada = formatDateToMySQL(data_auditoria);
+
     // Atualizar veiculos
     await conn.query(`
       UPDATE veiculos
@@ -93,7 +115,7 @@ export async function updateAuditoriaVeiculo(req, res) {
       UPDATE auditoria
       SET data_auditoria = ?, resultado = ?, auditor_responsavel = ?
       WHERE part_number = ?
-    `, [data_auditoria, resultado, auditor_responsavel, part_number]);
+    `, [dataFormatada, resultado, auditor_responsavel, part_number]);
 
     res.json({ message: "Auditoria de veículo atualizada com sucesso" });
 

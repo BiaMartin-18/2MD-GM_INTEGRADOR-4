@@ -31,7 +31,7 @@ async function deleteVeiculo(id) {
   return await resp.json();
 }
 
-// HeroSectionCRUD
+// HeroSectionCRUD (mantive igual)
 const HeroSectionCRUD = () => (
   <section className="hero-frontier-style position-relative">
     <div className="container position-relative z-2 py-5">
@@ -74,61 +74,117 @@ const HeroSectionCRUD = () => (
   </section>
 );
 
+// Formata ISO 8601 para "DD do M de YYYY, HhMM"
+function formatDataParaCard(isoString) {
+  if (!isoString) return "—";
+  const date = new Date(isoString);
+  if (isNaN(date)) return isoString;
+
+  const dia = date.getDate();
+  const mes = date.getMonth() + 1; // 0-11
+  const ano = date.getFullYear();
+  let horas = date.getHours();
+  const minutos = date.getMinutes().toString().padStart(2, "0");
+
+  return `${dia} do ${mes} de ${ano}, ${horas}h${minutos}`;
+}
+
 export default function VeiculosCRUD() {
   const [veiculos, setVeiculos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentVeiculo, setCurrentVeiculo] = useState(null);
+
+  // formulário com campos novos de data/hora separados
   const [form, setForm] = useState({
     id: null,
     placa: "",
     modelo: "",
     defeito: "",
+    descrição: "",
+    grau_defeito: "",
+    status_veiculo: "",
+    data_auditoria: "", // YYYY-MM-DD for input[type=date]
+    hora_auditoria: "", // HH:MM for input[type=time]
+    resultado: "",
+    auditor_responsavel: "",
   });
+
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Buscar dados da API
-  useEffect(() => {
-    async function fetchAuditorias() {
-      try {
-        const resp = await fetch("http://localhost:3001/api/auditoriasveiculos");
-        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        const data = await resp.json();
+  // fetch function reutilizável
+  async function fetchAuditorias() {
+    try {
+      const resp = await fetch("http://localhost:3001/api/auditoriasveiculos");
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const data = await resp.json();
 
-        const veiculosTransformados = data.map((item) => ({
-          id: item.part_number ?? `${Math.random().toString(36).slice(2, 9)}`,
-          placa: item.part_number ?? "—",
-          modelo: item.modelo ?? "—",
-          defeito: item.defeito ?? "—",
-          auditoria: {
-            descricao: item.descrição ?? item.descricao ?? "—",
-            grau: item.grau_defeito ?? "—",
-            status: item.status_veiculo ?? "—",
-            data: item.data_auditoria ?? "—",
-            resultado: item.resultado ?? "—",
-            responsavel: item.auditor_responsavel ?? "—",
-          },
-        }));
+      const veiculosTransformados = data.map((item) => ({
+        id: item.part_number ?? `${Math.random().toString(36).slice(2, 9)}`,
+        placa: item.part_number ?? "—",
+        modelo: item.modelo ?? "—",
+        defeito: item.defeito ?? "—",
+        auditoria: {
+          descrição: item.descrição ?? "—",
+          grau: item.grau_defeito ?? "—",
+          status: item.status_veiculo ?? "—",
+          data: item.data_auditoria ?? null, // mantém ISO 8601
+          resultado: item.resultado ?? "—",
+          responsavel: item.auditor_responsavel ?? "—",
+        },
+      }));
 
-        setVeiculos(veiculosTransformados);
-      } catch (err) {
-        console.error("Erro ao buscar auditorias:", err);
-      }
+      setVeiculos(veiculosTransformados);
+    } catch (err) {
+      console.error("Erro ao buscar auditorias:", err);
     }
+  }
+
+  useEffect(() => {
     fetchAuditorias();
   }, []);
 
   const openModal = (veiculo = null) => {
     if (veiculo) {
+      const dbDateTime = veiculo.auditoria?.data ?? "";
+      let datePart = "";
+      let timePart = "";
+      if (dbDateTime) {
+        const date = new Date(dbDateTime);
+        if (!isNaN(date)) {
+          datePart = date.toISOString().slice(0, 10); // YYYY-MM-DD
+          timePart = date.toTimeString().slice(0,5);  // HH:MM
+        }
+      }
+
       setCurrentVeiculo(veiculo);
       setForm({
         id: veiculo.id ?? null,
         placa: veiculo.placa ?? "",
         modelo: veiculo.modelo ?? "",
         defeito: veiculo.defeito ?? "",
+        descrição: veiculo.auditoria?.descrição ?? "",
+        grau_defeito: veiculo.auditoria?.grau ?? "",
+        status_veiculo: veiculo.auditoria?.status ?? "",
+        data_auditoria: datePart,
+        hora_auditoria: timePart,
+        resultado: veiculo.auditoria?.resultado ?? "",
+        auditor_responsavel: veiculo.auditoria?.responsavel ?? "",
       });
     } else {
       setCurrentVeiculo(null);
-      setForm({ id: null, placa: "", modelo: "", defeito: "" });
+      setForm({
+        id: null,
+        placa: "",
+        modelo: "",
+        defeito: "",
+        descrição: "",
+        grau_defeito: "",
+        status_veiculo: "",
+        data_auditoria: "",
+        hora_auditoria: "",
+        resultado: "",
+        auditor_responsavel: "",
+      });
     }
     setIsModalOpen(true);
   };
@@ -143,40 +199,40 @@ export default function VeiculosCRUD() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Salvar (POST ou PUT)
+  // Salvar (POST ou PUT) — build data_auditoria as "YYYY-MM-DD HH:MM:SS"
   const handleSave = async (e) => {
     e.preventDefault();
+
+    let dataAjustada = null;
+    if (form.data_auditoria && form.hora_auditoria) {
+      dataAjustada = `${form.data_auditoria} ${form.hora_auditoria}:00`;
+    }
 
     const veiculoData = {
       part_number: form.placa,
       modelo: form.modelo,
       defeito: form.defeito,
-      descricao: form.defeito,
-      grau_defeito: "Leve",
-      status_veiculo: "Pendente",
-      data_auditoria: new Date().toISOString(),
-      resultado: "—",
-      auditor_responsavel: "—",
+      descrição: form.descrição,
+      grau_defeito: form.grau_defeito,
+      status_veiculo: form.status_veiculo,
+      data_auditoria: dataAjustada,
+      resultado: form.resultado,
+      auditor_responsavel: form.auditor_responsavel,
     };
 
     try {
-      let savedVeiculo;
       if (currentVeiculo) {
-        savedVeiculo = await updateVeiculo({ ...veiculoData, id: currentVeiculo.id });
-        setVeiculos((prev) =>
-          prev.map((v) => (v.id === currentVeiculo.id ? savedVeiculo : v))
-        );
+        await updateVeiculo({ ...veiculoData, id: currentVeiculo.id });
       } else {
-        savedVeiculo = await createVeiculo(veiculoData);
-        setVeiculos((prev) => [...prev, savedVeiculo]);
+        await createVeiculo(veiculoData);
       }
+      await fetchAuditorias();
       closeModal();
     } catch (err) {
       console.error("Erro ao salvar veículo:", err);
     }
   };
 
-  // Deletar
   const handleDelete = async (id) => {
     if (!confirm("Tem certeza que deseja excluir este veículo?")) return;
 
@@ -241,10 +297,10 @@ export default function VeiculosCRUD() {
                   <p className="card-text"><strong>Defeito:</strong> {veiculo.defeito}</p>
 
                   <hr />
-                  <p className="card-text"><strong>Descrição:</strong> {veiculo.auditoria?.descricao ?? "—"}</p>
+                  <p className="card-text"><strong>Descrição:</strong> {veiculo.auditoria?.descrição ?? "—"}</p>
                   <p className="card-text"><strong>Grau do Defeito:</strong> {veiculo.auditoria?.grau ?? "—"}</p>
                   <p className="card-text"><strong>Status:</strong> {veiculo.auditoria?.status ?? "—"}</p>
-                  <p className="card-text"><strong>Data Auditoria:</strong> {veiculo.auditoria?.data ?? "—"}</p>
+                  <p className="card-text"><strong>Data Auditoria:</strong> {formatDataParaCard(veiculo.auditoria?.data)}</p>
                   <p className="card-text"><strong>Resultado:</strong> {veiculo.auditoria?.resultado ?? "—"}</p>
                   <p className="card-text"><strong>Auditor:</strong> {veiculo.auditoria?.responsavel ?? "—"}</p>
 
@@ -267,56 +323,73 @@ export default function VeiculosCRUD() {
         </div>
       </section>
 
+      {/* --- Modal Atualizado --- */}
       {isModalOpen && (
         <div className="modal-overlay">
-          <div className="modal-content">
+          <div
+            className="modal-content"
+            style={{
+              maxHeight: "90vh",
+              overflowY: "auto",
+              width: "90%",
+              maxWidth: "520px",
+              margin: "auto",
+            }}
+          >
             <h3 className="modal-title">
               {currentVeiculo ? "Editar Veículo" : "Novo Cadastro de Veículo"}
             </h3>
+
             <form onSubmit={handleSave}>
+              {[{ label: "Placa", name: "placa" },
+                { label: "Modelo", name: "modelo" },
+                { label: "Defeito", name: "defeito" },
+                { label: "Descrição", name: "descrição" },
+                { label: "Grau do Defeito", name: "grau_defeito" },
+                { label: "Status", name: "status_veiculo" },
+                { label: "Resultado", name: "resultado" },
+                { label: "Auditor", name: "auditor_responsavel" }
+              ].map((field) => (
+                <div className="form-group" key={field.name}>
+                  <label>{field.label}:</label>
+                  <input
+                    type="text"
+                    name={field.name}
+                    value={form[field.name] || ""}
+                    onChange={handleChange}
+                    required
+                    className="form-input"
+                  />
+                </div>
+              ))}
+
               <div className="form-group">
-                <label>Placa:</label>
+                <label>Data da Auditoria:</label>
                 <input
-                  type="text"
-                  name="placa"
-                  value={form.placa}
+                  type="date"
+                  name="data_auditoria"
+                  value={form.data_auditoria || ""}
                   onChange={handleChange}
-                  required
                   className="form-input"
+                  required
                 />
               </div>
 
               <div className="form-group">
-                <label>Modelo:</label>
+                <label>Hora da Auditoria:</label>
                 <input
-                  type="text"
-                  name="modelo"
-                  value={form.modelo}
+                  type="time"
+                  name="hora_auditoria"
+                  value={form.hora_auditoria || ""}
                   onChange={handleChange}
-                  required
                   className="form-input"
+                  required
                 />
               </div>
 
-              <div className="form-group">
-                <label>Defeito:</label>
-                <input
-                  type="text"
-                  name="defeito"
-                  value={form.defeito}
-                  onChange={handleChange}
-                  required
-                  className="form-input"
-                />
-              </div>
-
-              <div className="form-actions">
-                <button type="button" onClick={closeModal} className="cancel-btn">
-                  Cancelar
-                </button>
-                <button type="submit" className="save-btn">
-                  Salvar
-                </button>
+              <div style={{ display: "flex", gap: 10, justifyContent: "flex-end", marginTop: 12 }}>
+                <button type="button" onClick={closeModal} className="cancel-btn">Cancelar</button>
+                <button type="submit" className="save-btn">Salvar</button>
               </div>
             </form>
           </div>
