@@ -17,7 +17,7 @@ export default function CardVeiculo({ veiculo }) {
                     <p><strong>Status:</strong> {veiculo.status}</p>
                 </div>
 
-                <Link href={`/veiculos/${veiculo.id}`} className="add-btn">
+                <Link href={`/veiculos/${veiculo.part_number}`} className="add-btn">
                     Ver detalhes do veículo
                 </Link>
             </div>

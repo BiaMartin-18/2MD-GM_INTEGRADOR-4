@@ -81,7 +81,7 @@ export default function Veiculos() {
                             >
                                 <option value="Todos">Todos</option>
                                 <option value="Manutenção">Manutenção</option>
-                                <option value="Inativo">Aguardando revisão</option>
+                                <option value="Aguardando revisão">Aguardando revisão</option>
                             </select>
                         </div>
                     </div>

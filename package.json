@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/BiaMartin-18/2MD-GM_INTEGRADOR-4#readme",
   "dependencies": {
+    "axios": "^1.13.2",
     "bootstrap": "^5.3.8",
     "react-bootstrap": "^2.10.10"
   }
