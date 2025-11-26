@@ -16,7 +16,7 @@ async function createVeiculo(veiculo) {
 }
 
 async function updateVeiculo(veiculo) {
-  const resp = await fetch(`http://localhost:3001/api/auditoriasveiculos/${veiculo.id}`, {
+  const resp = await fetch(`http://localhost:3001/api/auditoriasveiculos/${veiculo.old_part_number}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(veiculo),
@@ -80,13 +80,13 @@ function formatDataParaCard(isoString) {
   const date = new Date(isoString);
   if (isNaN(date)) return isoString;
 
-  const dia = date.getDate();
-  const mes = date.getMonth() + 1; // 0-11
+  const dia = date.getDate().toString().padStart(2, "0");
+  const mes = (date.getMonth() + 1).toString().padStart(2, "0"); // 0-11
   const ano = date.getFullYear();
-  let horas = date.getHours();
+  const horas = date.getHours().toString().padStart(2, "0");
   const minutos = date.getMinutes().toString().padStart(2, "0");
 
-  return `${dia} do ${mes} de ${ano}, ${horas}h${minutos}`;
+  return `${dia}/${mes}/${ano} às ${horas}:${minutos}`;
 }
 
 export default function VeiculosCRUD() {
@@ -210,6 +210,7 @@ export default function VeiculosCRUD() {
 
     const veiculoData = {
       part_number: form.placa,
+      old_part_number: currentVeiculo?.placa,
       modelo: form.modelo,
       defeito: form.defeito,
       descrição: form.descrição,
@@ -222,7 +223,7 @@ export default function VeiculosCRUD() {
 
     try {
       if (currentVeiculo) {
-        await updateVeiculo({ ...veiculoData, id: currentVeiculo.id });
+        await updateVeiculo({ ...veiculoData, old_part_number: currentVeiculo.placa });
       } else {
         await createVeiculo(veiculoData);
       }

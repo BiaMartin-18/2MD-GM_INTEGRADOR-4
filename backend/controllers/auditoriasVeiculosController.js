@@ -19,8 +19,10 @@ function formatDateToMySQL(dateString) {
 
 // ================= GET =================
 export async function getAuditoriasVeiculos(req, res) {
+  let conn;
+
   try {
-    const conn = await getConnection();
+    conn = await getConnection();
 
     const [rows] = await conn.query(`
       SELECT 
@@ -38,14 +40,20 @@ export async function getAuditoriasVeiculos(req, res) {
     `);
 
     res.json(rows);
+
   } catch (err) {
     console.error("Erro ao buscar auditorias de veículos:", err);
     res.status(500).json({ message: "Erro ao buscar auditorias de veículos" });
+
+  } finally {
+    if (conn) conn.release();
   }
 }
 
 // ================= POST =================
 export async function createAuditoriaVeiculo(req, res) {
+  let conn;
+
   const {
     part_number,
     modelo,
@@ -59,18 +67,15 @@ export async function createAuditoriaVeiculo(req, res) {
   } = req.body;
 
   try {
-    const conn = await getConnection();
+    conn = await getConnection();
 
-    // Converter data
     const dataFormatada = formatDateToMySQL(data_auditoria);
 
-    // Inserir no veiculos
     await conn.query(`
       INSERT INTO veiculos (part_number, modelo, defeito, descrição, grau_defeito, status_veiculo)
       VALUES (?, ?, ?, ?, ?, ?)
     `, [part_number, modelo, defeito, descrição, grau_defeito, status_veiculo]);
 
-    // Inserir na auditoria
     await conn.query(`
       INSERT INTO auditoria (part_number, data_auditoria, resultado, auditor_responsavel)
       VALUES (?, ?, ?, ?)
@@ -81,13 +86,19 @@ export async function createAuditoriaVeiculo(req, res) {
   } catch (err) {
     console.error("Erro ao criar auditoria de veículo:", err);
     res.status(500).json({ message: "Erro ao criar auditoria de veículo" });
+
+  } finally {
+    if (conn) conn.release();
   }
 }
 
 // ================= PUT =================
 export async function updateAuditoriaVeiculo(req, res) {
-  const { part_number } = req.params;
+  let conn;
+
+  const { part_number: oldPartNumber } = req.params;
   const {
+    part_number: newPartNumber,
     modelo,
     defeito,
     descrição,
@@ -99,43 +110,42 @@ export async function updateAuditoriaVeiculo(req, res) {
   } = req.body;
 
   try {
-    const conn = await getConnection();
+    conn = await getConnection();
 
     const dataFormatada = formatDateToMySQL(data_auditoria);
 
-    // Atualizar veiculos
     await conn.query(`
       UPDATE veiculos
-      SET modelo = ?, defeito = ?, descrição = ?, grau_defeito = ?, status_veiculo = ?
+      SET part_number = ?, modelo = ?, defeito = ?, descrição = ?, grau_defeito = ?, status_veiculo = ?
       WHERE part_number = ?
-    `, [modelo, defeito, descrição, grau_defeito, status_veiculo, part_number]);
+    `, [newPartNumber, modelo, defeito, descrição, grau_defeito, status_veiculo, oldPartNumber]);
 
-    // Atualizar auditoria
     await conn.query(`
       UPDATE auditoria
-      SET data_auditoria = ?, resultado = ?, auditor_responsavel = ?
+      SET part_number = ?, data_auditoria = ?, resultado = ?, auditor_responsavel = ?
       WHERE part_number = ?
-    `, [dataFormatada, resultado, auditor_responsavel, part_number]);
+    `, [newPartNumber, dataFormatada, resultado, auditor_responsavel, oldPartNumber]);
 
     res.json({ message: "Auditoria de veículo atualizada com sucesso" });
 
   } catch (err) {
     console.error("Erro ao atualizar auditoria de veículo:", err);
     res.status(500).json({ message: "Erro ao atualizar auditoria de veículo" });
+
+  } finally {
+    if (conn) conn.release();
   }
 }
 
 // ================= DELETE =================
 export async function deleteAuditoriaVeiculo(req, res) {
+  let conn;
   const { part_number } = req.params;
 
   try {
-    const conn = await getConnection();
+    conn = await getConnection();
 
-    // Deletar auditoria primeiro
     await conn.query(`DELETE FROM auditoria WHERE part_number = ?`, [part_number]);
-
-    // Deletar veículo
     await conn.query(`DELETE FROM veiculos WHERE part_number = ?`, [part_number]);
 
     res.json({ message: "Auditoria de veículo deletada com sucesso" });
@@ -143,5 +153,8 @@ export async function deleteAuditoriaVeiculo(req, res) {
   } catch (err) {
     console.error("Erro ao deletar auditoria de veículo:", err);
     res.status(500).json({ message: "Erro ao deletar auditoria de veículo" });
+
+  } finally {
+    if (conn) conn.release();
   }
 }
