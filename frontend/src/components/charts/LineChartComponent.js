@@ -7,9 +7,9 @@ const LineChartComponent = ({ data }) => (
       data={data}
       margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
     >
-      <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-      <XAxis dataKey="mes" stroke="#666" />
-      <YAxis stroke="#666" />
+      <CartesianGrid strokeDasharray="3 3" stroke="#e4eefcff" />
+      <XAxis dataKey="mes" stroke="#f5f5f5ff" />
+      <YAxis stroke="#dbdbdbff" />
       <Tooltip 
         contentStyle={{ backgroundColor: '#1b2130', border: 'none', color: '#fff', borderRadius: '4px' }}
       />

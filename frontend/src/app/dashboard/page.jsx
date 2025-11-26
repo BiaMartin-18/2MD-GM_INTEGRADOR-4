@@ -9,9 +9,8 @@ import BarChartComponent from "@/components/charts/BarChartComponent";
 import PieChartComponent from "@/components/charts/PieChartComponent";
 import OverviewLineChart from "@/components/charts/OverviewLineChart";
 import FinisherParticles from "@/components/FinisherParticles";
-import MonthlyAuditsChart from "@/components/charts/MonthlyAuditsChart"; 
+import MonthlyAuditsChart from "@/components/charts/MonthlyAuditsChart";
 import AuditsLineChart from "@/components/charts/AuditsLineChart";
-
 
 export default function DashboardPage() {
   const [barData, setBarData] = useState([]);
@@ -27,8 +26,6 @@ export default function DashboardPage() {
 
   const [auditoriasMes, setAuditoriasMes] = useState([]);
   const [auditoriasMesData, setAuditoriasMesData] = useState([]);
-
-
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -49,7 +46,9 @@ export default function DashboardPage() {
         setLoading(true);
 
         // GRÁFICOS
-        const resCharts = await fetch("http://localhost:3001/api/dashboard/dados");
+        const resCharts = await fetch(
+          "http://localhost:3001/api/dashboard/dados"
+        );
         if (!resCharts.ok) throw new Error("Erro ao carregar gráficos.");
         const charts = await resCharts.json();
 
@@ -60,10 +59,10 @@ export default function DashboardPage() {
         setAuditoriasMes(charts.auditoriasMesChart || []);
         setAuditoriasMesData(charts.auditoriasMesChart || []);
 
-
-
         // CARDS
-        const resCards = await fetch("http://localhost:3001/api/dashboard/cards");
+        const resCards = await fetch(
+          "http://localhost:3001/api/dashboard/cards"
+        );
         if (!resCards.ok) throw new Error("Erro ao carregar cards.");
         const cardsData = await resCards.json();
 
@@ -80,12 +79,14 @@ export default function DashboardPage() {
     fetchData();
   }, []);
 
-  if (loading) return <div style={{ padding: 40 }}>Carregando dashboard...</div>;
+  if (loading)
+    return <div style={{ padding: 40 }}>Carregando dashboard...</div>;
   if (error) return <div style={{ padding: 40, color: "red" }}>{error}</div>;
 
   return (
     <div className="pageWrapper">
       <div className="dashboardHeaderSection">
+        
         <div className="animatedBackgroundContainer">
           <FinisherParticles />
           <div className="finisher-canvas-wrapper" />
@@ -109,44 +110,53 @@ export default function DashboardPage() {
       <div className="container kpi-section mt-4 mb-4">
         <div className="row">
           <div className="col-md-3 mb-3">
-            <div className="card kpi-card shadow-sm">
-              <div className="card-body">
-                <h6 className="card-title text-uppercase">Auditorias Aprovadas</h6>
-                <h2 className="kpi-value">{cards.auditoriasAprovadas}</h2>
+            <div className="card kpi-card   d-flex flex-column justify-content-center align-items-center py-4 shadow-sm">
+              <div className="card-body d-flex gap-3">
+                <i className="icone bi bi-calendar-check"></i>
+                <h6 className="card-title ">Auditorias Aprovadas</h6>
               </div>
+              <h2 className="kpi-value text-center">
+                {cards.auditoriasAprovadas}
+              </h2>
             </div>
           </div>
 
           <div className="col-md-3 mb-3">
-            <div className="card kpi-card shadow-sm">
-              <div className="card-body">
-                <h6 className="card-title text-uppercase">Total de Auditorias</h6>
-                <h2 className="kpi-value">{cards.totalAuditorias}</h2>
+            <div className="card kpi-card  d-flex flex-column justify-content-center align-items-center py-4  shadow-sm">
+              <div className="card-body d-flex gap-3">
+                <i className="icone bi bi-check-all"></i>
+                <h6 className="card-title ">Total de Auditorias</h6>
               </div>
+              <h2 className="kpi-value text-center">{cards.totalAuditorias}</h2>
             </div>
           </div>
 
           <div className="col-md-3 mb-3">
-            <div className="card kpi-card shadow-sm">
-              <div className="card-body">
-                <h6 className="card-title text-uppercase">Defeitos Registrados</h6>
-                <h2 className="kpi-value">{cards.defeitosRegistrados}</h2>
+            <div className="card kpi-card  d-flex flex-column justify-content-center align-items-center py-4    shadow-sm">
+              <div className="card-body d-flex gap-3">
+                <i className="icone bi bi-graph-up"></i>
+                <h6 className="card-title ">Defeitos Registrados</h6>
               </div>
+              <h2 className="kpi-value text-center">
+                {cards.defeitosRegistrados}
+              </h2>
             </div>
           </div>
 
           <div className="col-md-3 mb-3">
-            <div className="card kpi-card shadow-sm">
-              <div className="card-body">
-                <h6 className="card-title text-uppercase">Carros em Manutenção</h6>
-                <h2 className="kpi-value">{cards.manutencao}</h2>
+            <div className="card kpi-card  d-flex flex-column justify-content-center align-items-center py-4  shadow-sm">
+              <div className="card-body d-flex gap-3">
+                <i className="icone bi bi-file-earmark-bar-graph"></i>
+                <h6 className="card-title ">Carros em Manutenção</h6>
               </div>
+              <h2 className="kpi-value text-center">{cards.manutencao}</h2>
             </div>
           </div>
         </div>
       </div>
 
       {/* GRÁFICOS */}
+      <div className="background-quadriculado" />
       <div className="container main-content-section">
         <div className="row">
           <div className="col-lg-8 mb-4">
@@ -188,16 +198,13 @@ export default function DashboardPage() {
                 <h4>Total de Auditorias por Mês (Últimos 6 meses)</h4>
                 <div style={{ width: "100%", height: "350px" }}>
                   <AuditsLineChart data={auditoriasMesData} />
-
-
                 </div>
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
+   
   );
 }

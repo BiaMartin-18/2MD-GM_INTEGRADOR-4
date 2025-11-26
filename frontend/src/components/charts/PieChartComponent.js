@@ -4,7 +4,7 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recha
 const RADIAN = Math.PI / 180;
 
 // Cores fixas para as fatias
-const COLORS = ["#3c6d97ff", "#4618c5ff"];
+const COLORS = ["#0024eeff", "#3877ffff"];
 
 const renderCustomizedLabel = ({ cx, cy, midAngle, outerRadius, percent, index, name }) => {
   const sin = Math.sin(-RADIAN * midAngle);
@@ -24,11 +24,11 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, outerRadius, percent, index, 
 
   return (
     <g>
-      <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke="#999" fill="none" />
+      <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke="#d7e3ffff" fill="none" />
       <text
         x={ex + textXOffset}
         y={ey}
-        fill="#333333"
+        fill="#faf8f8ff"
         textAnchor={textAnchor}
         dominantBaseline="middle"
         fontSize="10px"

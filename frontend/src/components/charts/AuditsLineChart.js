@@ -8,15 +8,15 @@ const AuditsLineChart = ({ data }) => (
       margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
     >
       <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-      <XAxis dataKey="mes" stroke="#666" />
-      <YAxis stroke="#666" />
+      <XAxis dataKey="mes" stroke="#ffff" />
+      <YAxis stroke="#fff" />
       <Tooltip 
-        contentStyle={{ backgroundColor: '#1b2130', border: 'none', color: '#fff', borderRadius: '4px' }}
+        contentStyle={{ backgroundColor: '#dee2eeff', border: 'none', color: '#003983ff', borderRadius: '4px' }}
       />
       <Line 
         type="monotone" 
         dataKey="total"   // <-- AQUI MUDA
-        stroke="#00bcd4" 
+        stroke="#011fa8ff" 
         strokeWidth={3}
         activeDot={{ r: 8 }}
         name="Auditorias por mês"

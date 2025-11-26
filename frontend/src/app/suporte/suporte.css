@@ -140,6 +140,7 @@ body {
     transition: box-shadow 0.3s, border-color 0.3s;
     cursor: pointer;
     height: 100%;
+   
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); 
 }
 
@@ -149,8 +150,8 @@ body {
 }
 
 .category-card-helpplus.active {
-    border-color: #ff6e40; 
-    box-shadow: 0 0 0 1px #ff6e40; 
+    border-color: #1930ff; 
+    box-shadow: 0 0 0 1px #0028da; 
 }
 
 .category-icon-helpplus {
@@ -159,7 +160,7 @@ body {
 }
 
 .category-card-helpplus.active .category-icon-helpplus {
-    color: #ff6e40; 
+    color: #0438e2; 
 }
 
 .category-card-helpplus.active h6 {
