@@ -1,57 +1,84 @@
-.card-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin: 12px;
+:root {
+  --text: #ffffff; /* Texto claro */
+  --color-icon: #6f8cc4; /* Cor para ícones em fundo escuro */
+  --color-success: #1fb126; /* Verde para 'Aprovado' */
+  --color-danger: #e0260e; /* Vermelho para 'Reprovado' */
+  --color-revisao: #fbbd40; /* Amarelo para 'Aguardando revisão' */
+  --color-manutencao: #ee9029; /* Laranja para 'Manutenção' */
 }
 
-.card-main {
-    background: linear-gradient(#1e3c72, #2a5298);
-    padding: 25px;
-    width: 330px;
-    border-radius: 25px;
-    color: white;
-    box-shadow: 0px 10px 25px rgba(0,0,0,0.30);
-    animation: fadeIn 0.3s ease-in-out;
-    transition: transform 0.3s ease;
+/* CARD GRID */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.card-main:hover {
-    transform: translateY(-6px) scale(1.08);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+.cards-grid p {
+    color: var(--text);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+.crud-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
-.title {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-.info p {
-    margin: 5px 0;
-    opacity: 0.9;
-}
-
-.add-btn {
-    margin-top: 20px;
-    width: 100%;
-    padding: 12px;
-    border-radius: 15px;
-    font-weight: bold;
-    background: white;
-    color: #1e3c72;
-    text-align: center;
-    display: block;
-    text-decoration: none;
+.feature-card {
+    background: linear-gradient(135deg, #020824 0%, #07185a 40%, #0b288d 70%, #0d34c3 100%);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: left;
+    min-height: 200px;
+    position: relative;
     cursor: pointer;
-    transition: 0.2s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
-.add-btn:hover {
-    background: #e6e6e6;
+.feature-card:hover {
+    transform: perspective(800px) translateZ(12px) translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
+}
+
+.veiculo-card {
+    padding: 20px;
+    min-height: auto;
+}
+
+/* Status Colors */
+.veiculo-card[data-resultado="Reprovado"] {
+    border-left: 5px solid var(--color-danger);
+}
+
+.veiculo-card[data-resultado="Aprovado"] {
+    border-left: 5px solid var(--color-success);
+}
+
+.veiculo-card[data-status="Manutenção"] .status-text {
+    color: var(--color-manutencao);
+}
+
+.veiculo-card[data-status="Aguardando revisão"] .status-text {
+    color: var(--color-revisao);
+}
+
+.card-title {
+    color: white;
+}
+
+.card-text {
+    color: var(--text);
+}
+
+.card-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 20px;
 }
