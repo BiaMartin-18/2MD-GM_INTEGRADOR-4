@@ -20,7 +20,6 @@ function formatDateToMySQL(dateString) {
 // ================= GET =================
 export async function getAuditoriasVeiculos(req, res) {
   let conn;
-
   try {
     conn = await getConnection();
 
@@ -68,14 +67,15 @@ export async function createAuditoriaVeiculo(req, res) {
 
   try {
     conn = await getConnection();
-
     const dataFormatada = formatDateToMySQL(data_auditoria);
 
+    // Inserir veículo
     await conn.query(`
       INSERT INTO veiculos (part_number, modelo, defeito, descrição, grau_defeito, status_veiculo)
       VALUES (?, ?, ?, ?, ?, ?)
     `, [part_number, modelo, defeito, descrição, grau_defeito, status_veiculo]);
 
+    // Inserir auditoria
     await conn.query(`
       INSERT INTO auditoria (part_number, data_auditoria, resultado, auditor_responsavel)
       VALUES (?, ?, ?, ?)
@@ -111,15 +111,16 @@ export async function updateAuditoriaVeiculo(req, res) {
 
   try {
     conn = await getConnection();
-
     const dataFormatada = formatDateToMySQL(data_auditoria);
 
+    // Atualizar VEICULO
     await conn.query(`
       UPDATE veiculos
       SET part_number = ?, modelo = ?, defeito = ?, descrição = ?, grau_defeito = ?, status_veiculo = ?
       WHERE part_number = ?
     `, [newPartNumber, modelo, defeito, descrição, grau_defeito, status_veiculo, oldPartNumber]);
 
+    // Atualizar AUDITORIA
     await conn.query(`
       UPDATE auditoria
       SET part_number = ?, data_auditoria = ?, resultado = ?, auditor_responsavel = ?
@@ -146,7 +147,7 @@ export async function deleteAuditoriaVeiculo(req, res) {
     conn = await getConnection();
 
     await conn.query(`DELETE FROM auditoria WHERE part_number = ?`, [part_number]);
-    await conn.query(`DELETE FROM veiculos WHERE part_number = ?`, [part_number]);
+    await conn.query(`DELETE FROM veiculos   WHERE part_number = ?`, [part_number]);
 
     res.json({ message: "Auditoria de veículo deletada com sucesso" });
 
