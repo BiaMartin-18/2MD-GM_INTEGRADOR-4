@@ -17,11 +17,6 @@ import auditoriasVeiculosRoutes from "./routes/auditoriasveiculos.js"
 import veiculosRouter from "./routes/veiculosid.js";
 
 
-
-
-
-
-
 // Importar middlewares
 import { logMiddleware } from './middlewares/logMiddleware.js';
 import { errorMiddleware } from './middlewares/errorMiddleware.js';
