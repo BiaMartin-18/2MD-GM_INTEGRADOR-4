@@ -1,8 +1,22 @@
-import { read } from '../config/database.js';
+import { getConnection } from "../config/database.js";
 
 export async function listarAuditorias(req, res) {
+    let conn;
+
     try {
-        const dados = await read("auditoria");  // <-- confira o nome da tabela aqui
+        conn = await getConnection();
+
+        const [dados] = await conn.query(`
+            SELECT
+                a.part_number,
+                a.data_auditoria,
+                a.resultado,
+                a.auditor_responsavel,
+                u.nome AS nome_auditor
+            FROM auditoria a
+            LEFT JOIN usuarios u
+                ON a.auditor_responsavel = u.id_usuario
+        `);
 
         return res.json({
             sucesso: true,
@@ -17,5 +31,8 @@ export async function listarAuditorias(req, res) {
             erro: error?.message || "Erro desconhecido",
             stack: error?.stack || "Sem stack"
         });
+
+    } finally {
+        if (conn) conn.release();
     }
 }

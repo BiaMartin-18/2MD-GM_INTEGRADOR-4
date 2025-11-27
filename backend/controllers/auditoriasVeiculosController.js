@@ -17,6 +17,21 @@ function formatDateToMySQL(dateString) {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
+// ================= Função auxiliar =================
+// Converte nome do auditor → id_usuario
+async function getAuditorIdByName(conn, nome) {
+  if (!nome) return null;
+
+  const [rows] = await conn.query(
+    "SELECT id_usuario FROM usuarios WHERE nome = ?",
+    [nome]
+  );
+
+  if (rows.length === 0) return null;
+
+  return rows[0].id_usuario;
+}
+
 // ================= GET =================
 export async function getAuditoriasVeiculos(req, res) {
   let conn;
@@ -33,9 +48,11 @@ export async function getAuditoriasVeiculos(req, res) {
         v.status_veiculo,
         a.data_auditoria,
         a.resultado,
-        a.auditor_responsavel
+        a.auditor_responsavel,
+        u.nome AS auditor_nome
       FROM veiculos v
-      LEFT JOIN auditoria a ON v.part_number = a.part_number;
+      LEFT JOIN auditoria a ON v.part_number = a.part_number
+      LEFT JOIN usuarios u ON u.id_usuario = a.auditor_responsavel;
     `);
 
     res.json(rows);
@@ -62,12 +79,16 @@ export async function createAuditoriaVeiculo(req, res) {
     status_veiculo,
     data_auditoria,
     resultado,
-    auditor_responsavel
+    auditor_responsavel // <-- aqui vem o NOME
   } = req.body;
 
   try {
     conn = await getConnection();
+
     const dataFormatada = formatDateToMySQL(data_auditoria);
+
+    // BUSCAR ID DO AUDITOR
+    const auditorId = await getAuditorIdByName(conn, auditor_responsavel);
 
     // Inserir veículo
     await conn.query(`
@@ -79,7 +100,7 @@ export async function createAuditoriaVeiculo(req, res) {
     await conn.query(`
       INSERT INTO auditoria (part_number, data_auditoria, resultado, auditor_responsavel)
       VALUES (?, ?, ?, ?)
-    `, [part_number, dataFormatada, resultado, auditor_responsavel]);
+    `, [part_number, dataFormatada ?? null, resultado ?? null, auditorId ?? null]);
 
     res.status(201).json({ message: "Auditoria de veículo criada com sucesso" });
 
@@ -106,12 +127,15 @@ export async function updateAuditoriaVeiculo(req, res) {
     status_veiculo,
     data_auditoria,
     resultado,
-    auditor_responsavel
+    auditor_responsavel // <-- vem NOME também
   } = req.body;
 
   try {
     conn = await getConnection();
     const dataFormatada = formatDateToMySQL(data_auditoria);
+
+    // Buscar ID do auditor
+    const auditorId = await getAuditorIdByName(conn, auditor_responsavel);
 
     // Atualizar VEICULO
     await conn.query(`
@@ -125,7 +149,7 @@ export async function updateAuditoriaVeiculo(req, res) {
       UPDATE auditoria
       SET part_number = ?, data_auditoria = ?, resultado = ?, auditor_responsavel = ?
       WHERE part_number = ?
-    `, [newPartNumber, dataFormatada, resultado, auditor_responsavel, oldPartNumber]);
+    `, [newPartNumber, dataFormatada ?? null, resultado ?? null, auditorId ?? null, oldPartNumber]);
 
     res.json({ message: "Auditoria de veículo atualizada com sucesso" });
 
