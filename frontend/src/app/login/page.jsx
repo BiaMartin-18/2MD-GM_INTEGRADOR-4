@@ -1,6 +1,7 @@
 "use client";
 
 import Head from "next/head";
+import Script from 'next/script';
 import "./login.css";
 import Navbar from "@/components/blocks/Navbar";
 import FinisherParticles from "../../components/FinisherParticles";

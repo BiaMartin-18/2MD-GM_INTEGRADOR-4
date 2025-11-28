@@ -1,5 +1,5 @@
 "use client";
-
+import Script from 'next/script';
 import React, { useEffect, useState } from "react";
 import Navbar from "@/components/blocks/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";

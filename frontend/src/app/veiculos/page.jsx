@@ -5,6 +5,7 @@ import CardVeiculos from "@/components/cardcarros";
 import "./veiculos.css";
 import Navbar from "@/components/blocks/Navbar";
 import FinisherParticles from "@/components/FinisherParticles";
+import Script from 'next/script';
 
 export default function Veiculos() {
     const [veiculos, setVeiculos] = useState([]);
