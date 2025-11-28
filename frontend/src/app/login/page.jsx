@@ -1,31 +1,29 @@
 "use client";
 
 import Head from "next/head";
-import Script from 'next/script';
-import "./login.css";
 import Navbar from "@/components/blocks/Navbar";
 import FinisherParticles from "../../components/FinisherParticles";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+import "./login.css";
+
 export default function LoginPage() {
   const router = useRouter();
 
-  // Estados para capturar email, senha e erros
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
 
-  // Função do submit
   async function handleLogin(e) {
     e.preventDefault();
-    setErro(""); // Limpa erros anteriores
+    setErro("");
 
     try {
-      const response = await fetch('http://localhost:3001/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, senha })
+      const response = await fetch("http://localhost:3001/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, senha }),
       });
 
       const data = await response.json();
@@ -35,10 +33,7 @@ export default function LoginPage() {
         return;
       }
 
-      // Salvar token
       localStorage.setItem("token", data.dados.token);
-
-      // Redirecionar para admin
       router.push("/auditor");
     } catch (error) {
       setErro("Erro ao conectar ao servidor.");
@@ -54,57 +49,61 @@ export default function LoginPage() {
 
       <Navbar />
 
-      <div className="login-background-animated">
-        <div className="finisher-canvas-wrapper">
-          <FinisherParticles />
+      {/* CONTAINER GERAL */}
+      <div className="login-page">
+        {/* COLUNA ESQUERDA */}
+        <div className="login-left">
+          <div className="form-box">
+            <h2 className="title">
+              {" "}
+              <span className="big-text">Bem</span>Vindo(a)!
+            </h2>
+
+            {erro && <p className="erro-login">{erro}</p>}
+
+            <form onSubmit={handleLogin}>
+              {/* EMAIL */}
+              <div className="form custom-form">
+                <input
+                  className="input"
+                  type="email"
+                  placeholder="Email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <span className="input-border"></span>
+              </div>
+
+              {/* SENHA */}
+              <div className="form custom-form">
+                <input
+                  className="input"
+                  type="password"
+                  placeholder="Senha"
+                  required
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
+                />
+                <span className="input-border"></span>
+              </div>
+
+              <button type="submit" className="login-btn">
+                Login
+              </button>
+
+              <a className="forgot" href="/suporte">
+                Problemas com Login?
+              </a>
+            </form>
+          </div>
         </div>
-      </div>
 
-      <div className="login-wrapper-content">
-        <div className="login-wrapper">
-          <div className="login-container">
-            <div className="form-content">
-              <h2><strong>Login Administrador</strong></h2>
-
-              {/* Exibir erro se existir */}
-              {erro && <p className="erro-login">{erro}</p>}
-
-              <form className="login-form" onSubmit={handleLogin}>
-                <div className="input-group">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    placeholder="Entre com seu email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <div className="input-group">
-                  <label htmlFor="password">Senha</label>
-                  <input
-                    type="password"
-                    id="password"
-                    placeholder="Entre com sua senha"
-                    value={senha}
-                    onChange={(e) => setSenha(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <div className="options">
-                  <a href="/suporte" className="forgot-password">
-                    Problemas com Login?
-                  </a>
-                </div>
-
-                <button type="submit" className="login-button">
-                  Login
-                </button>
-              </form>
-            </div>
+        {/* COLUNA DIREITA – RECORTE + PARTÍCULAS */}
+        <div className="login-right">
+        
+          <div className="particles-container">
+            <FinisherParticles />
           </div>
         </div>
       </div>
