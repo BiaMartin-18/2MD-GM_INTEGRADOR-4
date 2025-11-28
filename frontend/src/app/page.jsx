@@ -1,10 +1,17 @@
 "use client";
-
+import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Navbar from "../components/blocks/Navbar";
 import FinisherParticles from "../components/FinisherParticles";
-import FaqSection from '../components/faqsection/index.jsx';
+import FaqSection from "../components/faqsection/index.jsx";
+
+const scrollToFeatures = () => {
+  const featuresSection = document.getElementById("features-section");
+  if (featuresSection) {
+    featuresSection.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 export default function Home() {
   return (
@@ -27,7 +34,7 @@ export default function Home() {
               monitoramento total.
             </p>
 
-            <button className="botao-ferramenta">
+            <button className="botao-ferramenta" onClick={scrollToFeatures}>
               Conheça a Ferramenta
               <i className="bi bi-arrow-up-right"></i>
             </button>
@@ -36,7 +43,7 @@ export default function Home() {
       </div>
 
       {/* NOVA SEÇÃO DE RECURSOS/CARDS */}
-      <section className="features-section">
+      <section id="features-section" className="features-section">
         {/* Título Principal */}
         <h3 className="section-subtitle">NOSSA META</h3>
         <h2 className="section-title">
@@ -162,25 +169,26 @@ export default function Home() {
                 </p>
 
                 <div className="d-flex align-items-center gap-5">
-                  <a
-                    href="#"
+                  {/* Substituindo a tag <a> por <Link> */}
+                  <Link
+                    href="/dashboard" // O caminho relativo à pasta `app`
                     className="text-dark text-decoration-none fw-semibold"
                   >
                     Acesse o painel de Dashboard
-                  </a>
+                  </Link>
                   <div className="d-flex gap-2">
-                    <button className="button-dashboard   d-flex align-items-center ">
+                    <button className="button-dashboard  d-flex align-items-center ">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
-                        strokeWidth={1.5} // Corrigido de stroke-width
+                        strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-6 h-6" // Corrigido de class
+                        className="w-6 h-6"
                       >
                         <path
-                          strokeLinecap="round" // Corrigido de stroke-linecap
-                          strokeLinejoin="round" // Corrigido de stroke-linejoin
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                           d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
                         ></path>
                       </svg>
@@ -194,7 +202,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <FaqSection/>
+      <FaqSection />
     </>
   );
 }

@@ -50,3 +50,20 @@
     line-height: 1.1;
     font-size: 3rem; /* Simula o visual da imagem */
 }
+
+/* --- Media Query para a Seção de FAQ (faqsection.css) --- */
+
+@media (max-width: 768px) {
+    /* Ajusta o espaçamento e a altura */
+    .faq-section {
+        padding: 40px 0;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        height: auto; /* Deixa a altura dinâmica em mobile */
+    }
+    
+    /* Reduz o tamanho da fonte do título principal em telas menores */
+    .faq-section h2 {
+        font-size: 2.2rem; /* Reduz de 3rem para 2.2rem */
+    }
+}
