@@ -52,7 +52,7 @@ border-radius: 0 0 20px 20px;
 /* Conteúdo ABAIXO do Navbar (Mensagem de Boas-Vindas) */
 .dashboard-content-overlay {
   position: relative;
-  z-index: 5;
+  z-index: 100;
   color: #fff;
   padding-top: 150px;
 }
@@ -80,9 +80,8 @@ border-radius: 0 0 20px 20px;
 /* ------------------------------------------------------------- */
 .kpi-section {
   top: -80px; /* Sobreposição para telas grandes */
-  z-index: 60;
   position: relative;
-  
+  z-index: 500;
 }
 
 .kpi-card {
@@ -306,6 +305,7 @@ h4 {
   .kpi-section {
     top: 0;
     margin-top: 20px !important;
+    z-index: 1;
   }
 
   /* Ajusta o espaçamento superior do conteúdo principal */

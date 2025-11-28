@@ -253,3 +253,11 @@ li.nav-item.dropdown.dropdown-hover:hover
   /* Para navegadores mais antigos (embora pouco usado atualmente): */
   border-color: transparent !important;
 }
+
+.offcanvas-backdrop.show {
+  z-index: 9998 !important;
+}
+
+.offcanvas.show {
+  z-index: 9999 !important;
+}

@@ -15,15 +15,13 @@ export default function Footer() {
         <div className="footer-right">
           <div className="footer-column">
             <h4>Home</h4>
-            <Link href="#">Sobre</Link>
-            <Link href="#">Painel do Operador</Link>
-            <Link href="#">Painel do Administrador</Link>
+            <Link href="/">Início</Link>
+            <Link href="/veiculos">Veículos</Link>
           </div>
 
           <div className="footer-column">
             <h4>Painel de Controle</h4>
-            <Link href="#">Dashboard Geral</Link>
-            <Link href="#">Painel do Administrador</Link>
+            <Link href="dashboard">Dashboard Geral</Link>
           </div>
 
           <div className="footer-column">
@@ -31,8 +29,9 @@ export default function Footer() {
             <Link href="/">Home</Link>
             <Link href="/admin">Painel de Controle</Link>
             <Link href="/veiculos">Veículos</Link>
+            <Link href="/dashboard">Dashboard Geral</Link>
+            <Link href="/suporte">Suporte</Link>
             <Link href="/login">Login</Link>
-            <Link href="/cadastro">Agendamento</Link>
           </div>
 
           <div className="footer-column">
