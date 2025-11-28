@@ -5,6 +5,13 @@ import Image from "next/image";
 import Navbar from "@/components/blocks/Navbar";
 import "./auditor.css";
 
+const scrollToFeatures = () => {
+  const featuresSection = document.getElementById("features-section");
+  if (featuresSection) {
+    featuresSection.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
 // Funções para chamar o backend
 async function createVeiculo(veiculo) {
   const resp = await fetch("http://localhost:3001/api/auditoriasveiculos", {
@@ -42,7 +49,7 @@ const HeroSectionCRUD = () => (
           </p>
           <div className="d-flex gap-3 justify-content-start">
             <button className="animated-button">
-              <span className="text">Começar Agora</span>
+              <span className="text"onClick={scrollToFeatures} >Começar Agora</span>
               <span className="circle"></span>
             </button>
           </div>
@@ -246,7 +253,7 @@ export default function VeiculosCRUD() {
       <Navbar />
       <HeroSectionCRUD />
 
-      <section className="features-section veiculos-crud-section">
+      <section  id="features-section"  className="features-section veiculos-crud-section">
         <div className="crud-container">
           <h3 className="section-subtitle">VISÃO GERAL</h3>
           <h2 className="section-title">Painel de Controle de Veículos</h2>
