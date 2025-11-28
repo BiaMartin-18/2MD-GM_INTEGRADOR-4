@@ -89,6 +89,7 @@ export default function Veiculos() {
                                 <option value="Todos os status">Todos os status</option>
                                 <option value="Manutenção">Manutenção</option>
                                 <option value="Aguardando revisão">Aguardando revisão</option>
+                                <option value="Finalizado">Finalizado</option>
                             </select>
 
                             <select
@@ -99,6 +100,8 @@ export default function Veiculos() {
                                 <option value="Todos os resultados">Todos os resultados</option>
                                 <option value="Aprovado">Aprovado</option>
                                 <option value="Reprovado">Reprovado</option>
+                                <option value="Pendente">Pendente</option>
+
                             </select>
                         </div>
                     </div>

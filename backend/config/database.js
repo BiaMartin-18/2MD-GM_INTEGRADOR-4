@@ -36,7 +36,7 @@ async function read(table, where = null) {
         return rows;
 
     } catch (error) {
-        console.error("🔥 ERRO NO READ():", error);
+        console.error("ERRO NO READ():", error);
         throw new Error(`Erro ao executar SELECT na tabela '${table}': ${error.message}`);
         
     } finally {

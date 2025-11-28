@@ -105,7 +105,7 @@ export default function VeiculosCRUD() {
       const veiculosTransformados = data.map((item) => ({
         id: item.part_number,
         placa: item.part_number,
-        modelo: item.modelo ?? "—",
+        modelo: item.modelo?.toLowerCase() ?? "",
         defeito: item.defeito ?? "—",
         auditoria: {
           descrição: item.descrição ?? "—",
@@ -187,6 +187,11 @@ export default function VeiculosCRUD() {
 
   const handleSave = async (e) => {
     e.preventDefault();
+
+    if (!form.placa || form.placa.length !== 8) {
+    alert("A placa deve conter exatamente 8 caracteres.");
+    return;
+  }
 
     let dataAjustada = null;
     if (form.data_auditoria && form.hora_auditoria) {
@@ -305,15 +310,14 @@ export default function VeiculosCRUD() {
 
             <form onSubmit={handleSave}>
               {/* CAMPOS OBRIGATÓRIOS */}
-              {[{ label: "Placa", name: "placa" },
-                { label: "Modelo", name: "modelo" },
+              {[{ label: "Placa (8 carcateres)", name: "placa" },
                 { label: "Defeito", name: "defeito" },
                 { label: "Descrição", name: "descrição" },
                 { label: "Grau do Defeito", name: "grau_defeito" },
-                { label: "Status", name: "status_veiculo" }
               ].map((field) => (
                 <div className="form-group" key={field.name}>
                   <label>{field.label}:</label>
+                  
                   <input
                     type="text"
                     name={field.name}
@@ -325,25 +329,65 @@ export default function VeiculosCRUD() {
                 </div>
               ))}
 
-              {/* CAMPOS NÃO OBRIGATÓRIOS */}
               <div className="form-group">
-                <label>Resultado:</label>
-                <input
-                  type="text"
-                  name="resultado"
-                  value={form.resultado || ""}
-                  onChange={handleChange}
-                  className="form-input"
-                />
-              </div>
+  <label>Modelo:</label>
+  <select
+    name="modelo"
+    value={form.modelo}
+    onChange={handleChange}
+    required
+    className="form-input"
+  >
+    <option value="">Selecione...</option>
+    <option value="spin">Spin</option>
+    <option value="tracker">Tracker</option>
+    <option value="montana">Montana</option>
+
+  </select>
+</div>
+
+<div className="form-group">
+  <label>Status:</label>
+  <select
+    name="status_veiculo"
+    value={form.status_veiculo}
+    onChange={handleChange}
+    required
+    className="form-input"
+  >
+    <option value="">Selecione...</option>
+    <option value="manutenção">Manutenção</option>
+    <option value="aguardando revisão">aguardando revisão</option>
+    <option value="finalizado">finalizado</option>
+  </select>
+</div>
+
+
+              {/* CAMPOS NÃO OBRIGATÓRIOS */}
+             <div className="form-group">
+  <label>Resultado:</label>
+  <select
+    name="resultado"
+    value={form.resultado || ""}
+    onChange={handleChange}
+    className="form-input"
+  >
+    <option value="">Selecione...</option>
+    <option value="Aprovado">Aprovado</option>
+    <option value="Reprovado">Reprovado</option>
+    <option value="Pendente">Pendente</option>
+  </select>
+</div>
+
 
               <div className="form-group">
-                <label>Auditor Responsável:</label>
+                <label> * Auditor Responsável:</label>
                 <input
                   type="text"
                   name="auditor_responsavel"
                   value={form.auditor_responsavel || ""}
                   onChange={handleChange}
+                  required
                   className="form-input"
                 />
               </div>

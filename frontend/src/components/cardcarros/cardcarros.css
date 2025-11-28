@@ -47,20 +47,30 @@
 }
 
 /* Status Colors */
-.veiculo-card[data-resultado="Reprovado"] {
+.veiculo-card[data-resultado="reprovado"] {
     border-left: 5px solid var(--color-danger);
 }
 
-.veiculo-card[data-resultado="Aprovado"] {
+.veiculo-card[data-resultado="aprovado"] {
     border-left: 5px solid var(--color-success);
 }
 
-.veiculo-card[data-status="Manutenção"] .status-text {
+.veiculo-card[data-resultado="pendente"] {
+    border-left: 5px solid var(--color-revisao);
+}
+
+
+
+.veiculo-card[data-status="manutenção"] .status-text {
     color: var(--color-manutencao);
 }
 
-.veiculo-card[data-status="Aguardando revisão"] .status-text {
+.veiculo-card[data-status="aguardando revisão"] .status-text {
     color: var(--color-revisao);
+}
+
+.veiculo-card[data-status="finalizado"] .status-text {
+    color: var( --color-success);
 }
 
 .card-title {

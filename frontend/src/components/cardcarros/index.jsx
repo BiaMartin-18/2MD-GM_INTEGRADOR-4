@@ -19,10 +19,11 @@ export default function CardVeiculos({ veiculo }) {
 
   return (
     <div
-      className="feature-card veiculo-card"
-      data-status={veiculo.status}
-      data-resultado={veiculo.resultado}
-    >
+  className="feature-card veiculo-card"
+  data-status={veiculo.status ? veiculo.status.toLowerCase() : ""}
+  data-resultado={veiculo.resultado ? veiculo.resultado.toLowerCase() : ""}
+>
+
       <div className="card-header">
         <h4 className="card-title">{veiculo.placa}</h4>
         <i className="bi bi-car-front"></i>

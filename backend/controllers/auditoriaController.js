@@ -24,7 +24,7 @@ export async function listarAuditorias(req, res) {
         });
 
     } catch (error) {
-        console.error("🔥 ERRO DETALHADO AO LISTAR AUDITORIAS:", error);
+        console.error(" ERRO DETALHADO AO LISTAR AUDITORIAS:", error);
 
         return res.status(500).json({
             sucesso: false,
