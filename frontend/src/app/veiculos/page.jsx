@@ -31,7 +31,8 @@ export default function Veiculos() {
                     grau_defeito: v.grau_defeito ?? "—",
                     status: v.status_veiculo ?? "—",
                     data: v.data_auditoria ?? "—",
-                    auditor: v.auditor_responsavel ?? "—",
+                    auditor: v.auditor_nome ?? "—",
+
                     resultado: v.resultado ?? "—",
                 }));
 
@@ -104,12 +105,10 @@ export default function Veiculos() {
             </div>
 
             <div className="cards-grid">
-                {filtrados.map((v) => (
-                    <CardVeiculos 
-                    key={v.part_number} 
-                    veiculo={v} 
-                    />
+                {filtrados.map((v, index) => (
+                    <CardVeiculos key={`${v.part_number}-${index}`} veiculo={v} />
                 ))}
+
             </div>
         </>
     );
