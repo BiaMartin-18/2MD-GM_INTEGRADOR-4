@@ -98,31 +98,30 @@ export default function VeiculosCRUD() {
   const [searchTerm, setSearchTerm] = useState("");
 
   async function fetchAuditorias() {
-  try {
-    const resp = await fetch("http://localhost:3001/api/auditoriasveiculos");
-    const data = await resp.json();
+    try {
+      const resp = await fetch("http://localhost:3001/api/auditoriasveiculos");
+      const data = await resp.json();
 
-    const veiculosTransformados = data.map((item) => ({
-      id: item.part_number,
-      placa: item.part_number,
-      modelo: item.modelo ?? "—",
-      defeito: item.defeito ?? "—",
-      auditoria: {
-        descrição: item.descrição ?? "—",
-        grau: item.grau_defeito ?? "—",
-        status: item.status_veiculo ?? "—",
-        data: item.data_auditoria ?? null,
-        resultado: item.resultado ?? "—",
-        responsavel: item.auditor_nome ?? "—", // ⭐ AGORA MOSTRA O NOME!
-      },
-    }));
+      const veiculosTransformados = data.map((item) => ({
+        id: item.part_number,
+        placa: item.part_number,
+        modelo: item.modelo ?? "—",
+        defeito: item.defeito ?? "—",
+        auditoria: {
+          descrição: item.descrição ?? "—",
+          grau: item.grau_defeito ?? "—",
+          status: item.status_veiculo ?? "—",
+          data: item.data_auditoria ?? null,
+          resultado: item.resultado ?? "—",
+          responsavel: item.auditor_nome ?? "—",
+        },
+      }));
 
-    setVeiculos(veiculosTransformados);
-  } catch (err) {
-    console.error("Erro ao buscar auditorias:", err);
+      setVeiculos(veiculosTransformados);
+    } catch (err) {
+      console.error("Erro ao buscar auditorias:", err);
+    }
   }
-}
-
 
   useEffect(() => {
     fetchAuditorias();
@@ -195,18 +194,17 @@ export default function VeiculosCRUD() {
     }
 
     const veiculoData = {
-  part_number: form.placa,
-  old_part_number: currentVeiculo?.placa,
-  modelo: form.modelo,
-  defeito: form.defeito,
-  descrição: form.descrição,
-  grau_defeito: form.grau_defeito,
-  status_veiculo: form.status_veiculo,
-  data_auditoria: dataAjustada || null, // 👈 AQUI ESTÁ A CORREÇÃO
-  resultado: form.resultado || null,
-  auditor_responsavel: form.auditor_responsavel || null,
-};
-
+      part_number: form.placa,
+      old_part_number: currentVeiculo?.placa,
+      modelo: form.modelo,
+      defeito: form.defeito,
+      descrição: form.descrição,
+      grau_defeito: form.grau_defeito,
+      status_veiculo: form.status_veiculo,
+      data_auditoria: dataAjustada || null,
+      resultado: form.resultado || null,
+      auditor_responsavel: form.auditor_responsavel || null,
+    };
 
     try {
       if (currentVeiculo) {
