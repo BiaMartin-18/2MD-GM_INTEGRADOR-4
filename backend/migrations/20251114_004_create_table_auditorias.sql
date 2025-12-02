@@ -1,6 +1,6 @@
--- Migration: Inserir dados iniciais
--- Data: 2025-01-15
--- Descrição: Dados iniciais para teste do sistema
+-- Migration: Criação da tabela auditoria
+-- Data: 2025-11-14
+-- Descrição: Tabela para armazenar auditorias realizadas
 
 USE PDI;
 

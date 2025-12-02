@@ -1,6 +1,6 @@
--- Migration: Criar tabela logs
--- Data: 2025-10-28
--- Descrição: Tabela para registrar logs de acesso às rotas da API
+-- Migration: Adiconar coluna part_number NA TABELA auditoria
+-- Data: 2025-11-14
+-- Descrição: Adicionar coluna part_number para referenciar o veículo auditado
 
 
 USE PDI;

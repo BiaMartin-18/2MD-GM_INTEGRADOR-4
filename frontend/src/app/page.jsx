@@ -169,15 +169,13 @@ export default function Home() {
                   planilha) por uma ferramenta rápida e intuitiva.
                 </p>
 
-                <div className="d-flex align-items-center gap-5">
+                      <div className="d-flex align-items-center gap-5 text-dark text-decoration-none fw-semibold">
                   {/* Substituindo a tag <a> por <Link> */}
-                  <Link
-                    href="/dashboard" // O caminho relativo à pasta `app`
-                    className="text-dark text-decoration-none fw-semibold"
-                  >
+                
                     Acesse o painel de Dashboard
-                  </Link>
+               
                   <div className="d-flex gap-2">
+                    <Link href="/dashboard" className="text-decoration-none">
                     <button className="button-dashboard  d-flex align-items-center ">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -196,6 +194,7 @@ export default function Home() {
 
                       <div className="text">Painel Dashboard</div>
                     </button>
+                    </Link>
                   </div>
                 </div>
               </div>
