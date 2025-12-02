@@ -46,7 +46,7 @@ export default function FinisherParticles() {
   return (
     <div
       ref={containerRef}
-      className="finisher-container"
+      className="finisher-header"
     />
   );
 }
