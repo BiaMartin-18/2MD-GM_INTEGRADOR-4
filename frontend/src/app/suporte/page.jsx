@@ -81,13 +81,12 @@ const SuportePage = () => {
                       placeholder="Quais são suas dúvidas?"
                     />
                     <button type="submit" className="btn btn-search-helpplus">
-                      Buscar
+                      Enviar
                     </button>
                   </form>
                 </div>
                 <p className="hero-lead-helpplus mb-5">
-                  Ou escolha uma das opções abaixo para encontrar rapidamente a
-                  ajuda que você precisa
+                 Mande sua duvída e encontre respostas na nossa central de ajuda.
                 </p>
               </div>
             </div>
