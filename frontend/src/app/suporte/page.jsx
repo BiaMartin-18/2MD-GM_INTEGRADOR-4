@@ -39,20 +39,19 @@ const SuportePage = () => {
       id: 1,
       title: "Como funciona o processo de Aquisição do Controle PDI?",
       content:
-        "Gerencie, audite e otimize sua frota de veículos com eficiência e precisão. Comece agora mesmo solicitando uma demonstração do produto ou falando com nosso setor Comercial.",
+        "Gerencie, audite e otimize sua frota de veículos com eficiência e precisão. Comece agora mesmo solicitando uma demonstração do produto ou falando com nosso setor.",
     },
     {
       id: 2,
-      title: "Nossas informações de Pagamento são seguras?",
+      title: "Nossas informações de Usuário Auditor são seguras?",
       content:
-        "Sim, todas as informações de pagamento são processadas por uma plataforma segura de terceiros e não armazenamos dados sensíveis diretamente em nossos servidores.",
+        "Sim, todas as informações são criptografadas, o acesso ao Painel de edição do Dashboard é de acesso restrito ao Auditor. Qualquer outro funcionário que tente acessar , receberá um aviso negando seu acesso.",
     },
-    {
-      id: 3,
-      title: "Como solicitar um Cartão Pré-pago para serviços?",
-      content:
-        "Entre em contato com o departamento financeiro pelo telefone +55 (11) 9456-7890 ou abra um ticket de suporte com o setor Comercial.",
-    },
+{
+    id: 3,
+    title: "Onde posso encontrar um manual de instruções para o PDI?",
+    content: "Toda e qualquer dúvida sobre o PDI, pode ser descrita com o seu FT adequado para te auxiliar.",
+  }
   ];
 
   return (
