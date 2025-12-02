@@ -1,6 +1,6 @@
--- Migration: Criar tabela produtos
--- Data: 2025-01-15
--- Descrição: Tabela para armazenar produtos do sistema
+-- Migration: Criar tabela veiculos
+-- Data: 2025-11-14
+-- Descrição: Tabela para armazenar as informações dos veículos
 
 USE PDI;
 

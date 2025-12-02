@@ -317,10 +317,9 @@ export default function VeiculosCRUD() {
 
             <form onSubmit={handleSave}>
               {/* CAMPOS OBRIGATÓRIOS */}
-              {[{ label: "Placa (8 carcateres)", name: "placa" },
-                { label: "Defeito", name: "defeito" },
-                { label: "Descrição", name: "descrição" },
-                { label: "Grau do Defeito", name: "grau_defeito" },
+              {[{ label: " * Placa (8 carcateres)", name: "placa" },
+                { label: "* Defeito", name: "defeito" },
+                { label: " * Descrição", name: "descrição" },
               ].map((field) => (
                 <div className="form-group" key={field.name}>
                   <label>{field.label}:</label>
@@ -337,7 +336,7 @@ export default function VeiculosCRUD() {
               ))}
 
               <div className="form-group">
-  <label>Modelo:</label>
+  <label>* Modelo:</label>
   <select
     name="modelo"
     value={form.modelo}
@@ -354,7 +353,7 @@ export default function VeiculosCRUD() {
 </div>
 
 <div className="form-group">
-  <label>Status:</label>
+  <label> * Status:</label>
   <select
     name="status_veiculo"
     value={form.status_veiculo}
@@ -364,10 +363,27 @@ export default function VeiculosCRUD() {
   >
     <option value="">Selecione...</option>
     <option value="manutenção">Manutenção</option>
-    <option value="aguardando revisão">aguardando revisão</option>
-    <option value="finalizado">finalizado</option>
+    <option value="aguardando revisão">Aguardando revisão</option>
+    <option value="finalizado">Finalizado</option>
   </select>
 </div>
+
+<div className="form-group">
+  <label>* Grau do Defeito:</label>
+  <select
+    name="grau_defeito"
+    value={form.grau_defeito}
+    onChange={handleChange}
+    required
+    className="form-input"
+  >
+    <option value="">Selecione...</option>
+    <option value="leve">Leve</option>
+    <option value="moderado">Médio</option>
+    <option value="grave">Grave</option>
+  </select>
+</div>
+
 
 
               {/* CAMPOS NÃO OBRIGATÓRIOS */}

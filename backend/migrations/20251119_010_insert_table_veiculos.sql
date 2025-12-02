@@ -1,6 +1,6 @@
--- Migration: Criar tabela logs
--- Data: 2025-10-28
--- Descrição: Tabela para registrar logs de acesso às rotas da API
+-- Migration: Fzer inserção de dados iniciais na tabela veiculos
+-- Data: 2025-11-19
+-- Descrição: Fazer inserção de dados iniciais na tabela veiculos para teste do sistema
 
 USE PDI;
 

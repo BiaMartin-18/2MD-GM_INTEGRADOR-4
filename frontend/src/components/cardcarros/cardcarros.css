@@ -10,7 +10,7 @@
 /* CARD GRID */
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
@@ -91,4 +91,10 @@
     grid-column: 1 / -1;
     text-align: center;
     margin-top: 20px;
+}
+
+.veiculo-card {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
 }
