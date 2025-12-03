@@ -165,7 +165,7 @@ export default function Navbar() {
               </span>
               <ul className="offcanvas-submenu">
                 <li>
-                  <Link className="nav-link" href="/dashboard-geral">
+                  <Link className="nav-link" href="/dashboard">
                     Dashboard Geral
                   </Link>
                 </li>

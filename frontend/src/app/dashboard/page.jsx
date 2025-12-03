@@ -1,5 +1,5 @@
 "use client";
-
+import Script from 'next/script';
 import React, { useEffect, useState } from "react";
 import Navbar from "@/components/blocks/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -99,7 +99,7 @@ export default function DashboardPage() {
         <div className="container dashboard-content-overlay">
           <div className="row greeting-container">
             <div className="col-12">
-              <h1 className="welcome-title">Bem-vinda, Paloma Vicente</h1>
+              <h1 className="welcome-title">Bem-vindo(a)</h1>
               <p className="current-date">Relatório de {getCurrentDate()}</p>
             </div>
           </div>

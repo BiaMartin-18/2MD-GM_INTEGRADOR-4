@@ -1,5 +1,3 @@
-# BOA SORTE
-
 # 2MD-GM - Projeto Integrador
 
 Repositório base para desenvolvimento do projeto integrador do curso de Desenvolvimento de Sistemas da 2MD-GM.
@@ -16,17 +14,15 @@ Este é um projeto base que utiliza uma arquitetura moderna de desenvolvimento f
 - **MySQL** - Banco de dados relacional
 - **JWT** - Autenticação e autorização
 - **Bcrypt** - Criptografia de senhas
-- **Multer** - Upload de arquivos
-- **Helmet** - Segurança HTTP
 
 ### Frontend
-- **Next.js 16** - Framework React
-- **React 19** - Biblioteca JavaScript
-- **Bootstrap 5** - Framework CSS
+- **Next.js** - Framework React
+- **React** - Biblioteca JavaScript
+- **Bootstrap** - Framework CSS
 - **Bootstrap Icons** - Ícones
 
 ### Banco de Dados
-- **MySQL 5.7+** - Sistema de gerenciamento de banco de dados relacional
+- **MySQL** - Sistema de gerenciamento de banco de dados relacional
 
 ## 📁 Estrutura do Projeto
 
@@ -161,9 +157,9 @@ Edite o arquivo `.env` com suas configurações:
 DB_HOST=localhost
 DB_PORT=3306
 DB_USER=seu_usuario
-DB_PASSWORD=sua_senha
-DB_NAME=produtos_api
-PORT=3000
+DB_PASSWORD=
+DB_NAME=PDI
+PORT=3001
 NODE_ENV=development
 JWT_SECRET=seu_secret_jwt_aqui
 JWT_EXPIRES_IN=1h
@@ -238,7 +234,6 @@ Após executar as migrations, você terá os seguintes usuários:
 
 ### Autenticação
 - `POST /api/auth/login` - Fazer login
-- `POST /api/auth/registrar` - Registrar novo usuário
 - `GET /api/auth/perfil` - Obter perfil do usuário logado
 
 ### Produtos
@@ -247,7 +242,6 @@ Após executar as migrations, você terá os seguintes usuários:
 - `POST /api/produtos` - Criar produto (autenticado)
 - `PUT /api/produtos/:id` - Atualizar produto (autenticado)
 - `DELETE /api/produtos/:id` - Excluir produto (autenticado)
-- `POST /api/produtos/upload` - Upload de imagem (autenticado)
 
 ### Usuários (Apenas Admin)
 - `GET /api/usuarios` - Listar usuários (com paginação)
@@ -262,7 +256,6 @@ Após executar as migrations, você terá os seguintes usuários:
 ## 📖 Documentação Adicional
 
 - **Backend**: Veja o [README.md do backend](backend/README.md) para detalhes completos da API
-- **Documentação**: Veja a [documentação completa](docs/docs.md)
 
 ## 🎯 Próximos Passos para os Alunos
 
@@ -278,159 +271,6 @@ Abaixo estão sugestões de projetos que podem ser desenvolvidos utilizando esta
 - **Prazo**: 4 semanas de desenvolvimento
 - **Complexidade**: Moderada (adequada para apresentação na GM)
 - **Requisitos**: Utilizar a estrutura base (Node.js, Next.js, MySQL)
-
-### 🚗 Projetos Relacionados à GM
-
-#### 1. Sistema de Agendamento de Colaboradores da GM
-**Descrição**: Sistema para gerenciar agendamentos e disponibilidade de colaboradores da GM.
-
-**Funcionalidades principais**:
-- Cadastro de colaboradores (nome, departamento, cargo)
-- Calendário de disponibilidade
-- Agendamento de reuniões/atividades
-- Visualização de agenda por colaborador
-- Notificações de agendamentos
-- Relatórios de utilização
-
-**Entidades sugeridas**: Colaboradores, Agendamentos, Departamentos
-
----
-
-#### 2. Sistema de Agendamento de Manutenção de Carros da GM
-**Descrição**: Sistema para controlar e agendar manutenções preventivas e corretivas de veículos da frota GM.
-
-**Funcionalidades principais**:
-- Cadastro de veículos (placa, modelo, ano, quilometragem)
-- Histórico de manutenções
-- Agendamento de revisões periódicas
-- Controle de peças e serviços realizados
-- Alertas de manutenção preventiva
-- Relatórios de custos e histórico
-
-**Entidades sugeridas**: Veículos, Manutenções, Peças, Serviços
-
----
-
-#### 3. Sistema de Controle de Frotas de Carros da GM
-**Descrição**: Sistema para gerenciar a frota de veículos da empresa, incluindo localização, status e utilização.
-
-**Funcionalidades principais**:
-- Cadastro completo de veículos
-- Controle de status (disponível, em uso, manutenção, indisponível)
-- Registro de saídas e retornos
-- Controle de quilometragem
-- Histórico de utilização
-- Relatórios de disponibilidade e uso
-
-**Entidades sugeridas**: Veículos, Motoristas, Saídas, Status
-
----
-
-#### 4. Sistema de Controle de Turnos de Funcionários com Login e Relógio de Ponto
-**Descrição**: Sistema para controle de presença e gestão de turnos dos colaboradores da GM.
-
-**Funcionalidades principais**:
-- Cadastro de funcionários e turnos
-- Login seguro com autenticação JWT
-- Registro de entrada e saída (relógio de ponto)
-- Controle de horas trabalhadas
-- Gestão de turnos (matutino, vespertino, noturno)
-- Relatórios de frequência e horas extras
-- Dashboard administrativo
-
-**Entidades sugeridas**: Funcionários, Turnos, Registros de Ponto, Horas Extras
-
----
-
-### 🏢 Outras Possibilidades de Projeto
-
-#### 5. Sistema de Gestão de Estoque de Peças
-**Descrição**: Controle de estoque de peças e componentes da GM.
-
-**Funcionalidades principais**:
-- Cadastro de peças e componentes
-- Controle de entrada e saída
-- Alertas de estoque mínimo
-- Histórico de movimentações
-- Relatórios de inventário
-- Categorização por tipo/fornecedor
-
-**Entidades sugeridas**: Peças, Movimentações, Fornecedores, Categorias
-
----
-
-#### 6. Sistema de Solicitação de Requisições Internas
-**Descrição**: Sistema para solicitação e aprovação de requisições internas (materiais, serviços, etc.).
-
-**Funcionalidades principais**:
-- Cadastro de requisições
-- Fluxo de aprovação (solicitante → supervisor → gerente)
-- Controle de status (pendente, aprovado, negado, atendido)
-- Histórico de requisições
-- Filtros por departamento/status
-- Relatórios de requisições
-
-**Entidades sugeridas**: Requisições, Departamentos, Status, Aprovações
-
----
-
-#### 7. Sistema de Gestão de Treinamentos
-**Descrição**: Sistema para gerenciar treinamentos e capacitações dos colaboradores.
-
-**Funcionalidades principais**:
-- Cadastro de treinamentos disponíveis
-- Inscrição de colaboradores
-- Controle de presença
-- Emissão de certificados
-- Histórico de treinamentos por colaborador
-- Relatórios de participação
-
-**Entidades sugeridas**: Treinamentos, Inscrições, Colaboradores, Certificados
-
----
-
-#### 8. Sistema de Controle de Equipamentos
-**Descrição**: Sistema para cadastro e controle de equipamentos da empresa.
-
-**Funcionalidades principais**:
-- Cadastro de equipamentos
-- Controle de empréstimos
-- Histórico de manutenções
-- Localização de equipamentos
-- Alertas de manutenção preventiva
-- Relatórios de utilização
-
-**Entidades sugeridas**: Equipamentos, Empréstimos, Manutenções, Localizações
-
----
-
-#### 9. Sistema de Gestão de Chamados Técnicos
-**Descrição**: Sistema para registro e acompanhamento de chamados técnicos e suporte.
-
-**Funcionalidades principais**:
-- Abertura de chamados
-- Atribuição a técnicos
-- Controle de status (aberto, em atendimento, resolvido, fechado)
-- Histórico de atendimentos
-- Priorização de chamados
-- Relatórios de tempo médio de resolução
-
-**Entidades sugeridas**: Chamados, Técnicos, Status, Prioridades
-
----
-
-#### 10. Sistema de Avaliação de Desempenho
-**Descrição**: Sistema para avaliação periódica de desempenho dos colaboradores.
-
-**Funcionalidades principais**:
-- Cadastro de avaliações
-- Critérios de avaliação
-- Registro de notas/comentários
-- Histórico de avaliações por colaborador
-- Relatórios comparativos
-- Dashboard de desempenho
-
-**Entidades sugeridas**: Avaliações, Colaboradores, Critérios, Notas
 
 ---
 
@@ -458,9 +298,4 @@ Este projeto está sob a licença GPLV3. Veja o arquivo [LICENSE](LICENSE) para 
 
 Para dúvidas ou problemas, consulte:
 - Documentação do backend: `backend/README.md`
-- Documentação adicional: `docs/docs.md`
 - Professor responsável pelo projeto
-
----
-
-**Desenvolvido para o curso de Desenvolvimento de Sistemas - 2MD-GM**

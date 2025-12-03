@@ -340,3 +340,34 @@ justify-content: center;
     }
 }
 
+/* --- Media Queries para o Grid de Cards --- */
+
+/* 💻 Para Telas Grandes e Médias (Padrão: 3 colunas) */
+
+/* 📱 Para Telas de Tablet (Max-width: 992px) */
+@media (max-width: 992px) {
+    .cards-grid {
+        /* Reduz para 2 colunas para melhor visualização em tablets */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px; /* Ajusta o espaçamento */
+    }
+}
+
+/* 📱 Para Telas de Celular (Max-width: 576px) */
+@media (max-width: 576px) {
+    .cards-grid {
+        /* Reduz para 1 coluna para telas muito pequenas */
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+/* Opcional: Ajuste do padding na seção em mobile */
+@media (max-width: 576px) {
+    .features-section {
+        padding: 40px 20px;
+    }
+    .section-title {
+        font-size: 28px;
+    }
+}

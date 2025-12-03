@@ -1,6 +1,6 @@
--- Migration: Criar tabela logs
--- Data: 2025-10-28
--- Descrição: Tabela para registrar logs de acesso às rotas da API
+-- Migration: adicionar chave estrangeira na tabela auditoria
+-- Data: 2025-11-14
+-- Descrição: Adicionar chave estrangeira para referenciar a tabela veiculos
 
 USE PDI;
 

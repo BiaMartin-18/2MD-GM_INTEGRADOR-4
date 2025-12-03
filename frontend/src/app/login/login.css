@@ -1,128 +1,305 @@
-/* ------------------------------------------------------------- */
-/* 0. Configuração base (Adicionar no CSS Global se possível)     */
-/* ------------------------------------------------------------- */
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-}
-
-/* ------------------------------------------------------------- */
-/* 1. Estilos do Fundo Animado (login-background-animated)       */
-/* ------------------------------------------------------------- */
-.login-background-animated {
-    /* Fundo fixed que cobre 100% da tela (viewport) */
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100vw; 
-    height: 100vh; 
-    overflow: hidden; 
-    background-color: #0c183a;
-    z-index: -1; /* Fica no fundo */
-}
-
-/* 2. Wrapper para o FinisherParticles (Preenche o pai fixo 100%x100%) */
-.finisher-canvas-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-/* 3. Estilo para o elemento .finisher-header gerado no componente */
-.finisher-header { 
-    width: 100%; 
-    height: 100%; 
-}
-
-/* ------------------------------------------------------------- */
-/* 4. Estilos do CONTEÚDO (Formulário)                           */
-/* ------------------------------------------------------------- */
-
-/* Wrapper do Conteúdo - Garante que ele tenha altura suficiente para centralizar */
-.login-wrapper-content {
-    min-height: 100vh; 
+body {
     
-    /* ************* AJUSTE AQUI: ALTURA DA SUA NAVBAR ************* */
-    padding-top: 80px; 
-    
-    box-sizing: border-box; 
+    background-color: #010846; /* Usei um tom de azul escuro como exemplo. */
 }
 
-/* Centraliza o login na tela */
-.login-wrapper {
-    position: relative; 
-    z-index: 10;
-    
-    /* Ocupa a altura restante do .login-wrapper-content */
-    height: calc(100vh - 80px); /* ************* AJUSTE AQUI: ALTURA DA SUA NAVBAR ************* */
-    width: 100%; 
-    
-    /* Flexbox para centralização */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* ====== LAYOUT GERAL ====== */
+.login-page {
+  width: 100%;
+  height: calc(100vh - 70px);
+  display: flex;
+  overflow: hidden;
+
 }
 
-/* 5. Estilo do Card de Login */
-.login-container {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 3rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 450px;
-    text-align: center;
+/* ====== COLUNA ESQUERDA ====== */
+.login-left {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
 }
 
-/* Opcional: Estilos do Formulário */
-.login-form {
-    display: flex;
+.form-box {
+  width: 100%;
+  max-width: 420px;
+  padding: 35px 40px;
+  
+}
+
+.title {
+  color: #ffffff;
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.big-text{
+    font-size: 6rem;
+}
+
+.form {
+  --width-of-input: 260px;
+  --border-height: 2px;
+  --border-before-color: rgb(0, 26, 170); /* azul claro inicial */
+  --border-after-color: #014ef3; /* azul principal animado */
+  --input-hovered-color: rgba(90, 160, 255, 0.15);
+   margin-bottom: 15px;
+  position: relative;
+  width: 20rem;
+}
+
+/* INPUT */
+.input {
+  color: #00388d;
+  font-size: 1rem;
+ 
+  width: 100%;
+  box-sizing: border-box;
+  padding-inline: 0.7em;
+  padding-block: 0.8em;
+  border: none;
+  border-bottom: var(--border-height) solid var(--border-before-color);
+  transition: background 0.3s ease;
+  border-radius: 5px 5px 0 0;
+}
+
+
+
+/* ANIMAÇÃO DA LINHA */
+.input-border {
+  position: absolute;
+  background: linear-gradient(
+    90deg,
+    #043eff 0%,
+    #4aa8ff 50%,
+    #0066cc 100%
+  );
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease-in-out;
+}
+
+/* QUANDO DIGITA */
+.input:focus ~ .input-border {
+  width: 100%;
+}
+
+
+/* ====== BOTÃO LOGIN ====== */
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 25px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(135deg, #001455, #0e4eff);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.login-btn:hover {
+  filter: brightness(1.15);
+  transform: translateY(-2px);
+}
+
+/* ====== LINK PROBLEMAS ====== */
+.forgot {
+  display: block;
+  margin-top: 15px;
+  color: #b8d1f8;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* ====== MENSAGEM ERRO ====== */
+.erro-login {
+  color: #ff6b6b;
+  background: rgba(255,0,0,0.1);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+/* ====== COLUNA DIREITA ====== */
+.login-right {
+  width: 50%;
+  position: relative;
+  background: #0202a788;
+  overflow: hidden;
+
+  /* ==== RECORTE CURVO ==== */
+  clip-path: polygon(
+    18% 0%, 100% 0%, 100% 100%, 18% 100%,
+    10% 70%, 10% 30%
+  );
+
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.7);
+}
+
+
+
+.back-button:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateX(-4px);
+}
+
+/* seta */
+.arrow-icon {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* ====== PARTÍCULAS ====== */
+.particles-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  filter: brightness(0.9);
+  opacity: 0.9;
+}
+
+/* =========================================================
+   RESPONSIVIDADE GERAL • BY CHATGPT
+   Mantendo fidelidade ao layout original
+   ========================================================= */
+
+/* ====== TELAS ATÉ 1024px (Notebook pequeno) ====== */
+@media (max-width: 1024px) {
+  .login-left {
+    padding: 40px;
+  }
+
+  .form-box {
+    max-width: 360px;
+  }
+
+  .big-text {
+    font-size: 4.5rem;
+  }
+
+  .login-right {
+    clip-path: polygon(
+      22% 0%, 100% 0%, 100% 100%, 22% 100%,
+      13% 70%, 13% 30%
+    );
+  }
+}
+
+/* ====== TELAS ATÉ 900px (Transição para tablet) ====== */
+@media (max-width: 900px) {
+  .login-left {
+    width: 55%;
+  }
+  .login-right {
+    width: 45%;
+  }
+}
+
+/* ====== TABLETS (máx 768px) ====== */
+@media (max-width: 768px) {
+  .login-page {
     flex-direction: column;
-    gap: 1.5rem;
-}
+    height: auto;
+    min-height: 100vh;
+  }
 
-.input-group label {
-    display: block;
-    text-align: left;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: #333;
-}
-
-.input-group input {
+  .login-left,
+  .login-right {
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-sizing: border-box;
+  }
+
+  .login-left {
+    padding: 35px;
+    order: 2;
+    justify-content: start;
+  }
+
+  .login-right {
+    order: 1;
+    height: 300px;
+    clip-path: polygon(
+      0 0, 100% 0, 100% 85%, 0 100%
+    );
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.6);
+  }
+
+  .back-button {
+    top: 15px;
+    left: 15px;
+    padding: 8px 12px;
+  }
+
+  .form-box {
+    margin-top: 20px;
+  }
 }
 
-.options {
-    text-align: right;
+
+
+/* ====== CELULARES MÉDIOS (até 480px) ====== */
+@media (max-width: 480px) {
+  .title {
+    font-size: 26px;
+  }
+
+  .big-text {
+    font-size: 3.2rem;
+  }
+
+  .form {
+    width: 100%;
+  }
+
+  .input {
+    font-size: 0.95rem;
+    padding-block: 0.7em;
+  }
+
+  .login-btn {
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  .forgot {
+    font-size: 13px;
+  }
+
+  .particles-container {
+    opacity: 0.8;
+  }
+
+  .login-right {
+    height: 260px;
+  }
 }
 
-.forgot-password {
-    color: #0c183a;
-    font-size: 0.9rem;
-    text-decoration: none;
-}
 
-.login-button {
-    padding: 1rem;
-    background-color: #077eed;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
 
-.login-button:hover {
-    background-color: #056abf;
+
+/* ====== CELULARES PEQUENOS (até 360px) ====== */
+@media (max-width: 360px) {
+  .title {
+    font-size: 22px;
+  }
+
+  .big-text {
+    font-size: 2.8rem;
+  }
+
+  .form-box {
+    padding: 20px 18px;
+  }
+
+  .back-button {
+    padding: 6px 10px;
+    font-size: 18px;
+  }
 }

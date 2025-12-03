@@ -5,6 +5,13 @@ import Image from "next/image";
 import Navbar from "@/components/blocks/Navbar";
 import "./auditor.css";
 
+const scrollToFeatures = () => {
+  const featuresSection = document.getElementById("features-section");
+  if (featuresSection) {
+    featuresSection.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
 // Funções para chamar o backend
 async function createVeiculo(veiculo) {
   const resp = await fetch("http://localhost:3001/api/auditoriasveiculos", {
@@ -31,22 +38,18 @@ async function deleteVeiculo(id) {
   return await resp.json();
 }
 
-// HeroSectionCRUD (mantive igual)
 const HeroSectionCRUD = () => (
   <section className="hero-frontier-style position-relative">
     <div className="container position-relative z-2 py-5">
       <div className="row align-items-center">
         <div className="col-lg-6 order-lg-1 text-white">
-          <h1 className="hero-frontier-title fw-bold">
-            Bem-vindo ao Controle PDI
-          </h1>
+          <h1 className="hero-frontier-title fw-bold">Bem-vindo ao Controle PDI</h1>
           <p className="hero-frontier-description mb-4 p-3">
-            Gerencie, audite e otimize sua frota de veículos com eficiência e
-            precisão.
+            Gerencie, audite e otimize sua frota de veículos com eficiência e precisão.
           </p>
           <div className="d-flex gap-3 justify-content-start">
             <button className="animated-button">
-              <span className="text">Começar Agora</span>
+              <span className="text"onClick={scrollToFeatures} >Começar Agora</span>
               <span className="circle"></span>
             </button>
           </div>
@@ -60,28 +63,19 @@ const HeroSectionCRUD = () => (
             className="hero-image-frontier shadow-lg"
             priority
           />
-          <div className="overlay-label-frontier top-right-label-frontier shadow-sm">
-            <i className="bi bi-wrench icone"></i>
-            <p className="label-text-frontier">Edição de Auditorias</p>
-          </div>
-          <div className="overlay-label-frontier middle-left-label-frontier shadow-sm">
-            <i className="bi bi-wrench-adjustable icone"></i>
-            <p className="label-text-frontier">Registro de Defeitos</p>
-          </div>
         </div>
       </div>
     </div>
   </section>
 );
 
-// Formata ISO 8601 para "DD do M de YYYY, HhMM"
 function formatDataParaCard(isoString) {
   if (!isoString) return "—";
   const date = new Date(isoString);
   if (isNaN(date)) return isoString;
 
   const dia = date.getDate().toString().padStart(2, "0");
-  const mes = (date.getMonth() + 1).toString().padStart(2, "0"); // 0-11
+  const mes = (date.getMonth() + 1).toString().padStart(2, "0");
   const ano = date.getFullYear();
   const horas = date.getHours().toString().padStart(2, "0");
   const minutos = date.getMinutes().toString().padStart(2, "0");
@@ -94,7 +88,6 @@ export default function VeiculosCRUD() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentVeiculo, setCurrentVeiculo] = useState(null);
 
-  // formulário com campos novos de data/hora separados
   const [form, setForm] = useState({
     id: null,
     placa: "",
@@ -103,33 +96,31 @@ export default function VeiculosCRUD() {
     descrição: "",
     grau_defeito: "",
     status_veiculo: "",
-    data_auditoria: "", // YYYY-MM-DD for input[type=date]
-    hora_auditoria: "", // HH:MM for input[type=time]
+    data_auditoria: "",
+    hora_auditoria: "",
     resultado: "",
     auditor_responsavel: "",
   });
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  // fetch function reutilizável
   async function fetchAuditorias() {
     try {
       const resp = await fetch("http://localhost:3001/api/auditoriasveiculos");
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       const data = await resp.json();
 
       const veiculosTransformados = data.map((item) => ({
-        id: item.part_number ?? `${Math.random().toString(36).slice(2, 9)}`,
-        placa: item.part_number ?? "—",
-        modelo: item.modelo ?? "—",
+        id: item.part_number,
+        placa: item.part_number,
+        modelo: item.modelo?.toLowerCase() ?? "",
         defeito: item.defeito ?? "—",
         auditoria: {
           descrição: item.descrição ?? "—",
           grau: item.grau_defeito ?? "—",
           status: item.status_veiculo ?? "—",
-          data: item.data_auditoria ?? null, // mantém ISO 8601
+          data: item.data_auditoria ?? null,
           resultado: item.resultado ?? "—",
-          responsavel: item.auditor_responsavel ?? "—",
+          responsavel: item.auditor_nome ?? "—",
         },
       }));
 
@@ -148,20 +139,21 @@ export default function VeiculosCRUD() {
       const dbDateTime = veiculo.auditoria?.data ?? "";
       let datePart = "";
       let timePart = "";
+
       if (dbDateTime) {
         const date = new Date(dbDateTime);
         if (!isNaN(date)) {
-          datePart = date.toISOString().slice(0, 10); // YYYY-MM-DD
-          timePart = date.toTimeString().slice(0,5);  // HH:MM
+          datePart = date.toISOString().slice(0, 10);
+          timePart = date.toTimeString().slice(0, 5);
         }
       }
 
       setCurrentVeiculo(veiculo);
       setForm({
-        id: veiculo.id ?? null,
-        placa: veiculo.placa ?? "",
-        modelo: veiculo.modelo ?? "",
-        defeito: veiculo.defeito ?? "",
+        id: veiculo.id,
+        placa: veiculo.placa,
+        modelo: veiculo.modelo,
+        defeito: veiculo.defeito,
         descrição: veiculo.auditoria?.descrição ?? "",
         grau_defeito: veiculo.auditoria?.grau ?? "",
         status_veiculo: veiculo.auditoria?.status ?? "",
@@ -186,6 +178,7 @@ export default function VeiculosCRUD() {
         auditor_responsavel: "",
       });
     }
+
     setIsModalOpen(true);
   };
 
@@ -199,9 +192,13 @@ export default function VeiculosCRUD() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Salvar (POST ou PUT) — build data_auditoria as "YYYY-MM-DD HH:MM:SS"
   const handleSave = async (e) => {
     e.preventDefault();
+
+    if (!form.placa || form.placa.length !== 8) {
+    alert("A placa deve conter exatamente 8 caracteres.");
+    return;
+  }
 
     let dataAjustada = null;
     if (form.data_auditoria && form.hora_auditoria) {
@@ -216,9 +213,9 @@ export default function VeiculosCRUD() {
       descrição: form.descrição,
       grau_defeito: form.grau_defeito,
       status_veiculo: form.status_veiculo,
-      data_auditoria: dataAjustada,
-      resultado: form.resultado,
-      auditor_responsavel: form.auditor_responsavel,
+      data_auditoria: dataAjustada || null,
+      resultado: form.resultado || null,
+      auditor_responsavel: form.auditor_responsavel || null,
     };
 
     try {
@@ -227,6 +224,7 @@ export default function VeiculosCRUD() {
       } else {
         await createVeiculo(veiculoData);
       }
+
       await fetchAuditorias();
       closeModal();
     } catch (err) {
@@ -236,7 +234,6 @@ export default function VeiculosCRUD() {
 
   const handleDelete = async (id) => {
     if (!confirm("Tem certeza que deseja excluir este veículo?")) return;
-
     try {
       await deleteVeiculo(id);
       setVeiculos((prev) => prev.filter((v) => v.id !== id));
@@ -256,19 +253,13 @@ export default function VeiculosCRUD() {
       <Navbar />
       <HeroSectionCRUD />
 
-      <section className="features-section veiculos-crud-section">
+      <section  id="features-section"  className="features-section veiculos-crud-section">
         <div className="crud-container">
           <h3 className="section-subtitle">VISÃO GERAL</h3>
           <h2 className="section-title">Painel de Controle de Veículos</h2>
-          <p className="section-description">
-            Utilize as ferramentas abaixo para gerenciar os veículos da sua frota.
-          </p>
 
           <div className="crud-actions">
-            <button
-              className="botao-ferramenta create-button"
-              onClick={() => openModal()}
-            >
+            <button className="botao-ferramenta create-button" onClick={() => openModal()}>
               <i className="bi bi-plus-lg"></i> Novo Veículo
             </button>
 
@@ -284,11 +275,7 @@ export default function VeiculosCRUD() {
           <div className="cards-grid crud-grid">
             {filteredVeiculos.length > 0 ? (
               filteredVeiculos.map((veiculo) => (
-                <div
-                  key={veiculo.id}
-                  className="feature-card veiculo-card"
-                  data-status={veiculo.defeito && veiculo.defeito !== "—" ? "pendente" : "ok"}
-                >
+                <div key={veiculo.id} className="feature-card veiculo-card">
                   <div className="card-header">
                     <h4 className="card-title">{veiculo.placa}</h4>
                     <i className="bi bi-car-front"></i>
@@ -296,7 +283,6 @@ export default function VeiculosCRUD() {
 
                   <p className="card-text"><strong>Modelo:</strong> {veiculo.modelo}</p>
                   <p className="card-text"><strong>Defeito:</strong> {veiculo.defeito}</p>
-
                   <hr />
                   <p className="card-text"><strong>Descrição:</strong> {veiculo.auditoria?.descrição ?? "—"}</p>
                   <p className="card-text"><strong>Grau do Defeito:</strong> {veiculo.auditoria?.grau ?? "—"}</p>
@@ -316,43 +302,28 @@ export default function VeiculosCRUD() {
                 </div>
               ))
             ) : (
-              <p className="section-description no-results">
-                Nenhum veículo encontrado.
-              </p>
+              <p className="section-description no-results">Nenhum veículo encontrado.</p>
             )}
           </div>
         </div>
       </section>
 
-      {/* --- Modal Atualizado --- */}
       {isModalOpen && (
         <div className="modal-overlay">
-          <div
-            className="modal-content"
-            style={{
-              maxHeight: "90vh",
-              overflowY: "auto",
-              width: "90%",
-              maxWidth: "520px",
-              margin: "auto",
-            }}
-          >
+          <div className="modal-content" style={{ maxHeight: "90vh", overflowY: "auto" }}>
             <h3 className="modal-title">
               {currentVeiculo ? "Editar Veículo" : "Novo Cadastro de Veículo"}
             </h3>
 
             <form onSubmit={handleSave}>
-              {[{ label: "Placa", name: "placa" },
-                { label: "Modelo", name: "modelo" },
-                { label: "Defeito", name: "defeito" },
-                { label: "Descrição", name: "descrição" },
-                { label: "Grau do Defeito", name: "grau_defeito" },
-                { label: "Status", name: "status_veiculo" },
-                { label: "Resultado", name: "resultado" },
-                { label: "Auditor", name: "auditor_responsavel" }
+              {/* CAMPOS OBRIGATÓRIOS */}
+              {[{ label: " * Placa (8 carcateres)", name: "placa" },
+                { label: "* Defeito", name: "defeito" },
+                { label: " * Descrição", name: "descrição" },
               ].map((field) => (
                 <div className="form-group" key={field.name}>
                   <label>{field.label}:</label>
+                  
                   <input
                     type="text"
                     name={field.name}
@@ -365,6 +336,86 @@ export default function VeiculosCRUD() {
               ))}
 
               <div className="form-group">
+  <label>* Modelo:</label>
+  <select
+    name="modelo"
+    value={form.modelo}
+    onChange={handleChange}
+    required
+    className="form-input"
+  >
+    <option value="">Selecione...</option>
+    <option value="spin">Spin</option>
+    <option value="tracker">Tracker</option>
+    <option value="montana">Montana</option>
+
+  </select>
+</div>
+
+<div className="form-group">
+  <label> * Status:</label>
+  <select
+    name="status_veiculo"
+    value={form.status_veiculo}
+    onChange={handleChange}
+    required
+    className="form-input"
+  >
+    <option value="">Selecione...</option>
+    <option value="manutenção">Manutenção</option>
+    <option value="aguardando revisão">Aguardando revisão</option>
+    <option value="finalizado">Finalizado</option>
+  </select>
+</div>
+
+<div className="form-group">
+  <label>* Grau do Defeito:</label>
+  <select
+    name="grau_defeito"
+    value={form.grau_defeito}
+    onChange={handleChange}
+    required
+    className="form-input"
+  >
+    <option value="">Selecione...</option>
+    <option value="leve">Leve</option>
+    <option value="moderado">Médio</option>
+    <option value="grave">Grave</option>
+  </select>
+</div>
+
+
+
+              {/* CAMPOS NÃO OBRIGATÓRIOS */}
+             <div className="form-group">
+  <label>Resultado:</label>
+  <select
+    name="resultado"
+    value={form.resultado || ""}
+    onChange={handleChange}
+    className="form-input"
+  >
+    <option value="">Selecione...</option>
+    <option value="Aprovado">Aprovado</option>
+    <option value="Reprovado">Reprovado</option>
+    <option value="Pendente">Pendente</option>
+  </select>
+</div>
+
+
+              <div className="form-group">
+                <label> * Auditor Responsável:</label>
+                <input
+                  type="text"
+                  name="auditor_responsavel"
+                  value={form.auditor_responsavel || ""}
+                  onChange={handleChange}
+                  required
+                  className="form-input"
+                />
+              </div>
+
+              <div className="form-group">
                 <label>Data da Auditoria:</label>
                 <input
                   type="date"
@@ -372,7 +423,6 @@ export default function VeiculosCRUD() {
                   value={form.data_auditoria || ""}
                   onChange={handleChange}
                   className="form-input"
-                  required
                 />
               </div>
 
@@ -384,11 +434,10 @@ export default function VeiculosCRUD() {
                   value={form.hora_auditoria || ""}
                   onChange={handleChange}
                   className="form-input"
-                  required
                 />
               </div>
 
-              <div style={{ display: "flex", gap: 10, justifyContent: "flex-end", marginTop: 12 }}>
+              <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end" }}>
                 <button type="button" onClick={closeModal} className="cancel-btn">Cancelar</button>
                 <button type="submit" className="save-btn">Salvar</button>
               </div>

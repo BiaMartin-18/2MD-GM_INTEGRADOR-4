@@ -1,26 +1,42 @@
 "use client";
+import "./cardcarros.css"
 
-import Link from "next/link";
-import "./cardcarros.css";
+export default function CardVeiculos({ veiculo }) {
 
-export default function CardVeiculo({ veiculo }) {
-    return (
-        <div className="card-container">
-            <div className="card-main">
+    function formatDataParaCard(isoString) {
+  if (!isoString) return "—";
+  const date = new Date(isoString);
+  if (isNaN(date)) return isoString;
 
-                <h2 className="title">{veiculo.modelo}</h2>
+  const dia = date.getDate().toString().padStart(2, "0");
+  const mes = (date.getMonth() + 1).toString().padStart(2, "0"); // 0-11
+  const ano = date.getFullYear();
+  const horas = date.getHours().toString().padStart(2, "0");
+  const minutos = date.getMinutes().toString().padStart(2, "0");
 
-                <div className="info">
-                    <p><strong>Placa:</strong> {veiculo.placa}</p>
-                    <p><strong>Defeito:</strong> {veiculo.defeito}</p>
-                    <p><strong>Grau do defeito:</strong> {veiculo.grau_defeito}</p>
-                    <p><strong>Status:</strong> {veiculo.status}</p>
-                </div>
+  return `${dia}/${mes}/${ano} às ${horas}:${minutos}`;
+}
 
-                <Link href={`/veiculos/${veiculo.part_number}`} className="add-btn">
-                    Ver detalhes do veículo
-                </Link>
-            </div>
-        </div>
-    );
+  return (
+    <div
+  className="feature-card veiculo-card"
+  data-status={veiculo.status ? veiculo.status.toLowerCase() : ""}
+  data-resultado={veiculo.resultado ? veiculo.resultado.toLowerCase() : ""}
+>
+
+      <div className="card-header">
+        <h4 className="card-title">{veiculo.placa}</h4>
+        <i className="bi bi-car-front"></i>
+      </div>
+
+      <p><strong>Modelo: </strong>{veiculo.modelo}</p>
+      <p><strong>Defeito: </strong>{veiculo.defeito}</p>
+      <p><strong>Descrição: </strong>{veiculo.descrição}</p>
+      <p><strong>Grau do Defeito: </strong>{veiculo.grau_defeito}</p>
+      <p className="status-text"><strong>Status: </strong>{veiculo.status}</p>
+      <p><strong>Data da Auditoria: </strong>{formatDataParaCard(veiculo.data)}</p>
+      <p><strong>Resultado: </strong>{veiculo.resultado ?? "—"}</p>
+      <p><strong>Auditor: </strong>{veiculo.auditor}</p>
+    </div>
+  );
 }

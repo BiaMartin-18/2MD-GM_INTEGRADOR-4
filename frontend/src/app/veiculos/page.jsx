@@ -1,34 +1,40 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import CardVeiculo from "@/components/cardcarros/index";
+import CardVeiculos from "@/components/cardcarros";
 import "./veiculos.css";
 import Navbar from "@/components/blocks/Navbar";
 import FinisherParticles from "@/components/FinisherParticles";
+import Script from 'next/script';
 
 export default function Veiculos() {
     const [veiculos, setVeiculos] = useState([]);
     const [busca, setBusca] = useState("");
-    const [filtro, setFiltro] = useState("Todos");
+    const [filtroStatus, setFiltroStatus] = useState("Todos os status");
+    const [filtroResultado, setFiltroResultado] = useState("Todos os resultados");
 
     useEffect(() => {
         async function carregar() {
             try {
-                const res = await fetch("http://localhost:3001/veiculos");
+                const res = await fetch("http://localhost:3001/api/auditoriasveiculos");
                 const json = await res.json();
 
-                // Sua API retorna: { sucesso: true, veiculos: [...] }
-                const lista = json.veiculos || [];
+                // Sua API deve retornar uma lista direta ou algo como { sucesso: true, dados: [...] }
+                const lista = json.dados || json.veiculos || json || [];
 
-                // Ajustar nomes para o frontend
+                // Converter para o formato que o front usa
                 const convertidos = lista.map((v) => ({
                     id: v.part_number,
-                    modelo: v.modelo,
                     placa: v.part_number,
-                    status: v.status_veiculo,
-                    defeito: v.defeito,              
-                    grau_defeito: v.grau_defeito,    
-                    //imagem: "/placeholder.png",
+                    modelo: v.modelo,
+                    descrição: v.descrição ?? "—",
+                    defeito: v.defeito,
+                    grau_defeito: v.grau_defeito ?? "—",
+                    status: v.status_veiculo ?? "—",
+                    data: v.data_auditoria ?? "—",
+                    auditor: v.auditor_nome ?? "—",
+
+                    resultado: v.resultado ?? "—",
                 }));
 
                 setVeiculos(convertidos);
@@ -40,16 +46,18 @@ export default function Veiculos() {
         carregar();
     }, []);
 
-    // FILTRAR + BUSCAR
+    // FILTRO DE BUSCA + STATUS
     const filtrados = veiculos.filter((v) => {
         const textoBusca =
             v.modelo.toLowerCase().includes(busca.toLowerCase()) ||
             v.status.toLowerCase().includes(busca.toLowerCase()) ||
             v.placa.toLowerCase().includes(busca.toLowerCase());
 
-        const statusOk = filtro === "Todos" || v.status === filtro;
+        const statusOk = filtroStatus === "Todos os status" || v.status === filtroStatus;
 
-        return textoBusca && statusOk;
+        const resultadoOk = filtroResultado === "Todos os resultados" || v.resultado === filtroResultado;
+
+        return textoBusca && statusOk && resultadoOk;
     });
 
     return (
@@ -58,13 +66,12 @@ export default function Veiculos() {
                 <Navbar />
                 <section className="hero section">
                     <FinisherParticles />
-                    {/* Conteúdo do Hero - Deve ficar acima do FinisherParticles */}
+
                     <div className="heroContent">
-                        {/* Título */}
                         <h1 className="titulo text-white fw-bold mb-5">
                             Veículos
                         </h1>
-                        {/* Filtro */}
+
                         <div className="filtros-container mt-5">
                             <input
                                 type="text"
@@ -75,13 +82,26 @@ export default function Veiculos() {
                             />
 
                             <select
-                                value={filtro}
-                                onChange={(e) => setFiltro(e.target.value)}
+                                value={filtroStatus}
+                                onChange={(e) => setFiltroStatus(e.target.value)}
                                 className="select-filtro"
                             >
-                                <option value="Todos">Todos</option>
+                                <option value="Todos os status">Todos os status</option>
                                 <option value="Manutenção">Manutenção</option>
                                 <option value="Aguardando revisão">Aguardando revisão</option>
+                                <option value="Finalizado">Finalizado</option>
+                            </select>
+
+                            <select
+                                value={filtroResultado}
+                                onChange={(e) => setFiltroResultado(e.target.value)}
+                                className="select-filtro"
+                            >
+                                <option value="Todos os resultados">Todos os resultados</option>
+                                <option value="Aprovado">Aprovado</option>
+                                <option value="Reprovado">Reprovado</option>
+                                <option value="Pendente">Pendente</option>
+
                             </select>
                         </div>
                     </div>
@@ -89,14 +109,11 @@ export default function Veiculos() {
             </div>
 
             <div className="cards-grid">
-                {filtrados.map((v) => (
-                    <CardVeiculo
-                        key={v.id}
-                        veiculo={v}
-                    />
+                {filtrados.map((v, index) => (
+                    <CardVeiculos key={`${v.part_number}-${index}`} veiculo={v} />
                 ))}
+
             </div>
         </>
     );
 }
-

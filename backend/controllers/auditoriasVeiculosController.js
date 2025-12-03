@@ -3,7 +3,6 @@ import { getConnection } from "../config/database.js";
 // ================= Função para converter datas =================
 function formatDateToMySQL(dateString) {
   if (!dateString) return null;
-
   const d = new Date(dateString);
   if (isNaN(d.getTime())) return null;
 
@@ -17,13 +16,18 @@ function formatDateToMySQL(dateString) {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
+// ================= Função auxiliar =================
+async function getAuditorIdByName(conn, nome) {
+  if (!nome) return null;
+  const [rows] = await conn.query("SELECT id_usuario FROM usuarios WHERE nome = ?", [nome]);
+  return rows.length > 0 ? rows[0].id_usuario : null;
+}
+
 // ================= GET =================
 export async function getAuditoriasVeiculos(req, res) {
   let conn;
-
   try {
     conn = await getConnection();
-
     const [rows] = await conn.query(`
       SELECT 
         v.part_number,
@@ -34,17 +38,16 @@ export async function getAuditoriasVeiculos(req, res) {
         v.status_veiculo,
         a.data_auditoria,
         a.resultado,
-        a.auditor_responsavel
+        a.auditor_responsavel,
+        u.nome AS auditor_nome
       FROM veiculos v
-      LEFT JOIN auditoria a ON v.part_number = a.part_number;
+      LEFT JOIN auditoria a ON v.part_number = a.part_number
+      LEFT JOIN usuarios u ON u.id_usuario = a.auditor_responsavel;
     `);
-
     res.json(rows);
-
   } catch (err) {
     console.error("Erro ao buscar auditorias de veículos:", err);
     res.status(500).json({ message: "Erro ao buscar auditorias de veículos" });
-
   } finally {
     if (conn) conn.release();
   }
@@ -53,7 +56,6 @@ export async function getAuditoriasVeiculos(req, res) {
 // ================= POST =================
 export async function createAuditoriaVeiculo(req, res) {
   let conn;
-
   const {
     part_number,
     modelo,
@@ -68,8 +70,8 @@ export async function createAuditoriaVeiculo(req, res) {
 
   try {
     conn = await getConnection();
-
     const dataFormatada = formatDateToMySQL(data_auditoria);
+    const auditorId = await getAuditorIdByName(conn, auditor_responsavel);
 
     await conn.query(`
       INSERT INTO veiculos (part_number, modelo, defeito, descrição, grau_defeito, status_veiculo)
@@ -79,14 +81,12 @@ export async function createAuditoriaVeiculo(req, res) {
     await conn.query(`
       INSERT INTO auditoria (part_number, data_auditoria, resultado, auditor_responsavel)
       VALUES (?, ?, ?, ?)
-    `, [part_number, dataFormatada, resultado, auditor_responsavel]);
+    `, [part_number, dataFormatada ?? null, resultado ?? null, auditorId ?? null]);
 
     res.status(201).json({ message: "Auditoria de veículo criada com sucesso" });
-
   } catch (err) {
     console.error("Erro ao criar auditoria de veículo:", err);
     res.status(500).json({ message: "Erro ao criar auditoria de veículo" });
-
   } finally {
     if (conn) conn.release();
   }
@@ -95,7 +95,6 @@ export async function createAuditoriaVeiculo(req, res) {
 // ================= PUT =================
 export async function updateAuditoriaVeiculo(req, res) {
   let conn;
-
   const { part_number: oldPartNumber } = req.params;
   const {
     part_number: newPartNumber,
@@ -111,8 +110,8 @@ export async function updateAuditoriaVeiculo(req, res) {
 
   try {
     conn = await getConnection();
-
     const dataFormatada = formatDateToMySQL(data_auditoria);
+    const auditorId = await getAuditorIdByName(conn, auditor_responsavel);
 
     await conn.query(`
       UPDATE veiculos
@@ -124,14 +123,12 @@ export async function updateAuditoriaVeiculo(req, res) {
       UPDATE auditoria
       SET part_number = ?, data_auditoria = ?, resultado = ?, auditor_responsavel = ?
       WHERE part_number = ?
-    `, [newPartNumber, dataFormatada, resultado, auditor_responsavel, oldPartNumber]);
+    `, [newPartNumber, dataFormatada ?? null, resultado ?? null, auditorId ?? null, oldPartNumber]);
 
     res.json({ message: "Auditoria de veículo atualizada com sucesso" });
-
   } catch (err) {
     console.error("Erro ao atualizar auditoria de veículo:", err);
     res.status(500).json({ message: "Erro ao atualizar auditoria de veículo" });
-
   } finally {
     if (conn) conn.release();
   }
@@ -144,16 +141,13 @@ export async function deleteAuditoriaVeiculo(req, res) {
 
   try {
     conn = await getConnection();
-
     await conn.query(`DELETE FROM auditoria WHERE part_number = ?`, [part_number]);
     await conn.query(`DELETE FROM veiculos WHERE part_number = ?`, [part_number]);
 
     res.json({ message: "Auditoria de veículo deletada com sucesso" });
-
   } catch (err) {
     console.error("Erro ao deletar auditoria de veículo:", err);
     res.status(500).json({ message: "Erro ao deletar auditoria de veículo" });
-
   } finally {
     if (conn) conn.release();
   }

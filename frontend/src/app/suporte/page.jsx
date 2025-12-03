@@ -39,20 +39,19 @@ const SuportePage = () => {
       id: 1,
       title: "Como funciona o processo de Aquisição do Controle PDI?",
       content:
-        "Gerencie, audite e otimize sua frota de veículos com eficiência e precisão. Comece agora mesmo solicitando uma demonstração do produto ou falando com nosso setor Comercial.",
+        "Gerencie, audite e otimize sua frota de veículos com eficiência e precisão. Comece agora mesmo solicitando uma demonstração do produto ou falando com nosso setor.",
     },
     {
       id: 2,
-      title: "Nossas informações de Pagamento são seguras?",
+      title: "Nossas informações de Usuário Auditor são seguras?",
       content:
-        "Sim, todas as informações de pagamento são processadas por uma plataforma segura de terceiros e não armazenamos dados sensíveis diretamente em nossos servidores.",
+        "Sim, todas as informações são criptografadas, o acesso ao Painel de edição do Dashboard é de acesso restrito ao Auditor. Qualquer outro funcionário que tente acessar , receberá um aviso negando seu acesso.",
     },
-    {
-      id: 3,
-      title: "Como solicitar um Cartão Pré-pago para serviços?",
-      content:
-        "Entre em contato com o departamento financeiro pelo telefone +55 (11) 9456-7890 ou abra um ticket de suporte com o setor Comercial.",
-    },
+{
+    id: 3,
+    title: "Onde posso encontrar um manual de instruções para o PDI?",
+    content: "Toda e qualquer dúvida sobre o PDI, pode ser descrita com o seu FT adequado para te auxiliar.",
+  }
   ];
 
   return (
@@ -61,9 +60,9 @@ const SuportePage = () => {
       <main className="suporte-wrapper-content">
         {/* === 1. Hero Section com Design Fiel ao HelpCenter === */}
         <header className="hero-support-axionet">
-          <div className="container py-5">
+          <div className="container py-5 px-4">
             <div className="row justify-content-center text-center">
-              <div className="col-lg-10">
+              <div className="col-lg-10 px-4">
                 {/* Título Principal Fiel ao Modelo */}
                 <h1 className="hero-title-helpplus mb-3">
                   <span className="text-accent-helpplus">Olá,</span> como
@@ -79,23 +78,23 @@ const SuportePage = () => {
                     <input
                       type="text"
                       className="form-control search-input-helpplus"
-                      placeholder="Pergunte algo ou insira um código de erro..."
+                      placeholder="Quais são suas dúvidas?"
                     />
                     <button type="submit" className="btn btn-search-helpplus">
-                      Buscar
+                      Enviar
                     </button>
                   </form>
                 </div>
+                <p className="hero-lead-helpplus mb-5">
+                 Mande sua duvída e encontre respostas na nossa central de ajuda.
+                </p>
               </div>
             </div>
           </div>
           {/* Cartões de Categoria Diretamente no Hero, Fiel ao Modelo */}
           <div className="container category-cards-wrapper-helpplus">
             {/* Texto solicitado antes dos cards: "ou escolha uma das opções abaixo" */}
-            <p className="hero-lead-helpplus mb-5">
-              ou escolha uma das opções abaixo para encontrar rapidamente a
-              ajuda que você precisa
-            </p>
+
             <div className="row justify-content-center">
               <div className="col-lg-10">
                 <div className="row justify-content-center g-3">
@@ -108,11 +107,10 @@ const SuportePage = () => {
                     </div>
                   </div>
 
-                  {/* Cartão 2: Pricing & Plans (Destacado - Fiel ao Laranja) */}
                   <div className="col-md-3 col-6">
                     <div className="category-card-helpplus active text-center p-4 d-dlex d-flex gap-3">
                       {/* Ícone de Câmera/Preços - Fiel ao ícone do modelo */}
-                     <i className="bi bi-key"></i>
+                      <i className="bi bi-key icone"></i>
                       <h6 className="fw-bold mb-0">Acesso ao sistema</h6>
                     </div>
                   </div>
@@ -121,7 +119,7 @@ const SuportePage = () => {
                   <div className="col-md-3 col-6">
                     <div className="category-card-helpplus text-center p-4 d-flex gap-3">
                       {/* Ícone de Dólar/Vendas - Font Awesome */}
-             <i className="bi bi-box-arrow-in-right"></i>
+                      <i className="bi bi-box-arrow-in-right"></i>
                       <h6 className="fw-bold mb-0">Login e Cadastro</h6>
                     </div>
                   </div>
@@ -147,7 +145,7 @@ const SuportePage = () => {
               <div className="col-lg-8">
                 {/* Título "Pricing Plans" Fiel ao Modelo */}
                 <h2 className="faq-main-title-helpplus text-center mb-1">
-                  Custos & Planos
+                  Tire suas dúvidas aqui
                 </h2>
                 <p className="faq-main-lead-helpplus text-center mb-5">
                   Aqui você encontrará informações detalhadas sobre os custos e
