@@ -7,17 +7,12 @@
   width: 100%;
 }
 
-/*.custom-navbar .container-fluid {
-  max-width: 1200px;
-}*/
-
 .navbar-brand {
-  /*margin-left: 0 !important;*/
   padding: 0;
 }
 
 .navbar-brand img {
-  width: 9rem;
+  width: 8rem;
 }
 
 .navbar-toggler {
@@ -35,12 +30,13 @@
 .botao-login {
   background-color: rgb(255, 255, 255);
   color: rgb(27, 26, 26);
-  padding: 0.5rem 1.25rem;
+  padding: 0.5rem;
   border-radius: 30px;
   text-decoration: none;
-  width: 9rem;
-  height: 3rem;
-  text-align: center;
+  width: 7rem;
+  height: 2.5rem;
+  text-align: center !important;
+  font-weight: 500;
 }
 
 .custom-dropdown-icon {
@@ -50,10 +46,6 @@
 }
 
 /* 4. Rotaciona a seta quando o dropdown está aberto (Regra original para o clique) */
-
-/*.nav-item.show .custom-dropdown-icon {
-    transform: rotate(180deg) !important;
-}/
 
 /* Estilo para que o texto do link e o ícone fiquem no mesmo nível */
 .nav-link {
@@ -70,7 +62,7 @@
   background-color: transparent;
   border-radius: 4px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
+  font-weight: 500;
   /* Adicionais para a transição de entrada */
   transform: translateY(10px); /* Começa 10px abaixo */
   opacity: 0;
@@ -83,9 +75,7 @@
   color: #333;
 }
 
-/* ---------------------------------------------------- */
 /* NOVO CSS PARA O EFEITO HOVER E ANIMAÇÃO */
-/* ---------------------------------------------------- */
 
 /* Oculta o dropdown menu por padrão, usando opacity e transform */
 .nav-item.dropdown .dropdown-menu {
@@ -117,34 +107,47 @@
 /* --- ESTILO PARA QUANDO O USUÁRIO ROLAR PARA FORA DA HERO --- */
 
 .custom-navbar.scrolled {
-  /* Exemplo: Um azul escuro sólido (ou semitransparente) para contraste */
-  background-color: rgb(17, 74, 206) !important;
-  border-radius: 50px;
-  height: 7rem;
-  margin-top: 1rem;
-  max-width: 1200px;
-  left: 50%;
-  transform: translateX(-50%);
-  /*transition: fadeIn 0.2s ease;*/
+  background-color: transparent !important;
+  border-radius: 0;
+  height: auto;
+  margin-top: 0;
+  left: 0;
+  right: 0;
+  transform: none;
+  padding: 0; /* deixa o container interno controlar espaçamento */
+  z-index: 1030;
 }
 
 .custom-navbar.scrolled .container-fluid {
-  /* Define a largura máxima do CONTEÚDO para que ele caiba no container azul */
-  max-width: 1200px;
-  width: 100%;
-  margin-left: 0;
-  margin-right: 0;
+  background-color: rgb(17, 74, 206);
+  max-width: 1200px;      /* largura do cartão azul */
+  margin: 1rem auto 0;    /* centraliza e "abaixa" 1rem do topo */
+  width: calc(100% - 40px); /* respira nas laterais em telas pequenas */
+  border-radius: 50px;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* mantém logo à esquerda e botão à direita */
   padding-left: 1rem;
   padding-right: 1rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  position: relative; /* para que itens absolutos funcionem, se necessários */
 }
 
-/* .li.nav-item.dropdown.dropdown-hover:hover
-  i.bi.bi-chevron-down.ms-1.custom-dropdown-icon::before {
-  transform: rotate(180deg) !important;
-  will-change: transform;
-  transform-origin: 50% 50% 0px;
-  opacity: 1;
-} */
+/* Ajuste do logo para caber verticalmente */
+.custom-navbar.scrolled .navbar-brand img {
+  width: 7.5rem;
+  height: auto;
+}
+
+/* Se quiser que o menu central (ul.navbar-nav) fique exatamente no meio do cartão */
+.custom-navbar.scrolled .navbar-nav {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 
 /* Seleciona o elemento LI (sem o ponto) com as classes especificadas quando o mouse estiver sobre ele */
 li.nav-item.dropdown.dropdown-hover:hover 
@@ -229,8 +232,7 @@ li.nav-item.dropdown.dropdown-hover:hover
   /* MUDANÇA ESSENCIAL: Fundo BRANCO e cor do texto PRETO */
   background-color: #ffffff; /* Fundo branco */
   color: rgb(7, 82, 255); /* Adicionado: Cor do texto PRETO */
-  padding: 0.75rem 1.25rem;
-  padding-top: 1.5rem !important;
+  padding: 1.1rem;
   margin-left: 2rem !important;
   border-radius: 30px;
   text-decoration: none;

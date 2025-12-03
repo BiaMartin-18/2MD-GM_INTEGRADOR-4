@@ -140,7 +140,7 @@ export default function Navbar() {
           <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
             {/* OFFCANVAS: Item Home (Dropdown expandido) */}
             <li className="nav-item">
-              <span className="nav-link fw-bold custom-offcanvas-header">
+              <span className="nav-link fw-medium custom-offcanvas-header">
                 Home
                 <i className="bi bi-arrow-up-right ms-2 custom-offcanvas-icon"></i>
               </span>
@@ -160,7 +160,7 @@ export default function Navbar() {
 
             {/* OFFCANVAS: Item Painel de Controle (Dropdown expandido) */}
             <li className="nav-item">
-              <span className="nav-link fw-bold custom-offcanvas-header">
+              <span className="nav-link fw-medium custom-offcanvas-header">
                 Painel de Controle
               </span>
               <ul className="offcanvas-submenu">
@@ -172,12 +172,19 @@ export default function Navbar() {
               </ul>
             </li>
 
-            {/* Botão Login */}
+            <div className="d-flex align-items-center">
+              <Link
+                href="/suporte"
+                className="nav-link"
+              >
+                Suporte
+              </Link>
             <li className="nav-item mt-3">
-              <Link href="/login" className=" botao-login-offcanvas w-100">
+              <Link href="/login" className=" botao-login-offcanvas">
                 Login
               </Link>
             </li>
+            </div>
           </ul>
         </div>
       </div>
