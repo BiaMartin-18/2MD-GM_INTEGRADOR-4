@@ -189,7 +189,7 @@ a {
 }
 
 /* Estilo de cada Card */
-.feature-card {
+.feature-card2 {
   background-color: #172449; /* Fundo do card, ligeiramente mais claro que a seção */
   padding: 30px;
   border-radius: 12px; /* Bordas arredondadas */
@@ -202,7 +202,7 @@ justify-content: center;
 }
 
 
-.feature-card:hover {
+.feature-card2:hover {
   background-color: #1f305f; /* Efeito hover para feedback */
 }
 
@@ -329,6 +329,12 @@ justify-content: center;
 
 .text {
   margin: 0 1.5em
+}
+
+.text-painel {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #0c183a;
 }
 
 /* ---------------------------------------------------------------------------------------------------------------------------------------*/

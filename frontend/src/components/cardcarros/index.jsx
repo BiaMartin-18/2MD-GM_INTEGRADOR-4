@@ -29,14 +29,14 @@ export default function CardVeiculos({ veiculo }) {
         <i className="bi bi-car-front"></i>
       </div>
 
-      <p><strong>Modelo: </strong>{veiculo.modelo}</p>
-      <p><strong>Defeito: </strong>{veiculo.defeito}</p>
-      <p><strong>Descrição: </strong>{veiculo.descrição}</p>
-      <p><strong>Grau do Defeito: </strong>{veiculo.grau_defeito}</p>
+      <p className="text-white"><strong>Modelo: </strong>{veiculo.modelo}</p>
+      <p className="text-white"><strong>Defeito: </strong>{veiculo.defeito}</p>
+      <p className="text-white"><strong>Descrição: </strong>{veiculo.descrição}</p>
+      <p className="text-white"><strong>Grau do Defeito: </strong>{veiculo.grau_defeito}</p>
       <p className="status-text"><strong>Status: </strong>{veiculo.status}</p>
-      <p><strong>Data da Auditoria: </strong>{formatDataParaCard(veiculo.data)}</p>
-      <p><strong>Resultado: </strong>{veiculo.resultado ?? "—"}</p>
-      <p><strong>Auditor: </strong>{veiculo.auditor}</p>
+      <p className="text-white"><strong>Data da Auditoria: </strong>{formatDataParaCard(veiculo.data)}</p>
+      <p className="text-white"><strong>Resultado: </strong>{veiculo.resultado ?? "—"}</p>
+      <p className="text-white"><strong>Auditor: </strong>{veiculo.auditor}</p>
     </div>
   );
 }

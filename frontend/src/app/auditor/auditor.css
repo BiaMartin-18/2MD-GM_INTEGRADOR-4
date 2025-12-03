@@ -2,7 +2,6 @@
 /* VARIÁVEIS DE COR E TEMA */
 /* ------------------------------------------- */
 :root {
-  --background: #0a1f3c; /* Fundo estático escuro (Body) */
   --foreground: #ffffff; /* Texto claro */
   --color-primary: #3654ff; /* Azul Principal */
   --color-card-bg: #172449; /* Fundo do card escuro */
@@ -40,7 +39,6 @@ body {
 body {
   color: var(--foreground);
   margin: 0;
-  background: var(--background); /* Fundo estático */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -73,7 +71,7 @@ a {
 .justify-content-center { justify-content: center; }
 .justify-content-start { justify-content: flex-start; }
 .text-center { text-align: center; }
-.text-white { color: white; }
+.text-white { color: rgb(114, 33, 33); }
 .fw-bold { font-weight: bold; }
 .mb-2 { margin-bottom: 0.5rem; }
 .mb-4 { margin-bottom: 1.5rem; }
@@ -106,6 +104,7 @@ a {
     overflow: visible; 
     padding-top: 100px; /* Mais espaço acima */
     padding-bottom: 100px; /* Mais espaço abaixo para o quote */
+    background-color: #0a1f3c;;
 }
 
 .hero-frontier-title {

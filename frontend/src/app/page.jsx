@@ -58,7 +58,7 @@ export default function Home() {
         {/* Container para os Cards */}
         <div className="cards-grid">
           {/* Exemplo de um Card (Repita para ter 6) */}
-          <div className="feature-card">
+          <div className="feature-card2">
             <div className="card-header">
               <h4 className="card-title">Usabilidade</h4>
               <i className="bi bi-folder2-open"></i>
@@ -68,7 +68,7 @@ export default function Home() {
               visualmente clara para gestão de qualidade.
             </p>
           </div>
-          <div className="feature-card">
+          <div className="feature-card2">
             <div className="card-header">
               <h4 className="card-title">Automação</h4>
               <i className="bi bi-lightning-fill"></i>
@@ -80,7 +80,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="feature-card">
+          <div className="feature-card2">
             <div className="card-header">
               <h4 className="card-title">Segurança e Fluxo de Trabalho</h4>
               <i className=" bi bi-clipboard-data-fill"></i>
@@ -91,7 +91,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="feature-card">
+          <div className="feature-card2">
             <div className="card-header">
               <h4 className="card-title">Gestão de Custos</h4>
               <i className="bi bi-cash-coin"></i>
@@ -103,7 +103,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="feature-card">
+          <div className="feature-card2">
             <div className="card-header">
               <h4 className="card-title">Acesso Hierárquico</h4>
               <i className="bi bi-person-vcard-fill"></i>
@@ -115,7 +115,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="feature-card">
+          <div className="feature-card2">
             <div className="card-header">
               <h4 className="card-title">Registro de Veículos</h4>
               <i className="bi bi-car-front"></i>
@@ -153,7 +153,7 @@ export default function Home() {
                 >
                   Controle PDI
                 </p>
-                <h2 className="display-6 fw-bold mb-4">
+                <h2 className="text-painel display-6 fw-bold mb-4">
                   Maximize a Margem de Lucro e
                   <span className="text-primary">
                     {" "}

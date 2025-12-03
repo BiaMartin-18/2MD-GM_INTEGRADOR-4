@@ -155,8 +155,8 @@ export default function VeiculosCRUD() {
         modelo: veiculo.modelo,
         defeito: veiculo.defeito,
         descrição: veiculo.auditoria?.descrição ?? "",
-        grau_defeito: veiculo.auditoria?.grau ?? "",
-        status_veiculo: veiculo.auditoria?.status ?? "",
+        grau_defeito: veiculo.auditoria?.grau?.toLowerCase() ?? "",
+        status_veiculo: veiculo.auditoria?.status?.toLowerCase() ?? "",
         data_auditoria: datePart,
         hora_auditoria: timePart,
         resultado: veiculo.auditoria?.resultado ?? "",
@@ -379,7 +379,7 @@ export default function VeiculosCRUD() {
   >
     <option value="">Selecione...</option>
     <option value="leve">Leve</option>
-    <option value="moderado">Médio</option>
+    <option value="médio">Médio</option>
     <option value="grave">Grave</option>
   </select>
 </div>

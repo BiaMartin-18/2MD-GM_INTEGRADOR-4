@@ -62,9 +62,9 @@ export default function Veiculos() {
 
     return (
         <>
-            <div className="hero-wrapper">
+            <div className="hero-wrapper2">
                 <Navbar />
-                <section className="hero section">
+                <section className="hero section2">
                     <FinisherParticles />
 
                     <div className="heroContent">
@@ -108,7 +108,7 @@ export default function Veiculos() {
                 </section>
             </div>
 
-            <div className="cards-grid">
+            <div className="cards-grid2">
                 {filtrados.map((v, index) => (
                     <CardVeiculos key={`${v.part_number}-${index}`} veiculo={v} />
                 ))}

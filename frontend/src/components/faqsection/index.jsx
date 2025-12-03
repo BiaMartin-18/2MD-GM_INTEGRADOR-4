@@ -13,7 +13,7 @@ export default function FaqSection () {
         
         {/* Coluna Esquerda: Título e Introdução (5 colunas) */}
         <div className="col-md-5 mb-5 mb-md-0">
-          <h2 className="display-4 fw-bolder mb-4">
+          <h2 className="texto-faq display-4 fw-bolder mb-4">
             Alguma dúvida? <br />
             Estamos aqui para ajudar.
           </h2>

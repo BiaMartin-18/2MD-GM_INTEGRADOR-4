@@ -33,6 +33,12 @@
     box-shadow: none !important;
 }
 
+.texto-faq {
+    color: #000000; /* Cor do texto da resposta */
+    font-size: 1.1rem; /* Tamanho da fonte da resposta */
+    line-height: 1.6; /* Espaçamento entre linhas para melhor legibilidade */
+}
+
 /* Adiciona a linha divisória inferior ao último item (e único neste caso) */
 .accordion-item:last-of-type .accordion-header .accordion-button {
     border-bottom: 1px solid #ddd;

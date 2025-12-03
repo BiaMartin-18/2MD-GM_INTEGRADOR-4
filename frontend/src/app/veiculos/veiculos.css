@@ -5,11 +5,11 @@
 }
 
 /* ESTILOS DA HERO SECTION (CARD FLUTUANTE) */
-.hero-wrapper {
+.hero-wrapper2 {
   padding-top: 30px; 
 }
 
-.hero.section {
+.hero.section2 {
   padding: 30px 40px;
   padding-top: 30px;
   border-radius: 30px;
@@ -96,7 +96,7 @@
 }
 
 /* GRID */
-.cards-grid {
+.cards-grid2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
