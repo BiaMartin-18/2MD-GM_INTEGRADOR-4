@@ -14,6 +14,11 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -43,12 +48,9 @@ export default function LoginPage() {
 
   return (
     <>
-      <Head>
-        <title>Login</title>
-      </Head>
-
-      <Navbar />
-
+      <div className="nav-login">
+        <Navbar />
+      </div>
       {/* CONTAINER GERAL */}
       <div className="login-page">
         {/* COLUNA ESQUERDA */}
@@ -58,6 +60,7 @@ export default function LoginPage() {
               {" "}
               <span className="big-text">Bem</span>Vindo(a)!
             </h2>
+           <p className="descricao-login ">Login Administrativo</p>
 
             {erro && <p className="erro-login">{erro}</p>}
 
@@ -76,16 +79,23 @@ export default function LoginPage() {
               </div>
 
               {/* SENHA */}
-              <div className="form custom-form">
+              <div className="form custom-form password-container">
                 <input
                   className="input"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Senha"
                   required
                   value={senha}
                   onChange={(e) => setSenha(e.target.value)}
                 />
                 <span className="input-border"></span>
+                <button
+                  type="button"
+                  className="toggle-password-btn"
+                  onClick={togglePasswordVisibility}
+                > 
+               <i className={showPassword ? "bi bi-eye-fill" : "bi bi-eye-slash-fill"}></i>
+                </button>
               </div>
 
               <button type="submit" className="login-btn">
@@ -101,7 +111,6 @@ export default function LoginPage() {
 
         {/* COLUNA DIREITA – RECORTE + PARTÍCULAS */}
         <div className="login-right">
-        
           <div className="particles-container">
             <FinisherParticles />
           </div>

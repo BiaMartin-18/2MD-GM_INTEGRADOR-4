@@ -7,7 +7,7 @@ const LineChartComponent = ({ data }) => (
       data={data}
       margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
     >
-      <CartesianGrid strokeDasharray="3 3" stroke="#e4eefcff" />
+      <CartesianGrid strokeDasharray="3 3" stroke="#0066f5ff" />
       <XAxis dataKey="mes" stroke="#f5f5f5ff" />
       <YAxis stroke="#dbdbdbff" />
       <Tooltip 
@@ -16,7 +16,7 @@ const LineChartComponent = ({ data }) => (
       <Line 
         type="monotone" 
         dataKey="indice" 
-        stroke="#1100c9ff" 
+        stroke="#f5f5f8ff" 
         strokeWidth={3}
         activeDot={{ r: 8 }}
         name="Índice"

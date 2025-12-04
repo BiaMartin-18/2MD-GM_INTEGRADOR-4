@@ -86,7 +86,9 @@ border-radius: 0 0 20px 20px;
 
 .kpi-card {
  border-radius: 12px;
- min-height: 140px;
+/* min-height: 120px;  */
+padding-top: 15px !important;
+  padding-bottom: 15px !important;
 
  background: linear-gradient(145deg, #ff2020 0%, #f9f9f9 100%);
  border: none;
@@ -134,7 +136,7 @@ overflow: hidden;
 
 .kpi-card {
   border-radius: 12px; /* Aumentado um pouco o raio */
-  min-height: 140px;
+  min-height: 120px;
   background: rgba(0, 54, 170, 0.425);
   backdrop-filter: blur(10px); 
     -webkit-backdrop-filter: blur(10px); /* Suporte para navegadores Webkit (Chrome, Safari) */
@@ -142,6 +144,7 @@ overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 color: #f6f8fc;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+
 
 }
 
@@ -156,31 +159,11 @@ color: #f6f8fc;
   font-size: 4rem; /* Ajustado para melhor destaque */
   font-weight: 700;
   color: #f6f8fc;
+  margin-bottom: 0% !important;
 }
 
 .icone{
   font-size: 2rem;
-}
-
-/* Indicadores de Mudança (Change) */
-.kpi-change {
-  font-size: 12px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  padding: 2px 8px;
-  border-radius: 15px; /* Pill shape */
-  background: rgba(82, 196, 26, 0.1); /* Fundo suave para sucesso (verde) */
-  color: #52c41a !important; /* Texto verde */
-}
-.text-danger {
-  color: #3e8ef7 !important; /* Cor forte de perigo (vermelho) */
-  background: rgba(77, 104, 255, 0.37);
-}
-.text-success {
-  /* Garantindo que o estilo de sucesso seja aplicado */
-  color: #099dff !important;
-  background-color: #099dff46;
 }
 
 .kpi-subtitle {

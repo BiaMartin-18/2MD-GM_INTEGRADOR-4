@@ -111,7 +111,7 @@ export default function DashboardPage() {
         <div className="row">
           <div className="col-md-3 mb-3">
             <div className="card kpi-card   d-flex flex-column justify-content-center align-items-center py-4 shadow-sm">
-              <div className="card-body d-flex gap-3">
+              <div className="card-body d-flex gap-3 align-items-center">
                 <i className="icone bi bi-calendar-check"></i>
                 <h6 className="card-title ">Auditorias Aprovadas</h6>
               </div>
@@ -123,7 +123,7 @@ export default function DashboardPage() {
 
           <div className="col-md-3 mb-3">
             <div className="card kpi-card  d-flex flex-column justify-content-center align-items-center py-4  shadow-sm">
-              <div className="card-body d-flex gap-3">
+              <div className="card-body d-flex gap-3 align-items-center">
                 <i className="icone bi bi-check-all"></i>
                 <h6 className="card-title ">Total de Auditorias</h6>
               </div>
@@ -133,7 +133,7 @@ export default function DashboardPage() {
 
           <div className="col-md-3 mb-3">
             <div className="card kpi-card  d-flex flex-column justify-content-center align-items-center py-4    shadow-sm">
-              <div className="card-body d-flex gap-3">
+              <div className="card-body d-flex gap-3 align-items-center">
                 <i className="icone bi bi-graph-up"></i>
                 <h6 className="card-title ">Defeitos Registrados</h6>
               </div>
@@ -145,7 +145,7 @@ export default function DashboardPage() {
 
           <div className="col-md-3 mb-3">
             <div className="card kpi-card  d-flex flex-column justify-content-center align-items-center py-4  shadow-sm">
-              <div className="card-body d-flex gap-3">
+              <div className="card-body d-flex gap-3 align-items-center">
                 <i className="icone bi bi-file-earmark-bar-graph"></i>
                 <h6 className="card-title ">Carros em Manutenção</h6>
               </div>

@@ -1,13 +1,21 @@
-
-
 /* ====== LAYOUT GERAL ====== */
 .login-page {
   width: 100%;
-  height: calc(100vh - 70px);
+  height: 100vh;
   display: flex;
   overflow: hidden;
   background-color: #ffffff;
+}
 
+.nav-login nav {
+  background: rgb(0, 44, 109) !important;
+  height: 5rem;
+  padding: 10px 20px;
+  position: fixed; /* fica no topo */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 /* ====== COLUNA ESQUERDA ====== */
@@ -16,70 +24,111 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 60px;
+
+  padding: 60px; /* Seu padding original */
+  padding-top: calc(
+    60px + 5rem
+  ); /* Adiciona 5rem (altura da Navbar) ao padding-top */
 }
 
 .form-box {
   width: 100%;
   max-width: 420px;
   padding: 35px 40px;
-  
 }
 
 .title {
   color: #001455;
   font-size: 34px;
   font-weight: 700;
-  margin-bottom: 25px;
+ 
 }
 
-.big-text{
-    font-size: 6rem;
-    color: #001455;
+.big-text {
+  font-size: 6rem;
+  color: #001455;
 }
 
 .form {
   --width-of-input: 260px;
   --border-height: 2px;
-  --border-before-color: rgb(0, 26, 170); /* azul claro inicial */
+  --border-before-color: rgb(206, 207, 216); /* azul claro inicial */
   --border-after-color: #014ef3; /* azul principal animado */
   --input-hovered-color: rgba(90, 160, 255, 0.15);
-   margin-bottom: 15px;
+  margin-bottom: 15px;
   position: relative;
   width: 20rem;
+}
+
+/* ====== BOTÃO MOSTRAR/OCULTAR SENHA ====== */
+/* Garante que o ícone possa ser posicionado absolutamente em relação a ele */
+.password-container {
+  position: relative;
+}
+
+.toggle-password-btn {
+  position: absolute;
+  top: 50%; /* Centraliza verticalmente */
+  right: 5px; /* Ajusta a distância da borda direita */
+  transform: translateY(-50%); /* Ajuste fino de centralização */
+
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.2rem; /* Tamanho do ícone/emoji */
+  color: #00388d; /* Cor do ícone */
+  z-index: 10; /* Garante que o botão fique acima do input */
+
+  opacity: 0.7; /* Suaviza a cor */
+  transition: opacity 0.2s;
+}
+
+.toggle-password-btn:hover {
+  opacity: 1;
 }
 
 /* INPUT */
 .input {
   color: #00388d;
   font-size: 1rem;
- 
+
   width: 100%;
   box-sizing: border-box;
   padding-inline: 0.7em;
   padding-block: 0.8em;
+  padding-right: 2.5em;
   border: none;
   border-bottom: var(--border-height) solid var(--border-before-color);
   transition: background 0.3s ease;
   border-radius: 5px 5px 0 0;
+  background: transparent !important;
 }
 
-
+/* Remover fundo azul do autocomplete do Chrome */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  box-shadow: 0 0 0px 1000px white inset !important; /* coloca sua cor */
+  -webkit-text-fill-color: #00388d !important; /* mantém sua cor do texto */
+  background-color: transparent !important;
+}
 
 /* ANIMAÇÃO DA LINHA */
 .input-border {
   position: absolute;
-  background: linear-gradient(
-    90deg,
-    #043eff 0%,
-    #4aa8ff 50%,
-    #0066cc 100%
-  );
+  background: linear-gradient(90deg, #043eff 0%, #4aa8ff 50%, #0066cc 100%);
   width: 0%;
   height: 2px;
   bottom: 0;
   left: 0;
   transition: width 0.3s ease-in-out;
+  border: 2rem;
+}
+
+.input:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* QUANDO DIGITA */
@@ -87,6 +136,13 @@
   width: 100%;
 }
 
+.descricao-login{
+  font-size: 1.2rem;
+  color: #002a6d;
+  font-weight: 500;
+  
+  margin-bottom: 20px;
+}
 
 /* ====== BOTÃO LOGIN ====== */
 .login-btn {
@@ -112,15 +168,16 @@
 .forgot {
   display: block;
   margin-top: 15px;
-  color: #b8d1f8;
+  color: #043b94;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 /* ====== MENSAGEM ERRO ====== */
 .erro-login {
   color: #ff6b6b;
-  background: rgba(255,0,0,0.1);
+  background: rgba(255, 0, 0, 0.1);
   padding: 8px 12px;
   border-radius: 8px;
   margin-bottom: 12px;
@@ -135,25 +192,11 @@
   overflow: hidden;
 
   /* ==== RECORTE CURVO ==== */
-  clip-path: polygon(
-    18% 0%, 100% 0%, 100% 100%, 18% 100%,
-    10% 70%, 10% 30%
-  );
 
-  box-shadow: inset 0 0 60px rgba(0,0,0,0.7);
-}
+  clip-path: polygon(30% 8%, 100% 6%, 100% 100%, 18% 100%, 10% 70%, 10% 30%);
 
-
-
-.back-button:hover {
-  background: rgba(255,255,255,0.2);
-  transform: translateX(-4px);
-}
-
-/* seta */
-.arrow-icon {
-  font-size: 24px;
-  font-weight: bold;
+  padding-top: 5rem;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.7);
 }
 
 /* ====== PARTÍCULAS ====== */
@@ -164,11 +207,6 @@
   filter: brightness(0.9);
   opacity: 0.9;
 }
-
-/* =========================================================
-   RESPONSIVIDADE GERAL • BY CHATGPT
-   Mantendo fidelidade ao layout original
-   ========================================================= */
 
 /* ====== TELAS ATÉ 1024px (Notebook pequeno) ====== */
 @media (max-width: 1024px) {
@@ -185,10 +223,7 @@
   }
 
   .login-right {
-    clip-path: polygon(
-      22% 0%, 100% 0%, 100% 100%, 22% 100%,
-      13% 70%, 13% 30%
-    );
+    clip-path: polygon(22% 0%, 100% 0%, 100% 100%, 22% 100%, 13% 70%, 13% 30%);
   }
 }
 
@@ -224,10 +259,8 @@
   .login-right {
     order: 1;
     height: 300px;
-    clip-path: polygon(
-      0 0, 100% 0, 100% 85%, 0 100%
-    );
-    box-shadow: inset 0 0 40px rgba(0,0,0,0.6);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
   }
 
   .back-button {
@@ -240,8 +273,6 @@
     margin-top: 20px;
   }
 }
-
-
 
 /* ====== CELULARES MÉDIOS (até 480px) ====== */
 @media (max-width: 480px) {
@@ -279,9 +310,6 @@
     height: 260px;
   }
 }
-
-
-
 
 /* ====== CELULARES PEQUENOS (até 360px) ====== */
 @media (max-width: 360px) {
