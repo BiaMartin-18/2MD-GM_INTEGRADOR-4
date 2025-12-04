@@ -11,13 +11,13 @@
 
 .hero.section2 {
   padding: 30px 40px;
-  padding-top: 30px;
+  padding-top: 10px;
   border-radius: 30px;
   padding-top: 30px; /* Mantém o espaçamento para o Navbar interno */
   padding-bottom: 40px; 
   padding-left: 40px; 
   padding-right: 40px;
-  width: 98%; /* Largura para "flutuar" */
+  width: 99.7%; /* Largura para "flutuar" */
   min-height: 50vh; /* Altura mínima para preencher a tela */
   margin-left: auto;
   margin-right: auto;
