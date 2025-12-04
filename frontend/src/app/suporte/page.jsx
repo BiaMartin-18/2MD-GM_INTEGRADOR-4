@@ -2,8 +2,8 @@
 "use client";
 import "./suporte.css";
 // Certifique-se de que o caminho para Navbar está correto
+import React, { useState } from "react";
 import Navbar from "@/components/blocks/Navbar";
-import React from "react";
 
 // Componente para um item de FAQ (Acordeão)
 const FaqItem = ({ id, title, content, isDefaultOpen = false }) => (
@@ -33,6 +33,25 @@ const FaqItem = ({ id, title, content, isDefaultOpen = false }) => (
 );
 
 const SuportePage = () => {
+
+  const [duvida, setDuvida] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (duvida.trim() === "") {
+      alert("Digite sua dúvida antes de enviar.");
+      return;
+    }
+
+    alert("Sua dúvida foi enviada! Em breve entraremos em contato.");
+
+    setDuvida(""); // limpa o campo
+  };
+
+
+
+
   // Dados de Exemplo para a Seção FAQ, fiel ao modelo
   const faqData = [
     {
@@ -47,11 +66,11 @@ const SuportePage = () => {
       content:
         "Sim, todas as informações são criptografadas, o acesso ao Painel de edição do Dashboard é de acesso restrito ao Auditor. Qualquer outro funcionário que tente acessar , receberá um aviso negando seu acesso.",
     },
-{
-    id: 3,
-    title: "Onde posso encontrar um manual de instruções para o PDI?",
-    content: "Toda e qualquer dúvida sobre o PDI, pode ser descrita com o seu FT adequado para te auxiliar.",
-  }
+    {
+      id: 3,
+      title: "Onde posso encontrar um manual de instruções para o PDI?",
+      content: "Toda e qualquer dúvida sobre o PDI, pode ser descrita com o seu FT adequado para te auxiliar.",
+    }
   ];
 
   return (
@@ -71,22 +90,22 @@ const SuportePage = () => {
 
                 {/* Bloco de Pesquisa Estilizado Fiel ao Modelo */}
                 <div className="search-block-helpplus mx-auto">
-                  <form
-                    onSubmit={(e) => e.preventDefault()}
-                    className="d-flex justify-content-center"
-                  >
+                  <form onSubmit={handleSubmit} className="d-flex justify-content-center">
                     <input
                       type="text"
                       className="form-control search-input-helpplus"
                       placeholder="Quais são suas dúvidas?"
+                      value={duvida}
+                      onChange={(e) => setDuvida(e.target.value)}
                     />
                     <button type="submit" className="btn btn-search-helpplus">
                       Enviar
                     </button>
                   </form>
+
                 </div>
                 <p className="hero-lead-helpplus mb-5">
-                 Mande sua duvída e encontre respostas na nossa central de ajuda.
+                  Mande sua duvída e encontre respostas na nossa central de ajuda.
                 </p>
               </div>
             </div>

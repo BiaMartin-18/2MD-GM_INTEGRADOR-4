@@ -1,3 +1,4 @@
+import FinisherClient from "../components/FinisherClient";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "../components/blocks/Navbar";
 import Footer from "../components/blocks/Footer";

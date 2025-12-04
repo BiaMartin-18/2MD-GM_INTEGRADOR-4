@@ -112,7 +112,7 @@ export default function VeiculosCRUD() {
       const veiculosTransformados = data.map((item) => ({
         id: item.part_number,
         placa: item.part_number,
-        modelo: item.modelo?.toLowerCase() ?? "",
+        modelo: item.modelo ?? "",
         defeito: item.defeito ?? "—",
         auditoria: {
           descrição: item.descrição ?? "—",
@@ -155,8 +155,8 @@ export default function VeiculosCRUD() {
         modelo: veiculo.modelo,
         defeito: veiculo.defeito,
         descrição: veiculo.auditoria?.descrição ?? "",
-        grau_defeito: veiculo.auditoria?.grau?.toLowerCase() ?? "",
-        status_veiculo: veiculo.auditoria?.status?.toLowerCase() ?? "",
+        grau_defeito: veiculo.auditoria?.grau ?? "",
+        status_veiculo: veiculo.auditoria?.status ?? "",
         data_auditoria: datePart,
         hora_auditoria: timePart,
         resultado: veiculo.auditoria?.resultado ?? "",
@@ -345,9 +345,9 @@ export default function VeiculosCRUD() {
     className="form-input"
   >
     <option value="">Selecione...</option>
-    <option value="spin">Spin</option>
-    <option value="tracker">Tracker</option>
-    <option value="montana">Montana</option>
+    <option value="Spin">Spin</option>
+    <option value="Tracker">Tracker</option>
+    <option value="Montana">Montana</option>
 
   </select>
 </div>
@@ -362,9 +362,9 @@ export default function VeiculosCRUD() {
     className="form-input"
   >
     <option value="">Selecione...</option>
-    <option value="manutenção">Manutenção</option>
-    <option value="aguardando revisão">Aguardando revisão</option>
-    <option value="finalizado">Finalizado</option>
+    <option value="Manutenção">Manutenção</option>
+    <option value="Aguardando revisão">Aguardando revisão</option>
+    <option value="Finalizado">Finalizado</option>
   </select>
 </div>
 
@@ -378,9 +378,9 @@ export default function VeiculosCRUD() {
     className="form-input"
   >
     <option value="">Selecione...</option>
-    <option value="leve">Leve</option>
-    <option value="médio">Médio</option>
-    <option value="grave">Grave</option>
+    <option value="Leve">Leve</option>
+    <option value="Médio">Médio</option>
+    <option value="Grave">Grave</option>
   </select>
 </div>
 
